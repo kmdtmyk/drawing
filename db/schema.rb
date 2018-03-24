@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180324122424) do
+ActiveRecord::Schema.define(version: 20180324133502) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,11 +27,8 @@ ActiveRecord::Schema.define(version: 20180324122424) do
     t.date     "order_date"
     t.integer  "estimated_price"
     t.integer  "difficulty"
-    t.integer  "category_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.index ["category_id"], name: "index_drawings_on_category_id", using: :btree
   end
 
-  add_foreign_key "drawings", "categories"
 end
