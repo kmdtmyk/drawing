@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Part number:</strong>
+  <%= @drawing.part_number %>
+</p>
+
+<p>
+  <strong>Order date:</strong>
+  <%= @drawing.order_date %>
+</p>
+
+<p>
+  <strong>Estimated price:</strong>
+  <%= @drawing.estimated_price %>
+</p>
+
+<p>
+  <strong>Difficulty:</strong>
+  <%= @drawing.difficulty %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @drawing.category %>
+</p>
+
+<%= link_to 'Edit', edit_drawing_path(@drawing) %> |
+<%= link_to 'Back', drawings_path %>

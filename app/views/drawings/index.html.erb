@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Drawings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Part number</th>
+      <th>Order date</th>
+      <th>Estimated price</th>
+      <th>Difficulty</th>
+      <th>Category</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @drawings.each do |drawing| %>
+      <tr>
+        <td><%= drawing.part_number %></td>
+        <td><%= drawing.order_date %></td>
+        <td><%= drawing.estimated_price %></td>
+        <td><%= drawing.difficulty %></td>
+        <td><%= drawing.category %></td>
+        <td><%= link_to 'Show', drawing %></td>
+        <td><%= link_to 'Edit', edit_drawing_path(drawing) %></td>
+        <td><%= link_to 'Destroy', drawing, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Drawing', new_drawing_path %>

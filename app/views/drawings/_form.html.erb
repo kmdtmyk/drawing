@@ -1,0 +1,42 @@
+<%= form_for(drawing) do |f| %>
+  <% if drawing.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(drawing.errors.count, "error") %> prohibited this drawing from being saved:</h2>
+
+      <ul>
+      <% drawing.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :part_number %>
+    <%= f.text_field :part_number %>
+  </div>
+
+  <div class="field">
+    <%= f.label :order_date %>
+    <%= f.date_select :order_date %>
+  </div>
+
+  <div class="field">
+    <%= f.label :estimated_price %>
+    <%= f.number_field :estimated_price %>
+  </div>
+
+  <div class="field">
+    <%= f.label :difficulty %>
+    <%= f.number_field :difficulty %>
+  </div>
+
+  <div class="field">
+    <%= f.label :category_id %>
+    <%= f.text_field :category_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
