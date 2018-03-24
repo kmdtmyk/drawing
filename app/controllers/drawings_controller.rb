@@ -1,5 +1,6 @@
 class DrawingsController < ApplicationController
   before_action :set_drawing, only: [:show, :edit, :update, :destroy]
+  before_action :set_categories, only: [:new, :edit]
 
   # GET /drawings
   # GET /drawings.json
@@ -67,8 +68,23 @@ class DrawingsController < ApplicationController
       @drawing = Drawing.find(params[:id])
     end
 
+    def set_categories
+      @categories = Category.all.order(:display_order)
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def drawing_params
-      params.require(:drawing).permit(:part_number, :order_date, :estimated_price, :difficulty)
+      params.require(:drawing).permit(
+        :part_number,
+        :order_date,
+        :estimated_price,
+        :difficulty,
+        drawing_categories_attributes: [
+          :id,
+          :category_id,
+          :display_order,
+          :_destroy,
+        ],
+      )
     end
 end

@@ -31,6 +31,14 @@
     <%= f.number_field :difficulty %>
   </div>
 
+  <div class="field">
+    <%= f.label :category %>
+    <%= f.nested_fields_for :drawing_categories do |drawing_category| %>
+      <%= drawing_category.collection_select :category_id, @categories, :id, :name, include_blank: true %>
+    <% end %>
+    <%= f.add_nested_fields_link :drawing_categories, '追加' %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
