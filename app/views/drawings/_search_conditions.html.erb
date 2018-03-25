@@ -1,0 +1,35 @@
+<div class='mb-2'>
+  <% if params[:part_number].present? %>
+    <a href='#'><%= tag_label('品番', params[:part_number]) %></a>
+  <% end %>
+
+  <% if params[:order_date_from].present? %>
+    <a href='#'><%= tag_label('受注日', params[:order_date_from] + ' 以降') %></a>
+  <% end %>
+
+  <% if params[:order_date_to].present? %>
+    <a href='#'><%= tag_label('受注日', params[:order_date_to] + ' 以前') %></a>
+  <% end %>
+
+  <% if params[:estimated_price_from].present? %>
+    <a href='#'><%= tag_label('見積金額', params[:estimated_price_from] + ' 以上') %></a>
+  <% end %>
+
+  <% if params[:estimated_price_to].present? %>
+    <a href='#'><%= tag_label('見積金額', params[:estimated_price_to] + ' 以下') %></a>
+  <% end %>
+
+  <% if params[:difficulty_from].present? %>
+    <a href='#'><%= tag_label('難易度', params[:difficulty_from] + ' 以上') %></a>
+  <% end %>
+
+  <% if params[:difficulty_to].present? %>
+    <a href='#'><%= tag_label('難易度', params[:difficulty_to] + ' 以下') %></a>
+  <% end %>
+
+  <% if params[:category].present? %>
+    <% params[:category].gsub('　', ' ').split.map do |category| %>
+      <a href='#'><%= tag_label('カテゴリー', category) %></a>
+    <% end %>
+  <% end %>
+</div>
