@@ -11,6 +11,8 @@
 
   <%= link_to '新規作成', new_drawing_path %>
 
+  <%= paginate_statistic @drawings %>
+
   <table>
     <thead>
       <tr>
