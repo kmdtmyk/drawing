@@ -1,0 +1,27 @@
+.tag-label{
+  color: #212529;
+  display: inline-block;
+  background-color: #e8e8e8;
+  margin: 0.2em;
+  padding: 0.2em;
+  padding-right: 1em;
+  text-indent: 0.3em;
+
+  .tag-label-name{
+    margin-left: 0.2em;
+    font-weight: bold;
+  }
+
+  .tag-label-value{
+    margin-left: 0.5em;
+  }
+
+  &:hover{
+    color: #212529;
+    text-decoration: none;
+    .tag-label-delete{
+      color: red;
+    }
+  }
+
+}
