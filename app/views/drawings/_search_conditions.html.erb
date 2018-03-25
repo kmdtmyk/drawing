@@ -1,35 +1,54 @@
 <div class='mb-2'>
   <% if params[:part_number].present? %>
-    <a href='#'><%= tag_label('品番', params[:part_number]) %></a>
+    <%= link_to drawings_path(params: params.merge(part_number: '')) do %>
+      <%= tag_label('品番', params[:part_number]) -%>
+    <% end %>
   <% end %>
 
   <% if params[:order_date_from].present? %>
-    <a href='#'><%= tag_label('受注日', params[:order_date_from] + ' 以降') %></a>
+    <%= link_to drawings_path(params: params.merge(order_date_from: '')) do %>
+      <%= tag_label('受注日', params[:order_date_from] + ' 以降') -%>
+    <% end %>
   <% end %>
 
   <% if params[:order_date_to].present? %>
-    <a href='#'><%= tag_label('受注日', params[:order_date_to] + ' 以前') %></a>
+    <%= link_to drawings_path(params: params.merge(order_date_to: '')) do %>
+      <%= tag_label('受注日', params[:order_date_to] + ' 以前') -%>
+    <% end %>
   <% end %>
 
   <% if params[:estimated_price_from].present? %>
-    <a href='#'><%= tag_label('見積金額', params[:estimated_price_from] + ' 以上') %></a>
+    <%= link_to drawings_path(params: params.merge(estimated_price_from: '')) do %>
+      <%= tag_label('見積金額', params[:estimated_price_from] + ' 以上') -%>
+    <% end %>
   <% end %>
 
   <% if params[:estimated_price_to].present? %>
-    <a href='#'><%= tag_label('見積金額', params[:estimated_price_to] + ' 以下') %></a>
+    <%= link_to drawings_path(params: params.merge(estimated_price_to: '')) do %>
+      <%= tag_label('見積金額', params[:estimated_price_to] + ' 以下') -%>
+    <% end %>
   <% end %>
 
   <% if params[:difficulty_from].present? %>
-    <a href='#'><%= tag_label('難易度', params[:difficulty_from] + ' 以上') %></a>
+    <%= link_to drawings_path(params: params.merge(difficulty_from: '')) do %>
+      <%= tag_label('難易度', params[:difficulty_from] + ' 以上') -%>
+    <% end %>
   <% end %>
 
   <% if params[:difficulty_to].present? %>
-    <a href='#'><%= tag_label('難易度', params[:difficulty_to] + ' 以下') %></a>
+    <%= link_to drawings_path(params: params.merge(difficulty_to: '')) do %>
+      <%= tag_label('難易度', params[:difficulty_to] + ' 以下') -%>
+    <% end %>
   <% end %>
 
   <% if params[:category].present? %>
-    <% params[:category].gsub('　', ' ').split.map do |category| %>
-      <a href='#'><%= tag_label('カテゴリー', category) %></a>
+    <% categories = params[:category].gsub('　', ' ').split %>
+    <% categories.each_with_index do |category, index| %>
+      <% other_categories = categories.clone %>
+      <% other_categories.delete_at(index) %>
+      <%= link_to drawings_path(params: params.merge(category: other_categories.join(' '))) do %>
+        <%= tag_label('カテゴリー', category) -%>
+      <% end %>
     <% end %>
   <% end %>
 </div>
