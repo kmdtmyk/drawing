@@ -12,14 +12,20 @@
     <%= render 'header' %>
 
     <% if yield(:sidebar).empty? %>
-      <main class='container'>
+
+      <main class='container pt-3'>
+        <%= render 'notice' %>
         <%= yield %>
       </main>
+
     <% else %>
+
       <%= render 'sidebar' %>
       <main class='col-sm-9 ml-sm-auto col-md-9 pt-3'>
+        <%= render 'notice' %>
         <%= yield %>
       </main>
+
     <% end %>
 
     <!-- <script src='https://code.jquery.com/jquery-3.2.1.slim.min.js' integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN' crossorigin='anonymous'></script> -->
