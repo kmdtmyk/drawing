@@ -22,7 +22,7 @@
         <%= link_to drawing do %>
           <img class='card-img-top' src='https://placehold.jp/400x300.png'>
         <% end %>
-        <div class='card-text'>
+        <div class='card-text px-2 py-1'>
           <table>
             <tr>
               <th>品番</th>
@@ -34,7 +34,7 @@
             </tr>
             <tr>
               <th>見積金額</th>
-              <td><%= drawing.estimated_price %></td>
+              <td><%= format_number drawing.estimated_price %></td>
             </tr>
             <tr>
               <th>難易度</th>
