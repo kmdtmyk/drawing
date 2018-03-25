@@ -1,0 +1,7 @@
+<% (1..1000).each do |i| %>
+drawing_<%= i %>:
+  part_number: <%= Faker::Code.asin %>
+  order_date: <%= Faker::Date.between(1.year.ago, Date.today) %>
+  estimated_price: <%= Faker::Number.between(1, 1000) * 100 %>
+  difficulty: <%= Faker::Number.between(1, 10) %>
+<% end %>
