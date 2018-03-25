@@ -3,7 +3,7 @@ class Drawing < ApplicationRecord
   has_many :categories, through: :drawing_categories
   accepts_nested_attributes_for :drawing_categories, allow_destroy: true
 
-  scope :search, -> (params){
+  scope :search_by_params, -> (params){
     drawings = all
     if params[:part_number].present?
       drawings.where!('LOWER(part_number) LIKE LOWER(?)', "%#{params[:part_number]}%")
@@ -28,6 +28,13 @@ class Drawing < ApplicationRecord
     end
     if params[:difficulty_to].present?
       drawings.where!('difficulty <= ?', params[:difficulty_to])
+    end
+
+    if params[:category].present?
+      params[:category].gsub('　', ' ').split.map do |word|
+        categories = Category.search_by_name(word)
+        drawings.where!(id: categories.drawing_ids)
+      end
     end
 
     drawings

@@ -6,7 +6,7 @@ class DrawingsController < ApplicationController
   # GET /drawings.json
   def index
     @drawings = Drawing
-      .search(params)
+      .search_by_params(params)
       .page(params[:page])
       .per(100)
   end

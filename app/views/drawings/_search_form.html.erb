@@ -43,5 +43,10 @@
     </div>
   </div>
 
+  <div class='form-group'>
+    <label>カテゴリー</label>
+    <%= text_field_tag :category, params[:category], class: 'form-control' %>
+  </div>
+
   <button type='submit' class='btn btn-primary'>検索</button>
 </form>
