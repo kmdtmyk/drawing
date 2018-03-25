@@ -19,25 +19,25 @@
 
   <% if params[:estimated_price_from].present? %>
     <%= link_to drawings_path(params: params.merge(estimated_price_from: '')) do %>
-      <%= tag_label('見積金額', params[:estimated_price_from] + ' 以上') -%>
+      <%= tag_label('見積金額',  format_number(params[:estimated_price_from]) + ' 以上') -%>
     <% end %>
   <% end %>
 
   <% if params[:estimated_price_to].present? %>
     <%= link_to drawings_path(params: params.merge(estimated_price_to: '')) do %>
-      <%= tag_label('見積金額', params[:estimated_price_to] + ' 以下') -%>
+      <%= tag_label('見積金額', format_number(params[:estimated_price_to]) + ' 以下') -%>
     <% end %>
   <% end %>
 
   <% if params[:difficulty_from].present? %>
     <%= link_to drawings_path(params: params.merge(difficulty_from: '')) do %>
-      <%= tag_label('難易度', params[:difficulty_from] + ' 以上') -%>
+      <%= tag_label('難易度', format_number(params[:difficulty_from]) + ' 以上') -%>
     <% end %>
   <% end %>
 
   <% if params[:difficulty_to].present? %>
     <%= link_to drawings_path(params: params.merge(difficulty_to: '')) do %>
-      <%= tag_label('難易度', params[:difficulty_to] + ' 以下') -%>
+      <%= tag_label('難易度', format_number(params[:difficulty_to]) + ' 以下') -%>
     <% end %>
   <% end %>
 
