@@ -10,7 +10,7 @@ module ApplicationHelper
 
   def tag_label(name, value = '')
     content_tag(:span, class: 'tag-label') do
-      content_tag(:i, nil, class: 'fa fa-tag') +
+      content_tag(:i, nil, class: 'fa fa-search') +
       content_tag(:span, name, class: 'tag-label-name') +
       content_tag(:span, value, class: 'tag-label-value') +
       content_tag(:i, nil, class: 'fa fa-close tag-label-delete')
