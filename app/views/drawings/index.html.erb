@@ -1,43 +1,49 @@
-<div class='sidebar-sticky'>
-  <h2>検索条件</h2>
-  <%= render 'search_form' %>
-</div>
+<% content_for :sidebar do %>
+  <div class='px-3'>
+    <h2>検索条件</h2>
+    <%= render 'search_form' %>
+  </div>
+<% end %>
 
 <div class='px-4'>
 
-  <p id="notice"><%= notice %></p>
+  <p id='notice'><%= notice %></p>
 
-  <h1>Drawings</h1>
+  <h1>図面一覧</h1>
 
   <%= link_to '新規作成', new_drawing_path %>
 
   <%= paginate_statistic @drawings %>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Part number</th>
-        <th>Order date</th>
-        <th>Estimated price</th>
-        <th>Difficulty</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @drawings.each do |drawing| %>
-        <tr>
-          <td><%= drawing.part_number %></td>
-          <td><%= drawing.order_date %></td>
-          <td><%= drawing.estimated_price %></td>
-          <td><%= drawing.difficulty %></td>
-          <td><%= link_to 'Show', drawing %></td>
-          <td><%= link_to 'Edit', edit_drawing_path(drawing) %></td>
-          <td><%= link_to 'Destroy', drawing, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <div class='card-columns'>
+    <% @drawings.each do |drawing| %>
+      <div class='card' >
+        <%= link_to drawing do %>
+          <img class='card-img-top' src='https://placehold.jp/400x300.png'>
+        <% end %>
+        <div class='card-text'>
+          <table>
+            <tr>
+              <th>品番</th>
+              <td><%= drawing.part_number %></td>
+            </tr>
+            <tr>
+              <th>受注日</th>
+              <td><%= drawing.order_date %></td>
+            </tr>
+            <tr>
+              <th>見積金額</th>
+              <td><%= drawing.estimated_price %></td>
+            </tr>
+            <tr>
+              <th>難易度</th>
+              <td><%= drawing.difficulty %></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    <% end %>
+  </div>
 
   <%= paginate @drawings %>
 
