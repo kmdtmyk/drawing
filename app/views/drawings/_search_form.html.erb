@@ -8,11 +8,11 @@
     <label>受注日</label>
     <div class='form-row align-items-center'>
       <div class='col'>
-        <%= date_field_tag :order_date_from, params[:order_date_from], class: 'form-control' %>
+        <%= text_field_tag :order_date_from, params[:order_date_from], class: 'form-control date-picker' %>
       </div>
       <span>〜</span>
       <div class='col'>
-        <%= date_field_tag :order_date_to, params[:order_date_to], class: 'form-control' %>
+        <%= text_field_tag :order_date_to, params[:order_date_to], class: 'form-control date-picker' %>
       </div>
     </div>
   </div>
@@ -77,6 +77,12 @@
       }else{
         category.value = e.target.innerText
       }
+    })
+  }
+  for(const element of document.querySelectorAll('.date-picker')){
+    new Pikaday({
+      field: element,
+      format: 'YYYY/MM/DD',
     })
   }
 })()
