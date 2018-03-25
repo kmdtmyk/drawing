@@ -7,9 +7,10 @@
 
 <div class='px-4'>
 
-  <h1>図面一覧</h1>
-
-  <%= link_to '新規作成', new_drawing_path %>
+  <div class='d-flex justify-content-start align-items-center'>
+    <h1 class='mr-4'>図面一覧</h1>
+    <%= link_to '新規作成', new_drawing_path, class: 'btn btn-info' %>
+  </div>
 
   <%= paginate_statistic @drawings %>
 
