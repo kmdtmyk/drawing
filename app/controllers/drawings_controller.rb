@@ -9,6 +9,7 @@ class DrawingsController < ApplicationController
       .search_by_params(params)
       .page(params[:page])
       .per(100)
+    @categories = Category.all.order(:display_order)
   end
 
   # GET /drawings/1
