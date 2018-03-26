@@ -1,0 +1,9 @@
+<% i = 1 %>
+<% Drawing.all.each_with_index do |drawing, index| %>
+  <% Faker::Number.between(1, 2).times do %>
+    drawing_categories_<%= i %>:
+      drawing: drawing_<%= index %>
+      category: category_<%= Faker::Number.between(1, 10) %>
+    <% i += 1 %>
+  <% end %>
+<% end %>
