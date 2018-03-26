@@ -1,5 +1,5 @@
 <% (1..10).each do |i| %>
 category_<%= i %>:
-  name: <%= "カテゴリー#{i}" %>
+  name: <%= "分類#{i}" %>
   display_order: <%= i %>
 <% end %>
