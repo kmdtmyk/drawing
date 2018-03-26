@@ -30,10 +30,12 @@ class Drawing < ApplicationRecord
       drawings.where!('difficulty <= ?', params[:difficulty_to])
     end
 
-    if params[:category].present?
-      params[:category].gsub('　', ' ').split.map do |word|
-        categories = Category.search_by_name(word)
-        drawings.where!(id: categories.drawing_ids)
+    if params[:categories].present?
+      params[:categories].each do |cateogy_id|
+        drawing_ids =  DrawingCategory
+          .where(category: cateogy_id)
+          .drawing_ids
+        drawings.where!(id: drawing_ids)
       end
     end
 

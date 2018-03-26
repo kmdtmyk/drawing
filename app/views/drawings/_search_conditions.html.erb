@@ -1,4 +1,5 @@
 <div class='mb-2'>
+
   <% if params[:part_number].present? %>
     <%= link_to drawings_path(params: params.merge(part_number: '')) do %>
       <%= tag_label('品番', params[:part_number]) -%>
@@ -41,14 +42,16 @@
     <% end %>
   <% end %>
 
-  <% if params[:category].present? %>
-    <% categories = params[:category].gsub('　', ' ').split %>
-    <% categories.each_with_index do |category, index| %>
-      <% other_categories = categories.clone %>
+  <% if params[:categories].present? %>
+    <% params[:categories].each_with_index do |category_id, index| %>
+      <% category = Category.find_by(id: category_id) %>
+      <% next if category.nil? %>
+      <% other_categories = params[:categories].clone %>
       <% other_categories.delete_at(index) %>
-      <%= link_to drawings_path(params: params.merge(category: other_categories.join(' '))) do %>
-        <%= tag_label('カテゴリー', category) -%>
+      <%= link_to drawings_path(params: params.merge(categories: other_categories)) do %>
+        <%= tag_label('カテゴリー', category.name) -%>
       <% end %>
     <% end %>
   <% end %>
+
 </div>

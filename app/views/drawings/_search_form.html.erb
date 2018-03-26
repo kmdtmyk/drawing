@@ -45,21 +45,22 @@
 
   <div class='form-group'>
     <label>カテゴリー</label>
-    <div class='input-group'>
-      <%= text_field_tag :category, params[:category], class: 'form-control' %>
-      <div class='input-group-append'>
-        <button type='button' class='btn btn-outline-secondary dropdown-toggle dropdown-toggle-split' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
-          <span class='sr-only'>Toggle Dropdown</span>
-        </button>
-        <div class='dropdown-menu'>
-          <% @categories.each do |category| %>
-            <button type='button' class='dropdown-item category-dropdown-item'>
-              <%= category.name %>
-            </button>
-          <% end %>
-        </div>
+    <% @categories.each_with_index do |category, index| %>
+      <div class='custom-control custom-checkbox'>
+        <%=
+          check_box_tag 'categories[]',
+          category.id,
+          params[:categories].present? && params[:categories].include?(category.id.to_s),
+          id: "category_#{category.id}",
+          class: 'custom-control-input'
+        %>
+        <%=
+          label_tag "category_#{category.id}",
+          category.name,
+          class: 'custom-control-label'
+        %>
       </div>
-    </div>
+    <% end %>
   </div>
 
   <button type='submit' class='btn btn-primary'>検索</button>
@@ -67,18 +68,6 @@
 
 <script>
 (function(){
-  const category = document.querySelector('[name="category"]')
-  const categoryDropdownItems = document.querySelectorAll('.category-dropdown-item')
-
-  for(const categoryDropdownItem of categoryDropdownItems){
-    categoryDropdownItem.addEventListener('click', (e) => {
-      if(category.value){
-        category.value += ' ' + e.target.innerText
-      }else{
-        category.value = e.target.innerText
-      }
-    })
-  }
   for(const element of document.querySelectorAll('.date-picker')){
     new Pikaday({
       field: element,
