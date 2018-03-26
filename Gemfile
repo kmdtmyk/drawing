@@ -30,6 +30,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'devise', '~> 4.4', '>= 4.4.3'
 gem 'nested_form_fields', '~> 0.8.2'
 gem 'kaminari', '~> 1.1', '>= 1.1.1'
 gem 'moji', '~> 1.6'
