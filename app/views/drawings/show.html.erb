@@ -20,6 +20,11 @@
   <%= @drawing.difficulty %>
 </p>
 
+<p>
+  <strong>Category:</strong>
+  <%= @drawing.categories.pluck(:name).join('、') %>
+</p>
+
 <%= link_to 'Edit', edit_drawing_path(@drawing) %> |
 <%= link_to 'Back', drawings_path %> |
 <%= link_to 'Destroy', @drawing, method: :delete, data: { confirm: 'Are you sure?' } %>
