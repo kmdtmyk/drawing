@@ -1,0 +1,26 @@
+<% order = 0 %>
+
+<% (1..5).each do |i| %>
+customer_order_<%= i %>:
+  name: <%= "受注先#{i}" %>
+  short_name: <%= "受#{i}" %>
+  display_order: <%= order += 1 %>
+  order_flag: true
+<% end %>
+
+<% (1..5).each do |i| %>
+customer_outsource_<%= i %>:
+  name: <%= "外注先#{i}" %>
+  short_name: <%= "外#{i}" %>
+  display_order: <%= order += 1 %>
+  outsource_flag: true
+<% end %>
+
+<% (1..5).each do |i| %>
+customer_order_<%= i %>:
+  name: <%= "受注外注先#{i}" %>
+  short_name: <%= "受外#{i}" %>
+  display_order: <%= order += 1 %>
+  order_flag: true
+  outsource_flag: true
+<% end %>
