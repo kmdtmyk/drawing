@@ -18,7 +18,7 @@ class CustomersController < ApplicationController
   def create
     @customer = Customer.new(customer_params)
     if @customer.save
-      redirect_to @customer, notice: 'Customer was successfully created.'
+      redirect_to customers_url, notice: 'Customer was successfully created.'
     else
       render :new
     end
@@ -26,7 +26,7 @@ class CustomersController < ApplicationController
 
   def update
     if @customer.update(customer_params)
-      redirect_to @customer, notice: 'Customer was successfully updated.'
+      redirect_to customers_url, notice: 'Customer was successfully updated.'
     else
       render :edit
     end

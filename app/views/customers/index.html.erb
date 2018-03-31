@@ -8,7 +8,7 @@
       <th>Display order</th>
       <th>Order flag</th>
       <th>Outsource flag</th>
-      <th colspan="3"></th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
@@ -20,7 +20,6 @@
         <td><%= customer.display_order %></td>
         <td><%= customer.order_flag %></td>
         <td><%= customer.outsource_flag %></td>
-        <td><%= link_to 'Show', customer %></td>
         <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
         <td><%= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
