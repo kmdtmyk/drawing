@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180331091700) do
+ActiveRecord::Schema.define(version: 20180331103647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,17 @@ ActiveRecord::Schema.define(version: 20180331091700) do
     t.datetime "updated_at",    null: false
     t.index ["category_id"], name: "index_drawing_categories_on_category_id", using: :btree
     t.index ["drawing_id"], name: "index_drawing_categories_on_drawing_id", using: :btree
+  end
+
+  create_table "drawing_outsources", force: :cascade do |t|
+    t.integer  "drawing_id"
+    t.integer  "customer_id"
+    t.integer  "purchase_price"
+    t.integer  "display_order"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["customer_id"], name: "index_drawing_outsources_on_customer_id", using: :btree
+    t.index ["drawing_id"], name: "index_drawing_outsources_on_drawing_id", using: :btree
   end
 
   create_table "drawings", force: :cascade do |t|
@@ -72,4 +83,6 @@ ActiveRecord::Schema.define(version: 20180331091700) do
 
   add_foreign_key "drawing_categories", "categories"
   add_foreign_key "drawing_categories", "drawings"
+  add_foreign_key "drawing_outsources", "customers"
+  add_foreign_key "drawing_outsources", "drawings"
 end

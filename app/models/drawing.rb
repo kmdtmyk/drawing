@@ -3,6 +3,9 @@ class Drawing < ApplicationRecord
   has_many :categories, through: :drawing_categories
   accepts_nested_attributes_for :drawing_categories, allow_destroy: true
 
+  has_many :drawing_outsources, -> { order(:display_order) }, dependent: :destroy
+  accepts_nested_attributes_for :drawing_outsources, allow_destroy: true
+
   scope :search_by_params, -> (params){
     drawings = all
     if params[:part_number].present?
