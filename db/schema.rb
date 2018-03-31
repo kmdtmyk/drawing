@@ -26,10 +26,10 @@ ActiveRecord::Schema.define(version: 20180331091700) do
     t.string   "name"
     t.string   "short_name"
     t.integer  "display_order"
-    t.boolean  "order_flag"
-    t.boolean  "outsource_flag"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.boolean  "order_flag",     default: false, null: false
+    t.boolean  "outsource_flag", default: false, null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
   create_table "drawing_categories", force: :cascade do |t|

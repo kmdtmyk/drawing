@@ -4,8 +4,8 @@ class CreateCustomers < ActiveRecord::Migration[5.0]
       t.string :name
       t.string :short_name
       t.integer :display_order
-      t.boolean :order_flag
-      t.boolean :outsource_flag
+      t.boolean :order_flag, default: false, null: false
+      t.boolean :outsource_flag, default: false, null: false
 
       t.timestamps
     end
