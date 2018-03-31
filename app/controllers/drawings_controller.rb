@@ -1,6 +1,7 @@
 class DrawingsController < ApplicationController
   before_action :set_drawing, only: [:show, :edit, :update, :destroy]
   before_action :set_categories, only: [:new, :edit]
+  before_action :set_outsources, only: [:new, :edit]
 
   # GET /drawings
   # GET /drawings.json
@@ -76,6 +77,10 @@ class DrawingsController < ApplicationController
       @categories = Category.all.order(:display_order)
     end
 
+    def set_outsources
+      @outsources = Customer.where(outsource_flag: true).order(:display_order)
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def drawing_params
       params.require(:drawing).permit(
@@ -89,6 +94,14 @@ class DrawingsController < ApplicationController
           :display_order,
           :_destroy,
         ],
+        drawing_outsources_attributes: [
+          :id,
+          :customer_id,
+          :purchase_price,
+          :display_order,
+          :_destroy,
+        ],
       )
     end
+
 end

@@ -39,6 +39,24 @@
     <%= f.add_nested_fields_link :drawing_categories, '追加' %>
   </div>
 
+  <h3>外注先</h3>
+
+  <%= f.add_nested_fields_link :drawing_outsources, '追加' %>
+
+  <%= f.nested_fields_for :drawing_outsources do |drawing_outsource| %>
+    <div class="form-inline">
+      <div>
+        <label>外注先</label>
+        <%= drawing_outsource.collection_select :customer_id, @outsources, :id, :name, include_blank: true %>
+      </div>
+      <div>
+        <label>仕入れ金額</label>
+        <%= drawing_outsource.number_field :purchase_price %>
+      </div>
+      <%= drawing_outsource.remove_nested_fields_link 'delete' %>
+    </div>
+  <% end %>
+
   <div class="actions">
     <%= f.submit %>
   </div>
