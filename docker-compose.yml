@@ -4,6 +4,8 @@ services:
     build: './docker/app'
     environment:
       TZ: Asia/Tokyo
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
     working_dir: /usr/src/app
     volumes:
       - .:/usr/src/app
