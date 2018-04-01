@@ -17,7 +17,7 @@ customer_outsource_<%= i %>:
 <% end %>
 
 <% (1..5).each do |i| %>
-customer_order_<%= i %>:
+customer_order_outsource_<%= i %>:
   name: <%= "受注外注先#{i}" %>
   short_name: <%= "受外#{i}" %>
   display_order: <%= order += 1 %>
