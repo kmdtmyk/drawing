@@ -1,139 +1,152 @@
 <%= form_for(drawing) do |f| %>
-  <% if drawing.errors.any? %>
-    <div id='error_explanation'>
-      <h2><%= pluralize(drawing.errors.count, 'error') %> prohibited this drawing from being saved:</h2>
 
-      <ul>
-      <% drawing.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+  <div class='row'>
+
+    <div class='col-sm-6'>
+
+      <% if drawing.errors.any? %>
+        <div id='error_explanation'>
+          <h2><%= pluralize(drawing.errors.count, 'error') %> prohibited this drawing from being saved:</h2>
+          <ul>
+            <% drawing.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class='form-group'>
-    <label>受注先</label>
-    <%= f.collection_select :customer_id, @orders, :id, :name, {include_blank: true}, class: 'form-control' %>
-  </div>
-
-  <div class='form-group'>
-    <label>品名</label>
-    <%= f.text_field :product_name, class: 'form-control' %>
-  </div>
-
-  <div class='form-group'>
-    <label>品番</label>
-    <%= f.text_field :product_name, class: 'form-control' %>
-  </div>
-
-  <div class='form-group'>
-    <h3>材質</h3>
-    <div class='form-row'>
-      <div class='col'>
-        <label>板厚</label>
-        <%= f.number_field :thickness, step: '0.01', class: 'form-control' %>
+      <div class='form-group'>
+        <label>受注先</label>
+        <%= f.collection_select :customer_id, @orders, :id, :name, {include_blank: true}, class: 'form-control' %>
       </div>
-      <div class='col'>
-        <label>幅</label>
-        <%= f.number_field :witdh, step: '0.01', class: 'form-control' %>
+
+      <div class='form-group'>
+        <label>品名</label>
+        <%= f.text_field :product_name, class: 'form-control' %>
       </div>
-      <div class='col'>
-        <label>長さ</label>
-        <%= f.number_field :length, step: '0.01', class: 'form-control' %>
+
+      <div class='form-group'>
+        <label>品番</label>
+        <%= f.text_field :product_name, class: 'form-control' %>
       </div>
-    </div>
-  </div>
 
-  <div class='form-group form-inline'>
-    <div class='form-group'>
-      <label>見積もり日</label>
-      <%= f.date_field :estimate_date, class: 'form-control' %>
-    </div>
-    <div class='form-group'>
-      <label>
-        <%= f.check_box :estimate_flag %>
-        見積もり
-      </label>
-    </div>
-    <div class='form-group'>
-      <label>
-        <%= f.check_box :order_flag %>
-        受注
-      </label>
-    </div>
-    <div class='form-group'>
-      <label>
-        <%= f.check_box :suspend_flag %>
-        保留
-      </label>
-    </div>
-  </div>
+      <div class='form-group'>
+        <h3>材質</h3>
+        <div class='form-row'>
+          <div class='col'>
+            <label>板厚</label>
+            <%= f.number_field :thickness, step: '0.01', class: 'form-control' %>
+          </div>
+          <div class='col'>
+            <label>幅</label>
+            <%= f.number_field :witdh, step: '0.01', class: 'form-control' %>
+          </div>
+          <div class='col'>
+            <label>長さ</label>
+            <%= f.number_field :length, step: '0.01', class: 'form-control' %>
+          </div>
+        </div>
+      </div>
 
-  <div class='form-group form-inline'>
-    <div class='form-group'>
-      <label>材料費</label>
-      <%= f.number_field :material_cost, class: 'form-control' %>
-    </div>
-    <div class='form-group'>
-      <label>加工費</label>
-      <%= f.number_field :process_cost, class: 'form-control' %>
-    </div>
-    <div class='form-group'>
-      <label>売価</label>
-      <%= f.number_field :sales_price, class: 'form-control' %>
-    </div>
-  </div>
+      <div class='form-group'>
+        <label>見積もり日</label>
+        <%= f.date_field :estimate_date, class: 'form-control' %>
+      </div>
 
-  <div class='form-group'>
-    <label>見積金額</label>
-    <%= f.number_field :estimated_price, class: 'form-control' %>
-  </div>
+      <div class='form-group form-row'>
+        <div class='col'>
+          <label>
+            <%= f.check_box :estimate_flag %>
+            見積もり
+          </label>
+        </div>
+        <div class='col'>
+          <label>
+            <%= f.check_box :order_flag %>
+            受注
+          </label>
+        </div>
+        <div class='col'>
+          <label>
+            <%= f.check_box :suspend_flag %>
+            保留
+          </label>
+        </div>
+      </div>
 
-  <div class='form-group'>
-    <label>難易度</label>
-    <%= f.number_field :difficulty, class: 'form-control' %>
-  </div>
+      <div class='form-group form-row'>
+        <div class='col'>
+          <label>材料費</label>
+          <%= f.number_field :material_cost, class: 'form-control' %>
+        </div>
+        <div class='col'>
+          <label>加工費</label>
+          <%= f.number_field :process_cost, class: 'form-control' %>
+        </div>
+        <div class='col'>
+          <label>売価</label>
+          <%= f.number_field :sales_price, class: 'form-control' %>
+        </div>
+      </div>
 
-  <div class='form-group'>
-    <div>
-      <label>カテゴリー</label>
-      <%= f.add_nested_fields_link :drawing_categories, '追加' %>
-    </div>
-    <div class='form-inline'>
-      <%= f.nested_fields_for :drawing_categories do |drawing_category| %>
-        <%= drawing_category.collection_select :category_id, @categories, :id, :name, {include_blank: true}, class: 'form-control' %>
-        <%= drawing_category.remove_nested_fields_link '削除' %>
-      <% end %>
-    </div>
-  </div>
+      <div class='form-group'>
+        <label>見積金額</label>
+        <%= f.number_field :estimated_price, class: 'form-control' %>
+      </div>
 
-  <div class='form-group'>
-    <div>
-      <label>外注先</label>
-      <%= f.add_nested_fields_link :drawing_outsources, '追加' %>
-    </div>
-    <%= f.nested_fields_for :drawing_outsources do |drawing_outsource| %>
-      <div class='form-inline'>
+      <div class='form-group'>
+        <label>難易度</label>
+        <%= f.number_field :difficulty, class: 'form-control' %>
+      </div>
+
+      <div class='form-group'>
+        <div>
+          <label>カテゴリー</label>
+          <%= f.add_nested_fields_link :drawing_categories, '追加' %>
+        </div>
+        <div class='form-inline'>
+          <%= f.nested_fields_for :drawing_categories do |drawing_category| %>
+            <%= drawing_category.collection_select :category_id, @categories, :id, :name, {include_blank: true}, class: 'form-control' %>
+            <%= drawing_category.remove_nested_fields_link '削除' %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class='form-group'>
         <div>
           <label>外注先</label>
-          <%= drawing_outsource.collection_select :customer_id, @outsources, :id, :name, {include_blank: true}, class: 'form-control' %>
+          <%= f.add_nested_fields_link :drawing_outsources, '追加' %>
         </div>
-        <div>
-          <label>仕入れ金額</label>
-          <%= drawing_outsource.number_field :purchase_price, class: 'form-control' %>
-        </div>
-        <%= drawing_outsource.remove_nested_fields_link '削除' %>
+        <%= f.nested_fields_for :drawing_outsources do |drawing_outsource| %>
+          <div class='form-inline'>
+            <div>
+              <label>外注先</label>
+              <%= drawing_outsource.collection_select :customer_id, @outsources, :id, :name, {include_blank: true}, class: 'form-control' %>
+            </div>
+            <div>
+              <label>仕入れ金額</label>
+              <%= drawing_outsource.number_field :purchase_price, class: 'form-control' %>
+            </div>
+            <%= drawing_outsource.remove_nested_fields_link '削除' %>
+          </div>
+        <% end %>
       </div>
-    <% end %>
-  </div>
 
-  <div class='form-group'>
-    <label>メモ</label>
-    <%= f.text_area :memo, class: 'form-control', rows: '3' %>
-  </div>
+      <div class='form-group'>
+        <label>メモ</label>
+        <%= f.text_area :memo, class: 'form-control', rows: '3' %>
+      </div>
 
-  <div class='form-group'>
-    <button type='submit' class='btn btn-primary'>登録</button>
+      <div class='form-group'>
+        <button type='submit' class='btn btn-primary'>登録</button>
+      </div>
+
+    </div>
+
+    <div class='col-sm-6'>
+      こっちで画像を選択する
+    </div>
+
   </div>
 
 <% end %>
