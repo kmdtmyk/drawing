@@ -6,6 +6,8 @@ class Drawing < ApplicationRecord
   has_many :drawing_outsources, -> { order(:display_order) }, dependent: :destroy
   accepts_nested_attributes_for :drawing_outsources, allow_destroy: true
 
+  belongs_to :customer, optional: true
+
   scope :search_by_params, -> (params){
     drawings = all
     if params[:part_number].present?

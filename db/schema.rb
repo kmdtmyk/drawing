@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180331103647) do
+ActiveRecord::Schema.define(version: 20180401092428) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,8 +58,23 @@ ActiveRecord::Schema.define(version: 20180331103647) do
     t.date     "order_date"
     t.integer  "estimated_price"
     t.integer  "difficulty"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "customer_id"
+    t.string   "product_name"
+    t.string   "material"
+    t.float    "thickness"
+    t.float    "witdh"
+    t.float    "length"
+    t.date     "estimate_date"
+    t.boolean  "estimate_flag",   default: false, null: false
+    t.boolean  "order_flag",      default: false, null: false
+    t.boolean  "suspend_flag",    default: false, null: false
+    t.integer  "material_cost"
+    t.integer  "process_cost"
+    t.integer  "sales_price"
+    t.text     "memo"
+    t.index ["customer_id"], name: "index_drawings_on_customer_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -85,4 +100,5 @@ ActiveRecord::Schema.define(version: 20180331103647) do
   add_foreign_key "drawing_categories", "drawings"
   add_foreign_key "drawing_outsources", "customers"
   add_foreign_key "drawing_outsources", "drawings"
+  add_foreign_key "drawings", "customers"
 end
