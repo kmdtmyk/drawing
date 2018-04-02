@@ -1,0 +1,82 @@
+<%
+json = @drawings
+  .includes(:customer)
+  .to_json(
+    only: [:customer_id, :estimate_date, :estimated_price],
+    include: {customer: {only: [:name]}}
+  )
+%>
+
+<input id='records' type='hidden' value='<%= json %>'>
+<div id='graph'></div>
+
+<script>
+(function(){
+
+  const records = JSON.parse(document.getElementById('records').value)
+
+  const groups = _.groupBy(records, (record) => {
+    return record.customer_id
+  })
+
+  const yearMonths = Object.keys(_.groupBy(records, (record) => {
+    const date = new Date(record.estimate_date)
+    return moment(date.setDate(1)).format('YYYY-MM')
+  }))
+
+  const series = []
+  for(customer_id in groups){
+    const records = groups[customer_id]
+
+    const data = []
+    for(yearMonth of yearMonths){
+      const sum = records.filter((record) => {
+        return record.estimate_date.startsWith(yearMonth)
+      }).reduce((accumulator, record) => {
+        return accumulator + record.estimated_price
+      }, 0)
+      data.push(sum)
+    }
+
+    series.push({
+      name: records[0].customer.name,
+      data: data,
+      animation: false,
+    })
+  }
+
+  Highcharts.setOptions({
+    lang: {
+      thousandsSep: ',',
+    },
+  })
+
+  Highcharts.chart('graph', {
+    chart: {
+      type: 'column'
+    },
+    title: {
+      text: '見積金額統計（仮）',
+    },
+    subtitle: {
+      text: '',
+    },
+    credits: {
+      enabled: false,
+    },
+    xAxis: {
+      categories: yearMonths,
+    },
+    plotOptions: {
+      column: {
+        stacking: 'normal',
+        dataLabels: {
+          // enabled: true,
+        },
+      },
+    },
+    series: series,
+  })
+
+})()
+</script>

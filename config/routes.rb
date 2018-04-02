@@ -8,5 +8,10 @@ Rails.application.routes.draw do
   resources :drawings
   resources :categories, except: [:show]
   resources :customers, except: [:show]
+
+  namespace :statistic do
+    resources :drawings, only: [:index]
+  end
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
