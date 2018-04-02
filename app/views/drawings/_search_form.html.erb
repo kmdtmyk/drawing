@@ -31,19 +31,6 @@
   </div>
 
   <div class='form-group'>
-    <label>難易度</label>
-    <div class='form-row align-items-center'>
-      <div class='col'>
-        <%= number_field_tag :difficulty_from, params[:difficulty_from], class: 'form-control' %>
-      </div>
-      <span>〜</span>
-      <div class='col'>
-        <%= number_field_tag :difficulty_to, params[:difficulty_to], class: 'form-control' %>
-      </div>
-    </div>
-  </div>
-
-  <div class='form-group'>
     <label>カテゴリー</label>
     <% @categories.each_with_index do |category, index| %>
       <div class='custom-control custom-checkbox'>

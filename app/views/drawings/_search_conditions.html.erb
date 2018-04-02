@@ -30,18 +30,6 @@
     <% end %>
   <% end %>
 
-  <% if params[:difficulty_from].present? %>
-    <%= link_to drawings_path(params: params.merge(difficulty_from: '')) do %>
-      <%= tag_label('難易度', format_number(params[:difficulty_from]) + ' 以上') -%>
-    <% end %>
-  <% end %>
-
-  <% if params[:difficulty_to].present? %>
-    <%= link_to drawings_path(params: params.merge(difficulty_to: '')) do %>
-      <%= tag_label('難易度', format_number(params[:difficulty_to]) + ' 以下') -%>
-    <% end %>
-  <% end %>
-
   <% if params[:categories].present? %>
     <% params[:categories].each_with_index do |category_id, index| %>
       <% category = Category.find_by(id: category_id) %>

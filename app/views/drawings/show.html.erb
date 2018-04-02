@@ -55,10 +55,6 @@
         <td><%= format_number @drawing.sales_price %></td>
       </tr>
       <tr>
-        <th>難易度</th>
-        <td><%= @drawing.difficulty %></td>
-      </tr>
-      <tr>
         <th>カテゴリー</th>
         <td><%= @drawing.categories.pluck(:name).join('、') %></td>
       </tr>
