@@ -97,7 +97,7 @@ class DrawingsController < ApplicationController
         :product_name,
         :material,
         :thickness,
-        :witdh,
+        :width,
         :length,
         :estimate_date,
         :estimate_flag,

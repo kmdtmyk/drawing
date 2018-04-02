@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180401092428) do
+ActiveRecord::Schema.define(version: 20180402112911) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 20180401092428) do
     t.string   "product_name"
     t.string   "material"
     t.float    "thickness"
-    t.float    "witdh"
+    t.float    "width"
     t.float    "length"
     t.date     "estimate_date"
     t.boolean  "estimate_flag",   default: false, null: false
