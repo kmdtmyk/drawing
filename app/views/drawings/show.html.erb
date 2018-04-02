@@ -24,15 +24,15 @@
       </tr>
       <tr>
         <th>板厚</th>
-        <td><%= @drawing.thickness %> [mm]</td>
+        <td><%= format_number @drawing.thickness %> [mm]</td>
       </tr>
       <tr>
         <th>幅</th>
-        <td><%= @drawing.width %> [mm]</td>
+        <td><%= format_number @drawing.width %> [mm]</td>
       </tr>
       <tr>
         <th>長さ</th>
-        <td><%= @drawing.length %> [mm]</td>
+        <td><%= format_number @drawing.length %> [mm]</td>
       </tr>
       <tr>
         <th>見積もり日</th>
