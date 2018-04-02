@@ -1,7 +1,20 @@
 <% (1..1000).each do |i| %>
 drawing_<%= i %>:
+  customer: customer_order_<%= Faker::Number.between(1, 5) %>
+  product_name: <%= Faker::Lorem.word %>
   part_number: <%= Faker::Code.asin %>
+  estimate_date: <%= Faker::Date.between(1.year.ago, Date.today) %>
   order_date: <%= Faker::Date.between(1.year.ago, Date.today) %>
   estimated_price: <%= Faker::Number.between(1, 1000) * 100 %>
+  thickness: <%= Faker::Number.decimal(5, 2) %>
+  width: <%= Faker::Number.decimal(5, 2) %>
+  length: <%= Faker::Number.decimal(5, 2) %>
   difficulty: <%= Faker::Number.between(1, 10) %>
+  estimate_flag: <%= Faker::Boolean.boolean %>
+  order_flag: <%= Faker::Boolean.boolean %>
+  suspend_flag: <%= Faker::Boolean.boolean %>
+  material_cost: <%= Faker::Number.between(1, 1000) * 100 %>
+  process_cost: <%= Faker::Number.between(1, 1000) * 100 %>
+  sales_price: <%= Faker::Number.between(1, 1000) * 100 %>
+  memo: <%= Faker::Lorem.sentence %>
 <% end %>
