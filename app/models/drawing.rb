@@ -47,4 +47,12 @@ class Drawing < ApplicationRecord
     drawings
   }
 
+  def status
+    array = []
+    array << '見積もり' if estimate_flag
+    array << '受注' if order_flag
+    array << '保留' if suspend_flag
+    return array.join('、')
+  end
+
 end
