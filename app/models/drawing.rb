@@ -8,6 +8,8 @@ class Drawing < ApplicationRecord
 
   belongs_to :customer, optional: true
 
+  delegate :name, to: :customer, prefix: true, allow_nil: true
+
   scope :search_by_params, -> (params){
     drawings = all
     if params[:part_number].present?
