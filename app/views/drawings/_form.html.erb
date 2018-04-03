@@ -113,23 +113,35 @@
       </div> -->
 
       <div class='form-group'>
-        <div>
-          <label>外注先</label>
-          <%= f.add_nested_fields_link :drawing_outsources, '追加' %>
-        </div>
-        <%= f.nested_fields_for :drawing_outsources do |drawing_outsource| %>
-          <div class='form-inline'>
-            <div>
-              <label>外注先</label>
-              <%= drawing_outsource.collection_select :customer_id, @outsources, :id, :name, {include_blank: true}, class: 'form-control' %>
-            </div>
-            <div>
-              <label>仕入れ金額</label>
-              <%= drawing_outsource.number_field :purchase_price, class: 'form-control' %>
-            </div>
-            <%= drawing_outsource.remove_nested_fields_link '削除' %>
-          </div>
-        <% end %>
+        <table>
+          <thead>
+            <tr>
+              <th>外注先</th>
+              <th>仕入れ金額</th>
+              <td>
+                <%= f.add_nested_fields_link :drawing_outsources do %>
+                  <button type='button' class='btn btn-info'>追加</button>
+                <% end %>
+              </td>
+            </tr>
+          </thead>
+
+          <tbody>
+            <%= f.nested_fields_for :drawing_outsources, wrapper_tag: :tr do |drawing_outsource| %>
+              <td>
+                <%= drawing_outsource.collection_select :customer_id, @outsources, :id, :name, {include_blank: true}, class: 'form-control' %>
+              </td>
+              <td>
+                <%= drawing_outsource.number_field :purchase_price, class: 'form-control' %>
+              </td>
+              <td>
+                <%= drawing_outsource.remove_nested_fields_link do %>
+                  <button type='button' class='btn btn-warning'>削除</button>
+                <% end %>
+              </td>
+            <% end %>
+          </tbody>
+        </table>
       </div>
 
       <div class='form-group'>
