@@ -12,8 +12,42 @@ class Drawing < ApplicationRecord
 
   scope :search_by_params, -> (params){
     drawings = all
+
+    if params[:customer_id].present?
+      drawings.where!(customer_id: params[:customer_id])
+    end
+
+    if params[:product_name].present?
+      drawings.where!('LOWER(product_name) LIKE LOWER(?)', "%#{params[:product_name]}%")
+    end
+
     if params[:part_number].present?
       drawings.where!('LOWER(part_number) LIKE LOWER(?)', "%#{params[:part_number]}%")
+    end
+
+    if params[:material].present?
+      drawings.where!('LOWER(material) LIKE LOWER(?)', "%#{params[:material]}%")
+    end
+
+    if params[:thickness_from].present?
+      drawings.where!('thickness >= ?', params[:thickness_from])
+    end
+    if params[:thickness_to].present?
+      drawings.where!('thickness <= ?', params[:thickness_to])
+    end
+
+    if params[:width_from].present?
+      drawings.where!('width >= ?', params[:width_from])
+    end
+    if params[:width_to].present?
+      drawings.where!('width <= ?', params[:width_to])
+    end
+
+    if params[:length_from].present?
+      drawings.where!('length >= ?', params[:length_from])
+    end
+    if params[:length_to].present?
+      drawings.where!('length <= ?', params[:length_to])
     end
 
     if params[:order_date_from].present?
@@ -28,13 +62,6 @@ class Drawing < ApplicationRecord
     end
     if params[:estimated_price_to].present?
       drawings.where!('estimated_price <= ?', params[:estimated_price_to])
-    end
-
-    if params[:difficulty_from].present?
-      drawings.where!('difficulty >= ?', params[:difficulty_from])
-    end
-    if params[:difficulty_to].present?
-      drawings.where!('difficulty <= ?', params[:difficulty_to])
     end
 
     if params[:categories].present?

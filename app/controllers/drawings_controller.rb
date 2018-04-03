@@ -1,7 +1,7 @@
 class DrawingsController < ApplicationController
   before_action :set_drawing, only: [:show, :edit, :update, :destroy]
   before_action :set_categories, only: [:new, :edit]
-  before_action :set_orders, only: [:new, :edit]
+  before_action :set_orders, only: [:index, :new, :edit]
   before_action :set_outsources, only: [:new, :edit]
 
   # GET /drawings
