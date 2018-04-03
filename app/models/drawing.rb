@@ -50,11 +50,11 @@ class Drawing < ApplicationRecord
       drawings.where!('length <= ?', params[:length_to])
     end
 
-    if params[:order_date_from].present?
-      drawings.where!('order_date >= ?', params[:order_date_from])
+    if params[:estimate_date_from].present?
+      drawings.where!('estimate_date >= ?', params[:estimate_date_from])
     end
-    if params[:order_date_to].present?
-      drawings.where!('order_date <= ?', params[:order_date_to])
+    if params[:estimate_date_to].present?
+      drawings.where!('estimate_date <= ?', params[:estimate_date_to])
     end
 
     if params[:estimated_price_from].present?

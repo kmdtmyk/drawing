@@ -61,15 +61,15 @@
     <% end %>
   <% end %>
 
-  <% if params[:order_date_from].present? %>
-    <%= link_to drawings_path(params: params.merge(order_date_from: '')) do %>
-      <%= tag_label('受注日', params[:order_date_from] + ' 以降') -%>
+  <% if params[:estimate_date_from].present? %>
+    <%= link_to drawings_path(params: params.merge(estimate_date_from: '')) do %>
+      <%= tag_label('見積もり日', params[:estimate_date_from] + ' 以降') -%>
     <% end %>
   <% end %>
 
-  <% if params[:order_date_to].present? %>
-    <%= link_to drawings_path(params: params.merge(order_date_to: '')) do %>
-      <%= tag_label('受注日', params[:order_date_to] + ' 以前') -%>
+  <% if params[:estimate_date_to].present? %>
+    <%= link_to drawings_path(params: params.merge(estimate_date_to: '')) do %>
+      <%= tag_label('見積もり日', params[:estimate_date_to] + ' 以前') -%>
     <% end %>
   <% end %>
 

@@ -25,20 +25,24 @@
         <div class='card-text px-2 py-1'>
           <table>
             <tr>
+              <th>受注先</th>
+              <td><%= drawing.customer_name %></td>
+            </tr>
+            <tr>
+              <th>品名</th>
+              <td><%= drawing.product_name %></td>
+            </tr>
+            <tr>
               <th>品番</th>
               <td><%= drawing.part_number %></td>
             </tr>
             <tr>
-              <th>受注日</th>
-              <td><%= drawing.order_date %></td>
+              <th>見積もり日</th>
+              <td><%= drawing.estimate_date %></td>
             </tr>
             <tr>
               <th>見積金額</th>
               <td><%= format_number drawing.estimated_price %></td>
-            </tr>
-            <tr>
-              <th>難易度</th>
-              <td><%= drawing.difficulty %></td>
             </tr>
           </table>
         </div>
