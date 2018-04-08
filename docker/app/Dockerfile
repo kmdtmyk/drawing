@@ -6,7 +6,8 @@ RUN apt-get update && \
       libpq-dev \
       postgresql-client \
       nodejs \
-      sudo
+      sudo \
+      ghostscript
 
 # add user
 RUN groupadd -g 1000 docker && \
