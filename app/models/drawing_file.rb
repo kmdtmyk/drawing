@@ -21,6 +21,14 @@ class DrawingFile < ApplicationRecord
     file_content_type == 'application/pdf'
   end
 
+  def thumbnail(options = {})
+    if image?
+      ApplicationController.helpers.image_tag file.url, **options
+    else pdf?
+      ApplicationController.helpers.image_tag file.url(:thumbnail)
+    end
+  end
+
   def output
     ApplicationController.helpers.link_to file.url do
       if image?

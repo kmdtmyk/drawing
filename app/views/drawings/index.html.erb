@@ -1,3 +1,5 @@
+<% @drawings = @drawings.includes(:drawing_files) %>
+
 <% content_for :sidebar do %>
   <div class='px-3'>
     <h2>検索条件</h2>
@@ -19,9 +21,14 @@
   <div class='card-columns'>
     <% @drawings.each do |drawing| %>
       <div class='card' >
-        <%= link_to drawing do %>
-          <img class='card-img-top' src='https://placehold.jp/400x300.png'>
+
+        <% drawing_file = drawing.drawing_files.first %>
+        <% if drawing_file.present? %>
+          <%= link_to drawing do %>
+            <% drawing_file.thumbnail style: 'width: 200px; height: 200px;' %>
+          <% end %>
         <% end %>
+
         <div class='card-text px-2 py-1'>
           <table>
             <tr>
@@ -46,6 +53,14 @@
             </tr> -->
           </table>
         </div>
+
+        <div class='card-footer d-flex justify-content-between'>
+          <small class='text-muted'>
+            <%= link_to '詳細', drawing %>
+            <%= link_to '編集', edit_drawing_path(drawing) %>
+          </small>
+        </div>
+
       </div>
     <% end %>
   </div>
