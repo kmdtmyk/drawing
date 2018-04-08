@@ -3,6 +3,7 @@ class DrawingsController < ApplicationController
   before_action :set_categories, only: [:new, :edit]
   before_action :set_orders, only: [:index, :new, :edit]
   before_action :set_outsources, only: [:new, :edit]
+  before_action :set_params_display_order, only: [:create, :update]
 
   # GET /drawings
   # GET /drawings.json
@@ -84,6 +85,12 @@ class DrawingsController < ApplicationController
 
     def set_orders
       @orders = Customer.where(order_flag: true).order(:display_order)
+    end
+
+    def set_params_display_order
+      params[:drawing][:drawing_files_attributes].each do |index, drawing_file|
+        drawing_file[:display_order] = index.to_i + 1
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
