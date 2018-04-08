@@ -120,6 +120,12 @@ class DrawingsController < ApplicationController
           :display_order,
           :_destroy,
         ],
+        drawing_files_attributes: [
+          :id,
+          :file,
+          :display_order,
+          :_destroy,
+        ],
       )
     end
 

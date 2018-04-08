@@ -81,7 +81,9 @@
   </div>
 
   <div class='col-sm-7'>
-    こっちに画像
+    <% @drawing.drawing_files.each do |drawing_file| %>
+      <%= image_tag drawing_file.file.url %>
+    <% end %>
   </div>
 
 </div>

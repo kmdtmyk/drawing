@@ -6,5 +6,6 @@ class CreateDrawingFiles < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
+    add_attachment :drawing_files, :file
   end
 end

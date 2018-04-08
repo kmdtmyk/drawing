@@ -6,6 +6,9 @@ class Drawing < ApplicationRecord
   has_many :drawing_outsources, -> { order(:display_order) }, dependent: :destroy
   accepts_nested_attributes_for :drawing_outsources, allow_destroy: true
 
+  has_many :drawing_files, -> { order(:display_order) }, dependent: :destroy
+  accepts_nested_attributes_for :drawing_files, allow_destroy: true
+
   belongs_to :customer, optional: true
 
   delegate :name, to: :customer, prefix: true, allow_nil: true

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180402112911) do
+ActiveRecord::Schema.define(version: 20180408092608) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,18 @@ ActiveRecord::Schema.define(version: 20180402112911) do
     t.datetime "updated_at",    null: false
     t.index ["category_id"], name: "index_drawing_categories_on_category_id", using: :btree
     t.index ["drawing_id"], name: "index_drawing_categories_on_drawing_id", using: :btree
+  end
+
+  create_table "drawing_files", force: :cascade do |t|
+    t.integer  "drawing_id"
+    t.integer  "display_order"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.index ["drawing_id"], name: "index_drawing_files_on_drawing_id", using: :btree
   end
 
   create_table "drawing_outsources", force: :cascade do |t|
@@ -74,6 +86,7 @@ ActiveRecord::Schema.define(version: 20180402112911) do
     t.integer  "process_cost"
     t.integer  "sales_price"
     t.text     "memo"
+    t.string   "file"
     t.index ["customer_id"], name: "index_drawings_on_customer_id", using: :btree
   end
 
@@ -98,6 +111,7 @@ ActiveRecord::Schema.define(version: 20180402112911) do
 
   add_foreign_key "drawing_categories", "categories"
   add_foreign_key "drawing_categories", "drawings"
+  add_foreign_key "drawing_files", "drawings"
   add_foreign_key "drawing_outsources", "customers"
   add_foreign_key "drawing_outsources", "drawings"
   add_foreign_key "drawings", "customers"

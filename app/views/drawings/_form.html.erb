@@ -156,7 +156,20 @@
     </div>
 
     <div class='col-sm-7'>
-      こっちで画像を選択する
+
+      <%= f.nested_fields_for :drawing_files, wrapper_tag: :div do |drawing_file| %>
+        <% if drawing_file.object.new_record? %>
+          <%= drawing_file.file_field :file %>
+        <% else %>
+          <%= image_tag drawing_file.object.file.url %>
+        <% end %>
+        <%= drawing_file.remove_nested_fields_link '削除' %>
+      <% end %>
+
+      <%= f.add_nested_fields_link :drawing_files do %>
+        <button type='button' class='btn btn-info'>追加</button>
+      <% end %>
+
     </div>
 
   </div>
