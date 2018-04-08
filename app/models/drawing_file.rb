@@ -1,5 +1,5 @@
 class DrawingFile < ApplicationRecord
-  belongs_to :drawing
+  belongs_to :drawing, optional: true
 
   has_attached_file :file,
     styles: {
