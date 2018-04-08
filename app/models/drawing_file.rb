@@ -11,11 +11,7 @@ class DrawingFile < ApplicationRecord
     }
 
   validates_attachment_content_type :file,
-    content_type: [
-      /\Aimage\/.*\z/,
-      'text/plain',
-      'application/pdf',
-    ]
+   content_type: []
 
   def image?
     file_content_type.start_with? 'image/'
