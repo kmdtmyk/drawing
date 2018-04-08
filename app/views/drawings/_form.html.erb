@@ -161,7 +161,7 @@
         <% if drawing_file.object.new_record? %>
           <%= drawing_file.file_field :file %>
         <% else %>
-          <%= image_tag drawing_file.object.file.url %>
+          <%= drawing_file.object.output %>
         <% end %>
         <%= drawing_file.remove_nested_fields_link '削除' %>
       <% end %>

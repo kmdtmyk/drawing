@@ -82,7 +82,9 @@
 
   <div class='col-sm-7'>
     <% @drawing.drawing_files.each do |drawing_file| %>
-      <%= image_tag drawing_file.file.url %>
+      <div>
+        <%= drawing_file.output %>
+      </div>
     <% end %>
   </div>
 
