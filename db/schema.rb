@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180408092608) do
+ActiveRecord::Schema.define(version: 20180409151113) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,6 +88,13 @@ ActiveRecord::Schema.define(version: 20180408092608) do
     t.text     "memo"
     t.string   "file"
     t.index ["customer_id"], name: "index_drawings_on_customer_id", using: :btree
+  end
+
+  create_table "materials", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "display_order"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "users", force: :cascade do |t|

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :drawings
   resources :categories, except: [:show]
   resources :customers, except: [:show]
+  resources :materials
 
   namespace :statistic do
     resources :drawings, only: [:index]
