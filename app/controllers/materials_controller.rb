@@ -7,11 +7,6 @@ class MaterialsController < ApplicationController
     @materials = Material.all
   end
 
-  # GET /materials/1
-  # GET /materials/1.json
-  def show
-  end
-
   # GET /materials/new
   def new
     @material = Material.new
@@ -28,7 +23,7 @@ class MaterialsController < ApplicationController
 
     respond_to do |format|
       if @material.save
-        format.html { redirect_to @material, notice: 'Material was successfully created.' }
+        format.html { redirect_to materials_url, notice: 'Material was successfully created.' }
         format.json { render :show, status: :created, location: @material }
       else
         format.html { render :new }
@@ -42,7 +37,7 @@ class MaterialsController < ApplicationController
   def update
     respond_to do |format|
       if @material.update(material_params)
-        format.html { redirect_to @material, notice: 'Material was successfully updated.' }
+        format.html { redirect_to materials_url, notice: 'Material was successfully updated.' }
         format.json { render :show, status: :ok, location: @material }
       else
         format.html { render :edit }
