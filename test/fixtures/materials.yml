@@ -1,0 +1,6 @@
+<% names = %w(ss400 s50c sus303 sus304 a5052 a2017 a7015) %>
+<% names.each_with_index do |name, index| %>
+  material_<%= index + 1 %>:
+    name: <%= name %>
+    display_order: <%= index + 1 %>
+<% end %>
