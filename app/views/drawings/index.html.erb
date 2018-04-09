@@ -11,7 +11,19 @@
 
 <div class='px-4'>
 
-  <div class='mb-2'>
+  <div class='mb-2 d-flex justify-content-between'>
+
+    <form class='form-inline'>
+      <%= hidden_params except: :display_mode %>
+
+      <label class='mr-2'>表示形式</label>
+      <select class='form-control mr-2' name='display_mode'>
+        <option value='card' <%= 'selected' if params[:display_mode] != 'list' %>>3列</option>
+        <option value='list' <%= 'selected' if params[:display_mode] == 'list' %>>一覧</option>
+      </select>
+      <button type='submit' class='btn btn-primary'>変更</button>
+    </form>
+
     <%= link_to '新規作成', new_drawing_path, class: 'btn btn-info' %>
   </div>
 
@@ -21,53 +33,10 @@
 
   <% if @drawings.empty? %>
     <p>検索条件に一致するデータが見つかりませんでした。</p>
+  <% elsif params[:display_mode] == 'list' %>
+    <%= render 'list', drawings: @drawings %>
   <% else %>
-    <div class='card-columns'>
-      <% @drawings.each do |drawing| %>
-        <div class='card' >
-
-          <% drawing_file = drawing.drawing_files.first %>
-          <% if drawing_file.present? %>
-            <%= link_to drawing do %>
-              <% drawing_file.thumbnail style: 'width: 200px; height: 200px;' %>
-            <% end %>
-          <% end %>
-
-          <div class='card-text px-2 py-1'>
-            <table>
-              <tr>
-                <th>受注先</th>
-                <td><%= drawing.customer_name %></td>
-              </tr>
-              <tr>
-                <th>品名</th>
-                <td><%= drawing.product_name %></td>
-              </tr>
-              <tr>
-                <th>品番</th>
-                <td><%= drawing.part_number %></td>
-              </tr>
-              <tr>
-                <th>見積もり日</th>
-                <td><%= drawing.estimate_date %></td>
-              </tr>
-              <!-- <tr>
-                <th>見積金額</th>
-                <td><%= format_number drawing.estimated_price %></td>
-              </tr> -->
-            </table>
-          </div>
-
-          <div class='card-footer d-flex justify-content-between'>
-            <small class='text-muted'>
-              <%= link_to '詳細', drawing %>
-              <%= link_to '編集', edit_drawing_path(drawing) %>
-            </small>
-          </div>
-
-        </div>
-      <% end %>
-    </div>
+    <%= render 'card', drawings: @drawings %>
   <% end %>
 
   <%= paginate @drawings %>
