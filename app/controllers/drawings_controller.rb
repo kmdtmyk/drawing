@@ -23,6 +23,7 @@ class DrawingsController < ApplicationController
   # GET /drawings/new
   def new
     @drawing = Drawing.new
+    @drawing.estimate_date = Date.today
   end
 
   # GET /drawings/1/edit
