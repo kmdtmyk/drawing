@@ -10,6 +10,7 @@ class DrawingsController < ApplicationController
   def index
     @drawings = Drawing
       .search_by_params(params)
+      .order(estimate_date: :desc)
       .page(params[:page])
       .per(100)
     @categories = Category.all.order(:display_order)
