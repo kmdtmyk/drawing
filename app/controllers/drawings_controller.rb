@@ -89,6 +89,7 @@ class DrawingsController < ApplicationController
     end
 
     def set_params_display_order
+      return if params[:drawing][:drawing_files_attributess].nil?
       params[:drawing][:drawing_files_attributes].each do |index, drawing_file|
         drawing_file[:display_order] = index.to_i + 1
       end
