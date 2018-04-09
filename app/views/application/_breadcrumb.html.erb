@@ -1,0 +1,11 @@
+<% breadcrumbs(autoroot: false).tap do |links| %>
+  <% if links.any? %>
+    <ol class='breadcrumb'>
+      <% links.each do |link| %>
+        <li class='breadcrumb-item<%= link.current? ? ' active' : nil  %>'>
+          <%= link_to_unless link.current?, link.text, link.url %>
+        </li>
+      <% end %>
+    </ol>
+  <% end %>
+<% end %>

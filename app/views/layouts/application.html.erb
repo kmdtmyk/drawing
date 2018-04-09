@@ -23,6 +23,7 @@
     <% if yield(:sidebar).empty? %>
 
       <main class='container pt-3'>
+        <%= render 'breadcrumb' %>
         <%= render 'notice' %>
         <%= yield %>
       </main>
@@ -31,6 +32,7 @@
 
       <%= render 'sidebar' %>
       <main class='col-sm-9 ml-sm-auto col-md-9 pt-3'>
+        <%= render 'breadcrumb' %>
         <%= render 'notice' %>
         <%= yield %>
       </main>
