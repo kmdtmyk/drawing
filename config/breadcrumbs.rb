@@ -24,6 +24,22 @@ end
 
 
 
+crumb :customers do
+  link '顧客一覧', customers_path
+  parent :root
+end
+
+crumb :customer_new do
+  link '新規'
+  parent :customers
+end
+
+crumb :customer_edit do
+  link '編集'
+  parent :customers
+end
+
+
 crumb :materials do
   link '材質一覧', materials_path
   parent :root

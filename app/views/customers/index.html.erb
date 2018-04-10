@@ -1,14 +1,19 @@
-<h1>Customers</h1>
+<% breadcrumb :customers %>
 
-<table>
+<p>
+  <%= link_to '新規作成', new_customer_path, class: 'btn btn-primary' %>
+</p>
+
+<%= table_tag do %>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Short name</th>
-      <th>Display order</th>
-      <th>Order flag</th>
-      <th>Outsource flag</th>
-      <th colspan="2"></th>
+      <th>名前</th>
+      <th>略称</th>
+      <th>受注先</th>
+      <th>外注先</th>
+      <th>表示順</th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
 
@@ -17,16 +22,12 @@
       <tr>
         <td><%= customer.name %></td>
         <td><%= customer.short_name %></td>
-        <td><%= customer.display_order %></td>
         <td><%= customer.order_flag %></td>
         <td><%= customer.outsource_flag %></td>
-        <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
-        <td><%= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= customer.display_order %></td>
+        <td><%= link_to '編集', edit_customer_path(customer) %></td>
+        <td><%= link_to '削除', customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Customer', new_customer_path %>
+<% end %>

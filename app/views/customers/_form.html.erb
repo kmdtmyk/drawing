@@ -11,32 +11,43 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+  <div class='form-group row'>
+    <label class='col-sm-2 col-form-label'>名前</label>
+    <div>
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :short_name %>
-    <%= f.text_field :short_name %>
+  <div class='form-group row'>
+    <label class='col-sm-2 col-form-label'>略称</label>
+    <div>
+      <%= f.text_field :short_name, class: 'form-control' %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :display_order %>
-    <%= f.number_field :display_order %>
+  <div class='form-group row'>
+    <label class='col-sm-2 col-form-label'>表示順</label>
+    <div>
+      <%= f.number_field :display_order, class: 'form-control' %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :order_flag %>
-    <%= f.check_box :order_flag %>
+  <div class='form-group row'>
+    <label class='col-sm-2 col-form-label'>受注先</label>
+    <div>
+      <%= f.check_box :order_flag %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :outsource_flag %>
-    <%= f.check_box :outsource_flag %>
+  <div class='form-group row'>
+    <label class='col-sm-2 col-form-label'>外注先</label>
+    <div>
+      <%= f.check_box :outsource_flag %>
+    </div>
   </div>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class='form-group'>
+    <%= f.submit '登録', class: 'btn btn-primary' %>
   </div>
+
 <% end %>
