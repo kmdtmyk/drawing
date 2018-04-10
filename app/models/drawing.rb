@@ -10,8 +10,10 @@ class Drawing < ApplicationRecord
   accepts_nested_attributes_for :drawing_files, allow_destroy: true
 
   belongs_to :customer, optional: true
-
   delegate :name, to: :customer, prefix: true, allow_nil: true
+
+  belongs_to :material, optional: true
+  delegate :name, to: :material, prefix: true, allow_nil: true
 
   scope :search_by_params, -> (params){
     drawings = all
@@ -28,8 +30,8 @@ class Drawing < ApplicationRecord
       drawings.where!('LOWER(part_number) LIKE LOWER(?)', "%#{params[:part_number]}%")
     end
 
-    if params[:material].present?
-      drawings.where!('LOWER(material) LIKE LOWER(?)', "%#{params[:material]}%")
+    if params[:material_id].present?
+      drawings.where!(material_id: params[:material_id])
     end
 
     if params[:thickness_from].present?

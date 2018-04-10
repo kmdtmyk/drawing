@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180409151113) do
+ActiveRecord::Schema.define(version: 20180410123750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,7 +74,6 @@ ActiveRecord::Schema.define(version: 20180409151113) do
     t.datetime "updated_at",                      null: false
     t.integer  "customer_id"
     t.string   "product_name"
-    t.string   "material"
     t.float    "thickness"
     t.float    "width"
     t.float    "length"
@@ -87,7 +86,9 @@ ActiveRecord::Schema.define(version: 20180409151113) do
     t.integer  "sales_price"
     t.text     "memo"
     t.string   "file"
+    t.integer  "material_id"
     t.index ["customer_id"], name: "index_drawings_on_customer_id", using: :btree
+    t.index ["material_id"], name: "index_drawings_on_material_id", using: :btree
   end
 
   create_table "materials", force: :cascade do |t|
@@ -122,4 +123,5 @@ ActiveRecord::Schema.define(version: 20180409151113) do
   add_foreign_key "drawing_outsources", "customers"
   add_foreign_key "drawing_outsources", "drawings"
   add_foreign_key "drawings", "customers"
+  add_foreign_key "drawings", "materials"
 end

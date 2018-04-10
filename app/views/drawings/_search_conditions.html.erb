@@ -19,9 +19,10 @@
     <% end %>
   <% end %>
 
-  <% if params[:material].present? %>
-    <%= link_to drawings_path(params: params.merge(material: '')) do %>
-      <%= tag_label('材質', params[:material]) -%>
+  <% if params[:material_id].present? %>
+    <% material = Material.find_by(id: params[:material_id]) %>
+    <%= link_to drawings_path(params: params.merge(material_id: '')) do %>
+      <%= tag_label('材質', material.name) -%>
     <% end %>
   <% end %>
 

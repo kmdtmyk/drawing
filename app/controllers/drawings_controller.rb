@@ -2,6 +2,7 @@ class DrawingsController < ApplicationController
   before_action :set_drawing, only: [:show, :edit, :update, :destroy]
   before_action :set_categories, only: [:new, :edit]
   before_action :set_orders, only: [:index, :new, :edit]
+  before_action :set_materials, only: [:index, :new, :edit]
   before_action :set_outsources, only: [:new, :edit]
   before_action :set_params_display_order, only: [:create, :update]
 
@@ -89,6 +90,10 @@ class DrawingsController < ApplicationController
       @orders = Customer.where(order_flag: true).order(:display_order)
     end
 
+    def set_materials
+      @materials = Material.all.order(:display_order)
+    end
+
     def set_params_display_order
       return if params[:drawing][:drawing_files_attributess].nil?
       params[:drawing][:drawing_files_attributes].each do |index, drawing_file|
@@ -105,7 +110,7 @@ class DrawingsController < ApplicationController
         :difficulty,
         :customer_id,
         :product_name,
-        :material,
+        :material_id,
         :thickness,
         :width,
         :length,
