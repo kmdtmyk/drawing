@@ -22,6 +22,24 @@ crumb :drawing_edit do
   parent :drawings
 end
 
+
+
+crumb :materials do
+  link '材質一覧', materials_path
+  parent :root
+end
+
+crumb :material_new do
+  link '新規'
+  parent :materials
+end
+
+crumb :material_edit do
+  link '編集'
+  parent :materials
+end
+
+
 # crumb :projects do
 #   link "Projects", projects_path
 # end
