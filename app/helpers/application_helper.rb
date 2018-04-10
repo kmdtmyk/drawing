@@ -8,6 +8,24 @@ module ApplicationHelper
     render 'kaminari/statistic', page: page
   end
 
+  def table_tag(options = {})
+    if options[:class].present?
+      options[:class] = options[:class].split
+    else
+      options[:class] = []
+    end
+    options[:class] << [
+      'table',
+      'table-sm',
+      'table-striped',
+      'table-bordered',
+      # 'table-hover',
+    ]
+    content_tag(:table, **options) do
+      yield
+    end
+  end
+
   def tag_label(name, value = '')
     content_tag(:span, class: 'tag-label') do
       content_tag(:i, nil, class: 'fa fa-search') +
