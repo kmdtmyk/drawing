@@ -20,6 +20,9 @@ RSpec.describe DrawingsController, type: :controller do
     it 'get with invalid id' do
       get :index, params: {customer_id: 0}
       expect(response).to render_template :index
+
+      get :index, params: {material_id: 0}
+      expect(response).to render_template :index
     end
 
   end

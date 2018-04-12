@@ -3,7 +3,7 @@
   <% if params[:customer_id].present? %>
     <% customer = Customer.find_by(id: params[:customer_id]) %>
     <%= link_to drawings_path(params: params.merge(customer_id: '')) do %>
-      <%= tag_label('受注先', customer.name) -%>
+      <%= tag_label('受注先', customer.try(:name)) -%>
     <% end %>
   <% end %>
 
@@ -22,7 +22,7 @@
   <% if params[:material_id].present? %>
     <% material = Material.find_by(id: params[:material_id]) %>
     <%= link_to drawings_path(params: params.merge(material_id: '')) do %>
-      <%= tag_label('材質', material.name) -%>
+      <%= tag_label('材質', material.try(:name)) -%>
     <% end %>
   <% end %>
 
