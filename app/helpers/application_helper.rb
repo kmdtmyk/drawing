@@ -37,6 +37,8 @@ module ApplicationHelper
 
   def hidden_params(options)
     except = Array.wrap(options[:except])
+    except << :controller
+    except << :action
     result = ''
     params.each do |name, value|
       next if except.include?(name.to_sym)
