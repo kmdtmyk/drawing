@@ -38,7 +38,7 @@ module ApplicationHelper
   def hidden_params(options)
     except = Array.wrap(options[:except])
     result = ''
-    params.map do |name, value|
+    params.each do |name, value|
       next if except.include?(name.to_sym)
       result += hidden_field_tag name, value
     end
