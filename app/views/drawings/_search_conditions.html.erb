@@ -1,5 +1,9 @@
 <div class='mb-2'>
 
+  <%= search_tag_label @search_params, :estimate_date_from, '見積もり日', suffix: '以降' %>
+
+  <%= search_tag_label @search_params, :estimate_date_to, '見積もり日', suffix: '以前' %>
+
   <% customer = Customer.find_by(id: params[:customer_id]) %>
   <%= search_tag_label @search_params, :customer_id, '受注先',
     text: customer.try(:name) || '' %>
@@ -23,17 +27,5 @@
   <%= search_tag_label @search_params, :length_from, '長さ', suffix: '[mm]以上' %>
 
   <%= search_tag_label @search_params, :length_to, '長さ', suffix: '[mm]以下' %>
-
-  <% if params[:estimate_date_from].present? %>
-    <%= link_to drawings_path(params: params.merge(estimate_date_from: '')) do %>
-      <%= tag_label('見積もり日', params[:estimate_date_from] + ' 以降') -%>
-    <% end %>
-  <% end %>
-
-  <% if params[:estimate_date_to].present? %>
-    <%= link_to drawings_path(params: params.merge(estimate_date_to: '')) do %>
-      <%= tag_label('見積もり日', params[:estimate_date_to] + ' 以前') -%>
-    <% end %>
-  <% end %>
 
 </div>

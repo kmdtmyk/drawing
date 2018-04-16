@@ -104,6 +104,8 @@ class DrawingsController < ApplicationController
 
     def search_params
       params.permit(
+        :estimate_date_from,
+        :estimate_date_to,
         :customer_id,
         :product_name,
         :part_number,

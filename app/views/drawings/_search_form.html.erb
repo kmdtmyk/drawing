@@ -1,4 +1,18 @@
 <form>
+
+  <div class='form-group'>
+    <label>見積もり日</label>
+    <div class='form-row align-items-center'>
+      <div class='col'>
+        <%= text_field_tag :estimate_date_from, params[:estimate_date_from], class: 'form-control date-picker' %>
+      </div>
+      <span>〜</span>
+      <div class='col'>
+        <%= text_field_tag :estimate_date_to, params[:estimate_date_to], class: 'form-control date-picker' %>
+      </div>
+    </div>
+  </div>
+
   <div class='form-group'>
     <label>受注先</label>
     <select name='customer_id' class='form-control'>
@@ -67,52 +81,6 @@
       </div>
     </div>
   </div>
-
-  <!-- <div class='form-group'>
-    <label>見積もり日</label>
-    <div class='form-row align-items-center'>
-      <div class='col'>
-        <%= text_field_tag :estimate_date_from, params[:estimate_date_from], class: 'form-control date-picker' %>
-      </div>
-      <span>〜</span>
-      <div class='col'>
-        <%= text_field_tag :estimate_date_to, params[:estimate_date_to], class: 'form-control date-picker' %>
-      </div>
-    </div>
-  </div>
-
-  <div class='form-group'>
-    <label>見積金額</label>
-    <div class='form-row align-items-center'>
-      <div class='col'>
-        <%= number_field_tag :estimated_price_from, params[:estimated_price_from], class: 'form-control' %>
-      </div>
-      <span>〜</span>
-      <div class='col'>
-        <%= number_field_tag :estimated_price_to, params[:estimated_price_to], class: 'form-control' %>
-      </div>
-    </div>
-  </div>
-
-  <div class='form-group'>
-    <label>カテゴリー</label>
-    <% @categories.each_with_index do |category, index| %>
-      <div class='custom-control custom-checkbox'>
-        <%=
-          check_box_tag 'categories[]',
-          category.id,
-          params[:categories].present? && params[:categories].include?(category.id.to_s),
-          id: "category_#{category.id}",
-          class: 'custom-control-input'
-        %>
-        <%=
-          label_tag "category_#{category.id}",
-          category.name,
-          class: 'custom-control-label'
-        %>
-      </div>
-    <% end %>
-  </div> -->
 
   <%= hidden_field_tag :display_mode, params[:display_mode] %>
 
