@@ -1,66 +1,28 @@
 <div class='mb-2'>
 
-  <% if params[:customer_id].present? %>
-    <% customer = Customer.find_by(id: params[:customer_id]) %>
-    <%= link_to drawings_path(params: params.merge(customer_id: '')) do %>
-      <%= tag_label('受注先', customer.try(:name)) -%>
-    <% end %>
-  <% end %>
+  <% customer = Customer.find_by(id: params[:customer_id]) %>
+  <%= search_tag_label @search_params, :customer_id, '受注先',
+    text: customer.try(:name) || '' %>
 
-  <% if params[:product_name].present? %>
-    <%= link_to drawings_path(params: params.merge(product_name: '')) do %>
-      <%= tag_label('品名', params[:product_name]) -%>
-    <% end %>
-  <% end %>
+  <%= search_tag_label @search_params, :product_name, '品名' %>
 
-  <% if params[:part_number].present? %>
-    <%= link_to drawings_path(params: params.merge(part_number: '')) do %>
-      <%= tag_label('品番', params[:part_number]) -%>
-    <% end %>
-  <% end %>
+  <%= search_tag_label @search_params, :part_number, '品番' %>
 
-  <% if params[:material_id].present? %>
-    <% material = Material.find_by(id: params[:material_id]) %>
-    <%= link_to drawings_path(params: params.merge(material_id: '')) do %>
-      <%= tag_label('材質', material.try(:name)) -%>
-    <% end %>
-  <% end %>
+  <% material = Material.find_by(id: params[:material_id]) %>
+  <%= search_tag_label @search_params, :material_id, '材質',
+    text: material.try(:name) || '' %>
 
-  <% if params[:thickness_from].present? %>
-    <%= link_to drawings_path(params: params.merge(thickness_from: '')) do %>
-      <%= tag_label('板厚', format_number(params[:thickness_from]) + '[mm]以上') -%>
-    <% end %>
-  <% end %>
+  <%= search_tag_label @search_params, :thickness_from, '板厚', suffix: '[mm]以上' %>
 
-  <% if params[:thickness_to].present? %>
-    <%= link_to drawings_path(params: params.merge(thickness_to: '')) do %>
-      <%= tag_label('板厚', format_number(params[:thickness_to]) + '[mm]以下') -%>
-    <% end %>
-  <% end %>
+  <%= search_tag_label @search_params, :thickness_to, '板厚', suffix: '[mm]以下' %>
 
-  <% if params[:width_from].present? %>
-    <%= link_to drawings_path(params: params.merge(width_from: '')) do %>
-      <%= tag_label('幅', format_number(params[:width_from]) + '[mm]以上') -%>
-    <% end %>
-  <% end %>
+  <%= search_tag_label @search_params, :width_from, '幅', suffix: '[mm]以上' %>
 
-  <% if params[:width_to].present? %>
-    <%= link_to drawings_path(params: params.merge(width_to: '')) do %>
-      <%= tag_label('幅', format_number(params[:width_to]) + '[mm]以下') -%>
-    <% end %>
-  <% end %>
+  <%= search_tag_label @search_params, :width_to, '幅', suffix: '[mm]以下' %>
 
-  <% if params[:length_from].present? %>
-    <%= link_to drawings_path(params: params.merge(length_from: '')) do %>
-      <%= tag_label('長さ', format_number(params[:length_from]) + '[mm]以上') -%>
-    <% end %>
-  <% end %>
+  <%= search_tag_label @search_params, :length_from, '長さ', suffix: '[mm]以上' %>
 
-  <% if params[:length_to].present? %>
-    <%= link_to drawings_path(params: params.merge(length_to: '')) do %>
-      <%= tag_label('長さ', format_number(params[:length_to]) + '[mm]以下') -%>
-    <% end %>
-  <% end %>
+  <%= search_tag_label @search_params, :length_to, '長さ', suffix: '[mm]以下' %>
 
   <% if params[:estimate_date_from].present? %>
     <%= link_to drawings_path(params: params.merge(estimate_date_from: '')) do %>
@@ -71,30 +33,6 @@
   <% if params[:estimate_date_to].present? %>
     <%= link_to drawings_path(params: params.merge(estimate_date_to: '')) do %>
       <%= tag_label('見積もり日', params[:estimate_date_to] + ' 以前') -%>
-    <% end %>
-  <% end %>
-
-  <% if params[:estimated_price_from].present? %>
-    <%= link_to drawings_path(params: params.merge(estimated_price_from: '')) do %>
-      <%= tag_label('見積金額',  format_number(params[:estimated_price_from]) + ' 以上') -%>
-    <% end %>
-  <% end %>
-
-  <% if params[:estimated_price_to].present? %>
-    <%= link_to drawings_path(params: params.merge(estimated_price_to: '')) do %>
-      <%= tag_label('見積金額', format_number(params[:estimated_price_to]) + ' 以下') -%>
-    <% end %>
-  <% end %>
-
-  <% if params[:categories].present? %>
-    <% params[:categories].each_with_index do |category_id, index| %>
-      <% category = Category.find_by(id: category_id) %>
-      <% next if category.nil? %>
-      <% other_categories = params[:categories].clone %>
-      <% other_categories.delete_at(index) %>
-      <%= link_to drawings_path(params: params.merge(categories: other_categories)) do %>
-        <%= tag_label('カテゴリー', category.name) -%>
-      <% end %>
     <% end %>
   <% end %>
 

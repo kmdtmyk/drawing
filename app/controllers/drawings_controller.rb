@@ -15,6 +15,7 @@ class DrawingsController < ApplicationController
       .page(params[:page])
       .per(100)
     @categories = Category.all.order(:display_order)
+    @search_params = search_params
   end
 
   # GET /drawings/1
@@ -99,6 +100,21 @@ class DrawingsController < ApplicationController
       params[:drawing][:drawing_files_attributes].each do |index, drawing_file|
         drawing_file[:display_order] = index.to_i + 1
       end
+    end
+
+    def search_params
+      params.permit(
+        :customer_id,
+        :product_name,
+        :part_number,
+        :material_id,
+        :thickness_from,
+        :thickness_to,
+        :width_from,
+        :width_to,
+        :length_from,
+        :length_to,
+      )
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
