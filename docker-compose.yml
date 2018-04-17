@@ -1,7 +1,11 @@
 version: '3'
 services:
   app:
-    build: './docker/app'
+    build:
+      context: './docker/app'
+      args:
+        uid: ${APP_UID}
+        gid: ${APP_GID}
     environment:
       TZ: Asia/Tokyo
       RAILS_ENV: ${RAILS_ENV}
