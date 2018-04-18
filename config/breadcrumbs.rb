@@ -55,6 +55,21 @@ crumb :material_edit do
   parent :materials
 end
 
+crumb :users do
+  link 'ユーザー一覧', users_path
+  parent :root
+end
+
+crumb :user_new do
+  link '新規'
+  parent :users
+end
+
+crumb :user_edit do
+  link '編集'
+  parent :users
+end
+
 
 # crumb :projects do
 #   link "Projects", projects_path

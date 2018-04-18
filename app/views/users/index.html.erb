@@ -1,0 +1,27 @@
+<% breadcrumb :users %>
+
+<p>
+  <%= link_to '新規作成', new_user_path, class: 'btn btn-primary' %>
+</p>
+
+<%= table_tag do %>
+  <thead>
+    <tr>
+      <th>名前</th>
+      <th>メールアドレス</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= link_to '編集', edit_user_path(user) %></td>
+        <td><%= link_to '削除', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+<% end %>
