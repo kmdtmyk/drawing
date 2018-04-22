@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180422132150) do
+ActiveRecord::Schema.define(version: 20180422134233) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,8 +94,12 @@ ActiveRecord::Schema.define(version: 20180422132150) do
   create_table "materials", force: :cascade do |t|
     t.string   "name"
     t.integer  "display_order"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "create_user_id"
+    t.integer  "update_user_id"
+    t.index ["create_user_id"], name: "index_materials_on_create_user_id", using: :btree
+    t.index ["update_user_id"], name: "index_materials_on_update_user_id", using: :btree
   end
 
   create_table "notices", force: :cascade do |t|
@@ -137,6 +141,8 @@ ActiveRecord::Schema.define(version: 20180422132150) do
   add_foreign_key "drawing_outsources", "drawings"
   add_foreign_key "drawings", "customers"
   add_foreign_key "drawings", "materials"
+  add_foreign_key "materials", "users", column: "create_user_id"
+  add_foreign_key "materials", "users", column: "update_user_id"
   add_foreign_key "notices", "users", column: "create_user_id"
   add_foreign_key "notices", "users", column: "update_user_id"
 end

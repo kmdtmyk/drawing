@@ -30,3 +30,22 @@
   </div>
 
 <% end %>
+
+<% unless material.new_record? %>
+  <small>
+    <table>
+      <tr>
+        <th>作成者</th>
+        <td><%= material.create_user_name %></td>
+        <th>作成日時</th>
+        <td><%= format_datetime material.created_at %></td>
+      </tr>
+      <tr>
+        <th>更新者</th>
+        <td><%= material.update_user_name %></td>
+        <th>更新日時</th>
+        <td><%= format_datetime material.updated_at %></td>
+      </tr>
+    </table>
+  </small>
+<% end %>
