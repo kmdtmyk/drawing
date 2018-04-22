@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
-    @users = User.all
+    @users = User.all.order(:furigana)
   end
 
   def new
@@ -44,6 +44,7 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(
         :name,
+        :furigana,
         :email,
         :password,
         :admin,
