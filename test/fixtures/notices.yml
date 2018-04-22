@@ -1,0 +1,6 @@
+<% (1..100).each do |i| %>
+notice_<%= i %>:
+  title: <%= Faker::Lorem.sentence %>
+  body: <%= Faker::Lorem.paragraphs %>
+  post_datetime: <%= Faker::Time.between(DateTime.now - 500, DateTime.now) %>
+<% end %>
