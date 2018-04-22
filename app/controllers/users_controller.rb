@@ -46,6 +46,7 @@ class UsersController < ApplicationController
         :name,
         :email,
         :password,
+        :admin,
       )
     end
 end
