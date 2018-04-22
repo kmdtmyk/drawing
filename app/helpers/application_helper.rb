@@ -4,6 +4,10 @@ module ApplicationHelper
     number_with_delimiter number
   end
 
+  def format_datetime(datetime)
+    datetime.strftime('%Y/%m/%d %H:%M:%S') if datetime.present?
+  end
+
   def paginate_statistic(page)
     render 'kaminari/statistic', page: page
   end
