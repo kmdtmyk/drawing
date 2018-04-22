@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :customers, except: [:show]
   resources :materials, except: [:show]
   resources :users, except: [:show]
+  resources :notices, except: [:show]
 
   namespace :statistic do
     resources :drawings, only: [:index]

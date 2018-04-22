@@ -1,0 +1,31 @@
+<%= form_for(notice) do |f| %>
+  <% if notice.errors.any? %>
+    <div id='error_explanation'>
+      <h2><%= pluralize(notice.errors.count, 'error') %> prohibited this notice from being saved:</h2>
+      <ul>
+      <% notice.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class='form-group row'>
+    <label class='col-sm-2 col-form-label'>タイトル</label>
+    <div class='col-sm-10'>
+      <%= f.text_field :title, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class='form-group row'>
+    <label class='col-sm-2 col-form-label'>本文</label>
+    <div class='col-sm-10'>
+      <%= f.text_area :body, class: 'form-control', rows: 10 %>
+    </div>
+  </div>
+
+  <div class='form-group'>
+    <%= f.submit '登録', class: 'btn btn-primary' %>
+  </div>
+
+<% end %>

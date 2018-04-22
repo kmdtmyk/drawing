@@ -1,0 +1,29 @@
+<% breadcrumb :notices %>
+
+<p>
+  <%= link_to '新規作成', new_notice_path, class: 'btn btn-primary' %>
+</p>
+
+<%= table_tag do %>
+  <thead>
+    <tr>
+      <th>タイトル</th>
+      <th>本文</th>
+      <th>投稿日時</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @notices.each do |notice| %>
+      <tr>
+        <td><%= notice.title %></td>
+        <td><%= notice.body %></td>
+        <td><%= notice.post_datetime %></td>
+        <td><%= link_to '編集', edit_notice_path(notice) %></td>
+        <td><%= link_to '削除', notice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+<% end %>

@@ -70,6 +70,21 @@ crumb :user_edit do
   parent :users
 end
 
+crumb :notices do
+  link 'お知らせ一覧', notices_path
+  parent :root
+end
+
+crumb :notice_new do
+  link '新規'
+  parent :notices
+end
+
+crumb :notice_edit do
+  link '編集'
+  parent :notices
+end
+
 
 # crumb :projects do
 #   link "Projects", projects_path
