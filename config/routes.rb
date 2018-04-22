@@ -9,8 +9,11 @@ Rails.application.routes.draw do
   resources :categories, except: [:show]
   resources :customers, except: [:show]
   resources :materials, except: [:show]
-  resources :users, except: [:show]
   resources :notices, except: [:show]
+
+  namespace :admin do
+    resources :users, except: [:show]
+  end
 
   namespace :statistic do
     resources :drawings, only: [:index]

@@ -56,7 +56,7 @@ crumb :material_edit do
 end
 
 crumb :users do
-  link 'ユーザー一覧', users_path
+  link 'ユーザー一覧', admin_users_path
   parent :root
 end
 
