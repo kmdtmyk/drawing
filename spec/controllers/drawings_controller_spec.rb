@@ -27,4 +27,23 @@ RSpec.describe DrawingsController, type: :controller do
 
   end
 
+  describe '#show' do
+
+    describe 'drawing with drawing_outsource that does not have customer_id' do
+
+      let(:drawing){ Drawing.create }
+
+      before do
+        drawing.drawing_outsources.create
+      end
+
+      it do
+        get :show, params: { id: drawing }
+        expect(response).to render_template :show
+      end
+
+    end
+
+  end
+
 end
