@@ -4,7 +4,9 @@ class Drawing < ApplicationRecord
   accepts_nested_attributes_for :drawing_categories, allow_destroy: true
 
   has_many :drawing_outsources, -> { order(:display_order) }, dependent: :destroy
-  accepts_nested_attributes_for :drawing_outsources, allow_destroy: true
+  accepts_nested_attributes_for :drawing_outsources,
+    allow_destroy: true,
+    reject_if: :reject_drawing_outsources
 
   has_many :drawing_files, -> { order(:display_order) }, dependent: :destroy
   accepts_nested_attributes_for :drawing_files, allow_destroy: true
@@ -88,5 +90,14 @@ class Drawing < ApplicationRecord
     array << '保留' if suspend_flag
     return array.join('、')
   end
+
+  private
+
+    def reject_drawing_outsources(attributes)
+      blank = attributes[:customer_id].blank? && attributes[:purchase_price].blank?
+      return blank unless attributes[:id].present?
+      attributes[:_destroy] = true if blank
+      false
+    end
 
 end
