@@ -10,10 +10,12 @@ class MaterialsController < ApplicationController
   # GET /materials/new
   def new
     @material = Material.new
+    assign_material_params(@material) if params[:material].present?
   end
 
   # GET /materials/1/edit
   def edit
+    assign_material_params(@material) if params[:material].present?
   end
 
   # POST /materials
@@ -23,7 +25,7 @@ class MaterialsController < ApplicationController
     if @material.save
       redirect_to materials_url, notice: 'Material was successfully created.'
     else
-      render :new
+      redirect_to action: :new, material: @material.attributes
     end
   end
 
@@ -33,7 +35,7 @@ class MaterialsController < ApplicationController
     if @material.update(material_params)
       redirect_to materials_url, notice: 'Material was successfully updated.'
     else
-      render :edit
+      redirect_to action: :edit, material: @material.attributes
     end
   end
 
@@ -53,5 +55,10 @@ class MaterialsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def material_params
       params.require(:material).permit(:name, :display_order)
+    end
+
+    def assign_material_params(material)
+      material.assign_attributes(material_params)
+      material.valid?
     end
 end
