@@ -16,6 +16,10 @@
   <%= search_tag_label @search_params, :material_id, '材質',
     text: material.try(:name) || '' %>
 
+  <% processing_type = ProcessingType.find_by(id: params[:processing_type_id]) %>
+  <%= search_tag_label @search_params, :processing_type_id, '加工種類',
+    text: processing_type.try(:name) || '' %>
+
   <%= search_tag_label @search_params, :thickness_from, '板厚', suffix: '[mm]以上' %>
 
   <%= search_tag_label @search_params, :thickness_to, '板厚', suffix: '[mm]以下' %>

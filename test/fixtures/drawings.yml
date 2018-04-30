@@ -18,4 +18,5 @@ drawing_<%= i %>:
   process_cost: <%= Faker::Number.between(1, 1000) * 100 %>
   sales_price: <%= Faker::Number.between(1, 1000) * 100 %>
   memo: <%= Faker::Lorem.sentence %>
+  processing_type: processing_type_<%= Faker::Number.between(1, 4) %>
 <% end %>

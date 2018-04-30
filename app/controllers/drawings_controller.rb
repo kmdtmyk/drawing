@@ -3,6 +3,7 @@ class DrawingsController < ApplicationController
   before_action :set_categories, only: [:new, :edit]
   before_action :set_orders, only: [:index, :new, :edit]
   before_action :set_materials, only: [:index, :new, :edit]
+  before_action :set_processing_types, only: [:index, :new, :edit]
   before_action :set_outsources, only: [:new, :edit]
   before_action :set_params_display_order, only: [:create, :update]
 
@@ -95,6 +96,10 @@ class DrawingsController < ApplicationController
       @materials = Material.all.order(:display_order)
     end
 
+    def set_processing_types
+      @processing_types = ProcessingType.all.order(:display_order)
+    end
+
     def set_params_display_order
       return if params[:drawing][:drawing_files_attributess].nil?
       params[:drawing][:drawing_files_attributes].each do |index, drawing_file|
@@ -110,6 +115,7 @@ class DrawingsController < ApplicationController
         :product_name,
         :part_number,
         :material_id,
+        :processing_type_id,
         :thickness_from,
         :thickness_to,
         :width_from,
@@ -129,6 +135,7 @@ class DrawingsController < ApplicationController
         :customer_id,
         :product_name,
         :material_id,
+        :processing_type_id,
         :thickness,
         :width,
         :length,

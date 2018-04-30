@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180430121223) do
+ActiveRecord::Schema.define(version: 20180430132619) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,25 +70,27 @@ ActiveRecord::Schema.define(version: 20180430121223) do
     t.date     "order_date"
     t.integer  "estimated_price"
     t.integer  "difficulty"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.integer  "customer_id"
     t.string   "product_name"
     t.float    "thickness"
     t.float    "width"
     t.float    "length"
     t.date     "estimate_date"
-    t.boolean  "estimate_flag",   default: false, null: false
-    t.boolean  "order_flag",      default: false, null: false
-    t.boolean  "suspend_flag",    default: false, null: false
+    t.boolean  "estimate_flag",      default: false, null: false
+    t.boolean  "order_flag",         default: false, null: false
+    t.boolean  "suspend_flag",       default: false, null: false
     t.integer  "material_cost"
     t.integer  "process_cost"
     t.integer  "sales_price"
     t.text     "memo"
     t.string   "file"
     t.integer  "material_id"
+    t.integer  "processing_type_id"
     t.index ["customer_id"], name: "index_drawings_on_customer_id", using: :btree
     t.index ["material_id"], name: "index_drawings_on_material_id", using: :btree
+    t.index ["processing_type_id"], name: "index_drawings_on_processing_type_id", using: :btree
   end
 
   create_table "materials", force: :cascade do |t|
@@ -152,6 +154,7 @@ ActiveRecord::Schema.define(version: 20180430121223) do
   add_foreign_key "drawing_outsources", "drawings"
   add_foreign_key "drawings", "customers"
   add_foreign_key "drawings", "materials"
+  add_foreign_key "drawings", "processing_types"
   add_foreign_key "materials", "users", column: "create_user_id"
   add_foreign_key "materials", "users", column: "update_user_id"
   add_foreign_key "notices", "users", column: "create_user_id"

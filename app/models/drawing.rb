@@ -17,6 +17,9 @@ class Drawing < ApplicationRecord
   belongs_to :material, optional: true
   delegate :name, to: :material, prefix: true, allow_nil: true
 
+  belongs_to :processing_type, optional: true
+  delegate :name, to: :processing_type, prefix: true, allow_nil: true
+
   scope :search_by_params, -> (params){
     drawings = all
 
@@ -34,6 +37,10 @@ class Drawing < ApplicationRecord
 
     if params[:material_id].present?
       drawings.where!(material_id: params[:material_id])
+    end
+
+    if params[:processing_type_id].present?
+      drawings.where!(processing_type_id: params[:processing_type_id])
     end
 
     if params[:thickness_from].present?
