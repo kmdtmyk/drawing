@@ -25,7 +25,7 @@ class MaterialsController < ApplicationController
     if @material.save
       redirect_to materials_url, notice: 'Material was successfully created.'
     else
-      redirect_to action: :new, material: @material.attributes
+      redirect_to action: :new, material: material_params
     end
   end
 
@@ -35,7 +35,7 @@ class MaterialsController < ApplicationController
     if @material.update(material_params)
       redirect_to materials_url, notice: 'Material was successfully updated.'
     else
-      redirect_to action: :edit, material: @material.attributes
+      redirect_to action: :edit, material: material_params
     end
   end
 
