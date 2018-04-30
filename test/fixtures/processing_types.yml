@@ -1,0 +1,6 @@
+<% names = %w(センバン ヨウセツ レーザー ワイヤー) %>
+<% names.each_with_index do |name, index| %>
+  processing_type_<%= index + 1 %>:
+    name: <%= name %>
+    display_order: <%= index + 1 %>
+<% end %>
