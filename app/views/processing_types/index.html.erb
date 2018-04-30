@@ -1,0 +1,27 @@
+<% breadcrumb :processing_types %>
+
+<p>
+  <%= link_to '新規作成', new_processing_type_path, class: 'btn btn-primary' %>
+</p>
+
+<%= table_tag do %>
+  <thead>
+    <tr>
+      <th>名前</th>
+      <th>表示順</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @processing_types.each do |processing_type| %>
+      <tr>
+        <td><%= processing_type.name %></td>
+        <td><%= processing_type.display_order %></td>
+        <td><%= link_to '編集', edit_processing_type_path(processing_type) %></td>
+        <td><%= link_to '削除', processing_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+<% end %>

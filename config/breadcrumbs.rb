@@ -55,6 +55,22 @@ crumb :material_edit do
   parent :materials
 end
 
+crumb :processing_types do
+  link '加工種類一覧', processing_types_path
+  parent :root
+end
+
+crumb :processing_type_new do
+  link '新規'
+  parent :processing_types
+end
+
+crumb :processing_type_edit do
+  link '編集'
+  parent :processing_types
+end
+
+
 crumb :users do
   link 'ユーザー一覧', admin_users_path
   parent :root

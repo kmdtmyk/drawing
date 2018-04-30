@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :categories, except: [:show]
   resources :customers, except: [:show]
   resources :materials, except: [:show]
+  resources :processing_types, except: [:show]
   resources :notices, except: [:show]
 
   namespace :admin do

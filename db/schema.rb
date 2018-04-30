@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180422134233) do
+ActiveRecord::Schema.define(version: 20180430121223) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,6 +114,17 @@ ActiveRecord::Schema.define(version: 20180422134233) do
     t.index ["update_user_id"], name: "index_notices_on_update_user_id", using: :btree
   end
 
+  create_table "processing_types", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "display_order"
+    t.integer  "create_user_id"
+    t.integer  "update_user_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["create_user_id"], name: "index_processing_types_on_create_user_id", using: :btree
+    t.index ["update_user_id"], name: "index_processing_types_on_update_user_id", using: :btree
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "email",                  default: "",    null: false
@@ -145,4 +156,6 @@ ActiveRecord::Schema.define(version: 20180422134233) do
   add_foreign_key "materials", "users", column: "update_user_id"
   add_foreign_key "notices", "users", column: "create_user_id"
   add_foreign_key "notices", "users", column: "update_user_id"
+  add_foreign_key "processing_types", "users", column: "create_user_id"
+  add_foreign_key "processing_types", "users", column: "update_user_id"
 end

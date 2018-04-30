@@ -1,0 +1,51 @@
+<%= form_for(processing_type) do |f| %>
+  <% if processing_type.errors.any? %>
+    <div id='error_explanation'>
+      <h2><%= pluralize(processing_type.errors.count, 'error') %> prohibited this processing_type from being saved:</h2>
+
+      <ul>
+      <% processing_type.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class='form-group row'>
+    <label class='col-sm-2 col-form-label'>名前</label>
+    <div>
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class='form-group row'>
+    <label class='col-sm-2 col-form-label'>表示順</label>
+    <div>
+      <%= f.number_field :display_order, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class='form-group'>
+    <%= f.submit '登録', class: 'btn btn-primary' %>
+  </div>
+
+<% end %>
+
+<% unless processing_type.new_record? %>
+  <small>
+    <table>
+      <tr>
+        <th>作成者</th>
+        <td><%= processing_type.create_user_name %></td>
+        <th>作成日時</th>
+        <td><%= format_datetime processing_type.created_at %></td>
+      </tr>
+      <tr>
+        <th>更新者</th>
+        <td><%= processing_type.update_user_name %></td>
+        <th>更新日時</th>
+        <td><%= format_datetime processing_type.updated_at %></td>
+      </tr>
+    </table>
+  </small>
+<% end %>
