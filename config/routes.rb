@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     sessions: 'users/sessions'
   }
-  resources :drawings
+  resources :drawings do
+    resource :thumbnail, only: [:edit, :update], module: :drawings
+  end
   resources :categories, except: [:show]
   resources :customers, except: [:show]
   resources :materials, except: [:show]

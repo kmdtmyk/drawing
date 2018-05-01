@@ -11,6 +11,11 @@ class Drawing < ApplicationRecord
   has_many :drawing_files, -> { order(:display_order) }, dependent: :destroy
   accepts_nested_attributes_for :drawing_files, allow_destroy: true
 
+  belongs_to :thumbnail_drawing_file,
+    class_name: 'DrawingFile',
+    foreign_key: 'thumbnail_drawing_file_id',
+    optional: true
+
   belongs_to :customer, optional: true
   delegate :name, to: :customer, prefix: true, allow_nil: true
 
@@ -96,6 +101,17 @@ class Drawing < ApplicationRecord
     array << '受注' if order_flag
     array << '保留' if suspend_flag
     return array.join('、')
+  end
+
+  def thumbnail
+    return if thumbnail_drawing_file.nil?
+    thumbnail_drawing_file.medium
+  end
+
+  def thumbnail_drawing_files
+    drawing_files.select do |drawing_file|
+      drawing_file.image_or_pdf?
+    end
   end
 
   private

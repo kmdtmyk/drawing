@@ -1,11 +1,10 @@
 <div class='card-columns'>
   <% drawings.each do |drawing| %>
-    <div class='card' >
+    <div class='card'>
 
-      <% drawing_file = drawing.drawing_files.first %>
-      <% if drawing_file.present? %>
+      <% if drawing.thumbnail.present? %>
         <%= link_to drawing do %>
-          <% drawing_file.medium %>
+          <% drawing.thumbnail %>
         <% end %>
       <% end %>
 

@@ -6,6 +6,7 @@ class DrawingsController < ApplicationController
   before_action :set_processing_types, only: [:index, :new, :edit]
   before_action :set_outsources, only: [:new, :edit]
   before_action :set_params_display_order, only: [:create, :update]
+  after_action :set_thumbnail_drawing_file, only: [:create, :update]
 
   # GET /drawings
   # GET /drawings.json
@@ -171,6 +172,13 @@ class DrawingsController < ApplicationController
           :_destroy,
         ],
       )
+    end
+
+    def set_thumbnail_drawing_file
+      return if @drawing.thumbnail_drawing_file.present?
+      first_thumbnail = @drawing.thumbnail_drawing_files.first
+      @drawing.thumbnail_drawing_file = first_thumbnail
+      @drawing.save
     end
 
 end

@@ -7,8 +7,8 @@ crumb :drawings do
   parent :root
 end
 
-crumb :drawing_show do
-  link '詳細'
+crumb :drawing_show do |drawing|
+  link '詳細', drawing
   parent :drawings
 end
 
@@ -20,6 +20,11 @@ end
 crumb :drawing_edit do
   link '編集'
   parent :drawings
+end
+
+crumb :drawing_thumbnail_edit do |drawing|
+  link 'サムネイル選択'
+  parent :drawing_show, drawing
 end
 
 

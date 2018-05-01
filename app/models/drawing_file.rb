@@ -1,6 +1,11 @@
 class DrawingFile < ApplicationRecord
   belongs_to :drawing, optional: true
 
+  has_one :drawing,
+    class_name: 'Drawing',
+    foreign_key: 'thumbnail_drawing_file_id',
+    dependent: :nullify
+
   has_attached_file :file,
     styles: -> (attachment) {
       if attachment.instance.pdf?
