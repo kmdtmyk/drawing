@@ -20,9 +20,9 @@
       <tr>
         <td><%= notice.title %></td>
         <td><%= notice.body %></td>
-        <td><%= notice.post_datetime %></td>
-        <td><%= link_to '編集', edit_notice_path(notice) %></td>
-        <td><%= link_to '削除', notice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= format_datetime notice.post_datetime %></td>
+        <td><%= link_to '編集', edit_notice_path(notice), class: 'btn btn-primary btn-sm' %></td>
+        <td><%= link_to '削除', notice, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %></td>
       </tr>
     <% end %>
   </tbody>

@@ -19,8 +19,8 @@
       <tr>
         <td><%= processing_type.name %></td>
         <td><%= processing_type.display_order %></td>
-        <td><%= link_to '編集', edit_processing_type_path(processing_type) %></td>
-        <td><%= link_to '削除', processing_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '編集', edit_processing_type_path(processing_type), class: 'btn btn-primary btn-sm' %></td>
+        <td><%= link_to '削除', processing_type, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %></td>
       </tr>
     <% end %>
   </tbody>
