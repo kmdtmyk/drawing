@@ -103,9 +103,9 @@ class Drawing < ApplicationRecord
     return array.join('、')
   end
 
-  def thumbnail
+  def thumbnail(options = {})
     return if thumbnail_drawing_file.nil?
-    thumbnail_drawing_file.medium
+    thumbnail_drawing_file.medium **options
   end
 
   def thumbnail_drawing_files
