@@ -1,19 +1,27 @@
 <% breadcrumb :drawing_thumbnail_edit, @drawing %>
 
-<%= form_for(@drawing, url: drawing_thumbnail_path(@drawing), method: :patch) do |f| %>
-  <div class='d-flex flex-wrap'>
-    <% @drawing.thumbnail_drawing_files.each do |drawing_file| %>
-      <label class='mr-4'>
-        <div>
-          <%= drawing_file.medium style: 'box-shadow: 5px 5px 10px gray;'%>
-        </div>
-        <%= f.radio_button :thumbnail_drawing_file_id, drawing_file.id %>
-        選択
-      </label>
-    <% end %>
+<% if @drawing.thumbnail_drawing_files.empty? %>
+  <div class='alert alert-info'>
+    まだサムネイルが登録されていません
   </div>
+<% else %>
 
-  <div>
-    <%= f.submit '登録', class: 'btn btn-primary' %>
-  </div>
+  <%= form_for(@drawing, url: drawing_thumbnail_path(@drawing), method: :patch) do |f| %>
+    <div class='d-flex flex-wrap'>
+      <% @drawing.thumbnail_drawing_files.each do |drawing_file| %>
+        <label class='mr-4'>
+          <div>
+            <%= drawing_file.medium style: 'box-shadow: 5px 5px 10px gray;'%>
+          </div>
+          <%= f.radio_button :thumbnail_drawing_file_id, drawing_file.id %>
+          選択
+        </label>
+      <% end %>
+    </div>
+
+    <div>
+      <%= f.submit '登録', class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+
 <% end %>
