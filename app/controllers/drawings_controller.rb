@@ -29,11 +29,13 @@ class DrawingsController < ApplicationController
     @drawing = Drawing.new
     @drawing.estimate_date = Date.today
     @drawing.drawing_outsources.new
+    @drawing.drawing_files.new
   end
 
   # GET /drawings/1/edit
   def edit
     @drawing.drawing_outsources.new if @drawing.drawing_outsources.empty?
+    @drawing.drawing_files.new if @drawing.drawing_files.empty?
   end
 
   # POST /drawings

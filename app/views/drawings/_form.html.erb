@@ -162,13 +162,17 @@
 
     <div class='col-sm-7'>
 
-      <%= f.nested_fields_for :drawing_files, wrapper_tag: :div do |drawing_file| %>
-        <% if drawing_file.object.new_record? %>
-          <%= drawing_file.file_field :file %>
-        <% else %>
-          <%= drawing_file.object.output %>
+      <%= table_tag do %>
+        <%= f.nested_fields_for :drawing_files, wrapper_tag: :tr do |drawing_file| %>
+          <% if drawing_file.object.new_record? %>
+            <td colspan='2'><%= drawing_file.file_field :file %></td>
+            <td><%= drawing_file.remove_nested_fields_link '削除' %></td>
+          <% else %>
+            <td><%= link_to drawing_file.object.file_file_name, drawing_file.object.file.url %></td>
+            <td><%= number_to_human_size drawing_file.object.file_file_size %></td>
+            <td><%= drawing_file.remove_nested_fields_link '削除' %></td>
+          <% end %>
         <% end %>
-        <%= drawing_file.remove_nested_fields_link '削除' %>
       <% end %>
 
       <%= f.add_nested_fields_link :drawing_files do %>
