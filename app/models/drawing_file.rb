@@ -4,7 +4,14 @@ class DrawingFile < ApplicationRecord
   has_attached_file :file,
     styles: -> (attachment) {
       if attachment.instance.pdf?
-        {thumbnail: ['300x300>', :png]}
+        {
+          large: ['1000x1000>', :png],
+          medium: ['300x300>', :png],
+        }
+      elsif attachment.instance.image?
+        {
+          medium: '300x300>',
+        }
       else
         {}
       end
@@ -21,21 +28,25 @@ class DrawingFile < ApplicationRecord
     file_content_type == 'application/pdf'
   end
 
-  def thumbnail(options = {})
+  def name
+    file_file_name
+  end
+
+  def url
+    file.url
+  end
+
+  def large(options = {})
     if image?
       ApplicationController.helpers.image_tag file.url, **options
-    else pdf?
-      ApplicationController.helpers.image_tag file.url(:thumbnail)
+    elsif pdf?
+      ApplicationController.helpers.image_tag file.url(:large), **options
     end
   end
 
-  def output
-    ApplicationController.helpers.link_to file.url do
-      if image?
-        ApplicationController.helpers.image_tag file.url
-      else
-        file.original_filename
-      end
+  def medium(options = {})
+    if image? or pdf?
+      ApplicationController.helpers.image_tag file.url(:medium), **options
     end
   end
 

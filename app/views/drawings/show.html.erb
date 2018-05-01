@@ -89,11 +89,13 @@
         まだファイルが登録されていません
       </div>
     <% else %>
-      <% @drawing.drawing_files.each do |drawing_file| %>
-        <div>
-          <%= drawing_file.output %>
-        </div>
-      <% end %>
+      <ul class='list-group'>
+        <% @drawing.drawing_files.each do |drawing_file| %>
+          <li class='list-group-item'>
+            <%= drawing_file.large style: 'max-width: 100%;' %>
+          </li>
+        <% end %>
+      </ul>
     <% end %>
   </div>
 

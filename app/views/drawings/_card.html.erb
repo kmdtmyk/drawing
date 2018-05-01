@@ -5,7 +5,7 @@
       <% drawing_file = drawing.drawing_files.first %>
       <% if drawing_file.present? %>
         <%= link_to drawing do %>
-          <% drawing_file.thumbnail style: 'width: 200px; height: 200px;' %>
+          <% drawing_file.medium %>
         <% end %>
       <% end %>
 
