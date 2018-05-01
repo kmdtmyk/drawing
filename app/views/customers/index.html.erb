@@ -22,8 +22,8 @@
       <tr>
         <td><%= customer.name %></td>
         <td><%= customer.short_name %></td>
-        <td><%= customer.order_flag %></td>
-        <td><%= customer.outsource_flag %></td>
+        <td><%= fa_icon 'check' if customer.order_flag %></td>
+        <td><%= fa_icon 'check' if customer.outsource_flag %></td>
         <td><%= customer.display_order %></td>
         <td><%= link_to '編集', edit_customer_path(customer) %></td>
         <td><%= link_to '削除', customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
