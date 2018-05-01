@@ -97,7 +97,7 @@
                 <%= drawing_file.large title: drawing_file.name, style: 'max-width: 100%;' %>
               <% end %>
             <% else %>
-              <%= link_to drawing_file.name, drawing_file.url %>
+              <%= link_to drawing_file.name_with_icon, drawing_file.url %>
             <% end %>
           </li>
         <% end %>

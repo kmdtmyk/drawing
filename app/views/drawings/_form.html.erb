@@ -168,7 +168,7 @@
             <td colspan='2'><%= drawing_file.file_field :file %></td>
             <td><%= drawing_file.remove_nested_fields_link '削除' %></td>
           <% else %>
-            <td><%= link_to drawing_file.object.name, drawing_file.object.url %></td>
+            <td><%= link_to drawing_file.object.name_with_icon, drawing_file.object.url %></td>
             <td><%= number_to_human_size drawing_file.object.file_file_size %></td>
             <td><%= drawing_file.remove_nested_fields_link '削除' %></td>
           <% end %>
