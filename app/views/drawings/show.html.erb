@@ -84,10 +84,16 @@
   </div>
 
   <div class='col-sm-9'>
-    <% @drawing.drawing_files.each do |drawing_file| %>
-      <div>
-        <%= drawing_file.output %>
+    <% if @drawing.drawing_files.empty? %>
+      <div class='alert alert-info'>
+        まだファイルが登録されていません
       </div>
+    <% else %>
+      <% @drawing.drawing_files.each do |drawing_file| %>
+        <div>
+          <%= drawing_file.output %>
+        </div>
+      <% end %>
     <% end %>
   </div>
 
