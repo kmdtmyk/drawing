@@ -1,15 +1,13 @@
-<div class='card-columns'>
+<div class='drawing-cards mb-4'>
   <% drawings.each do |drawing| %>
-    <div class='card'>
-
-      <% if drawing.thumbnail.present? %>
-        <%= link_to drawing do %>
-          <% drawing.thumbnail %>
+    <div class='drawing-card'>
+      <div class='drawing-card-item'>
+        <% if drawing.thumbnail.present? %>
+          <%= link_to drawing do %>
+            <%= drawing.thumbnail %>
+          <% end %>
         <% end %>
-      <% end %>
-
-      <div class='card-text px-2 py-1'>
-        <table>
+        <table class='drawing-card-info'>
           <tr>
             <th>受注先</th>
             <td><%= drawing.customer_name %></td>
@@ -26,20 +24,12 @@
             <th>見積もり日</th>
             <td><%= drawing.estimate_date %></td>
           </tr>
-          <!-- <tr>
-            <th>見積金額</th>
-            <td><%= format_number drawing.estimated_price %></td>
-          </tr> -->
         </table>
+        <div class='drawing-card-footer'>
+          <%= link_to '詳細', drawing, class: 'btn btn-info btn-sm mr-2' %>
+          <%= link_to '編集', edit_drawing_path(drawing), class: 'btn btn-info btn-sm' %>
+        </div>
       </div>
-
-      <div class='card-footer d-flex justify-content-between'>
-        <small class='text-muted'>
-          <%= link_to '詳細', drawing %>
-          <%= link_to '編集', edit_drawing_path(drawing) %>
-        </small>
-      </div>
-
     </div>
   <% end %>
 </div>

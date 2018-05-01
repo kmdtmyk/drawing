@@ -9,7 +9,7 @@
   </div>
 <% end %>
 
-<div class='px-4'>
+<div class=''>
 
   <div class='mb-2 d-flex justify-content-between'>
 
@@ -21,10 +21,10 @@
         <option value='card' <%= 'selected' if params[:display_mode] != 'list' %>>3列</option>
         <option value='list' <%= 'selected' if params[:display_mode] == 'list' %>>一覧</option>
       </select>
-      <button type='submit' class='btn btn-primary'>変更</button>
+      <button type='submit' class='btn btn-info'>変更</button>
     </form>
 
-    <%= link_to '新規作成', new_drawing_path, class: 'btn btn-info' %>
+    <%= link_to '新規作成', new_drawing_path, class: 'btn btn-primary' %>
   </div>
 
   <%= paginate_statistic @drawings %>
