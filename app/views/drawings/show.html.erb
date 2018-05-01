@@ -92,7 +92,13 @@
       <ul class='list-group'>
         <% @drawing.drawing_files.each do |drawing_file| %>
           <li class='list-group-item'>
-            <%= drawing_file.large style: 'max-width: 100%;' %>
+            <% if drawing_file.image_or_pdf? %>
+              <%= link_to drawing_file.url do %>
+                <%= drawing_file.large title: drawing_file.name, style: 'max-width: 100%;' %>
+              <% end %>
+            <% else %>
+              <%= link_to drawing_file.name, drawing_file.url %>
+            <% end %>
           </li>
         <% end %>
       </ul>

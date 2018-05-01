@@ -28,6 +28,10 @@ class DrawingFile < ApplicationRecord
     file_content_type == 'application/pdf'
   end
 
+  def image_or_pdf?
+    image? or pdf?
+  end
+
   def name
     file_file_name
   end
@@ -45,7 +49,7 @@ class DrawingFile < ApplicationRecord
   end
 
   def medium(options = {})
-    if image? or pdf?
+    if image_or_pdf?
       ApplicationController.helpers.image_tag file.url(:medium), **options
     end
   end
