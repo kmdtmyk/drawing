@@ -18,7 +18,7 @@
 
       <label class='mr-2'>表示形式</label>
       <select class='form-control mr-2' name='display_mode'>
-        <option value='card' <%= 'selected' if params[:display_mode] != 'list' %>>3列</option>
+        <option value='thumbnail' <%= 'selected' if params[:display_mode] != 'list' %>>サムネイル</option>
         <option value='list' <%= 'selected' if params[:display_mode] == 'list' %>>一覧</option>
       </select>
       <button type='submit' class='btn btn-info'>変更</button>
