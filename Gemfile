@@ -36,6 +36,7 @@ gem 'kaminari', '~> 1.1', '>= 1.1.1'
 gem 'moji', '~> 1.6'
 gem 'paperclip', '~> 6.0'
 gem 'gretel', '~> 3.0', '>= 3.0.9'
+gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.4'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

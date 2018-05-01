@@ -19,7 +19,7 @@
       <div class='navbar-nav'>
         <% if user_signed_in? %>
           <div class='btn btn-secondary'>
-            <i class='fa fa-user-o' aria-hidden='true'></i>
+            <%= fa_icon 'user-o' %>
             <%= current_user.name %>
           </div>
           <div class='nav-item'>
