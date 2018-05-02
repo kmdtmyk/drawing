@@ -55,4 +55,8 @@ module ApplicationHelper
     raw result
   end
 
+  def userstamp(record)
+    render 'userstamp', record: record
+  end
+
 end
