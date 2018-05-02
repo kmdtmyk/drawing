@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180502114343) do
+ActiveRecord::Schema.define(version: 20180502205113) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,10 +93,14 @@ ActiveRecord::Schema.define(version: 20180502114343) do
     t.integer  "material_id"
     t.integer  "processing_type_id"
     t.integer  "thumbnail_drawing_file_id"
+    t.integer  "create_user_id"
+    t.integer  "update_user_id"
+    t.index ["create_user_id"], name: "index_drawings_on_create_user_id", using: :btree
     t.index ["customer_id"], name: "index_drawings_on_customer_id", using: :btree
     t.index ["material_id"], name: "index_drawings_on_material_id", using: :btree
     t.index ["processing_type_id"], name: "index_drawings_on_processing_type_id", using: :btree
     t.index ["thumbnail_drawing_file_id"], name: "index_drawings_on_thumbnail_drawing_file_id", using: :btree
+    t.index ["update_user_id"], name: "index_drawings_on_update_user_id", using: :btree
   end
 
   create_table "materials", force: :cascade do |t|
@@ -164,6 +168,8 @@ ActiveRecord::Schema.define(version: 20180502114343) do
   add_foreign_key "drawings", "drawing_files", column: "thumbnail_drawing_file_id"
   add_foreign_key "drawings", "materials"
   add_foreign_key "drawings", "processing_types"
+  add_foreign_key "drawings", "users", column: "create_user_id"
+  add_foreign_key "drawings", "users", column: "update_user_id"
   add_foreign_key "materials", "users", column: "create_user_id"
   add_foreign_key "materials", "users", column: "update_user_id"
   add_foreign_key "notices", "users", column: "create_user_id"
