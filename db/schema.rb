@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180501102715) do
+ActiveRecord::Schema.define(version: 20180502114343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,10 @@ ActiveRecord::Schema.define(version: 20180501102715) do
     t.boolean  "outsource_flag", default: false, null: false
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+    t.integer  "create_user_id"
+    t.integer  "update_user_id"
+    t.index ["create_user_id"], name: "index_customers_on_create_user_id", using: :btree
+    t.index ["update_user_id"], name: "index_customers_on_update_user_id", using: :btree
   end
 
   create_table "drawing_categories", force: :cascade do |t|
@@ -149,6 +153,8 @@ ActiveRecord::Schema.define(version: 20180501102715) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "customers", "users", column: "create_user_id"
+  add_foreign_key "customers", "users", column: "update_user_id"
   add_foreign_key "drawing_categories", "categories"
   add_foreign_key "drawing_categories", "drawings"
   add_foreign_key "drawing_files", "drawings"
