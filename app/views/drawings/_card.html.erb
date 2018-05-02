@@ -3,7 +3,7 @@
     <div class='drawing-card'>
       <div class='drawing-card-item'>
         <% if drawing.thumbnail.present? %>
-          <%= link_to drawing.thumbnail_drawing_file.url do %>
+          <%= link_to drawing do %>
             <%= drawing.thumbnail %>
           <% end %>
         <% end %>
