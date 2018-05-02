@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180502205113) do
+ActiveRecord::Schema.define(version: 20180502205833) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,7 +89,6 @@ ActiveRecord::Schema.define(version: 20180502205113) do
     t.integer  "process_cost"
     t.integer  "sales_price"
     t.text     "memo"
-    t.string   "file"
     t.integer  "material_id"
     t.integer  "processing_type_id"
     t.integer  "thumbnail_drawing_file_id"
