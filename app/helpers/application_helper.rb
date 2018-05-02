@@ -16,6 +16,13 @@ module ApplicationHelper
     render 'kaminari/statistic', page: page
   end
 
+  def record_select(records, name, value, options = {})
+    select_tag name,
+      options_from_collection_for_select(records, 'id', 'name', value),
+      include_blank: true,
+      **options
+  end
+
   def table_tag(options = {})
     if options[:class].present?
       options[:class] = options[:class].split
