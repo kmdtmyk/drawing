@@ -33,7 +33,6 @@
     <%= text_field_tag :part_number, params[:part_number], class: 'form-control' %>
   </div>
 
-
   <div class='form-group'>
     <label>材質</label>
     <%= material_select 'material_id', params[:material_id], class: 'form-control' %>
@@ -41,12 +40,7 @@
 
   <div class='form-group'>
     <label>加工種類</label>
-    <select name='processing_type_id' class='form-control'>
-      <option></option>
-      <%= @processing_types.each do |processing_type| %>
-        <option value='<%= processing_type.id %>' <%= 'selected' if processing_type.id.to_s == params[:processing_type_id] %>><%= processing_type.name %></option>
-      <% end %>
-    </select>
+    <%= processing_type_select 'processing_type_id', params[:processing_type_id], class: 'form-control' %>
   </div>
 
   <div class='form-group'>
