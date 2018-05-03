@@ -11,7 +11,9 @@ class DrawingsController < ApplicationController
   # GET /drawings
   # GET /drawings.json
   def index
+    restore_params
 
+    params[:display_mode] = 'thumbnail' unless ['thumbnail', 'list'].include?(params[:display_mode])
     params[:sort] = 'estimate_date' unless ['estimate_date', 'sales_price'].include?(params[:sort])
     params[:order] = 'desc' unless ['asc', 'desc'].include?(params[:order])
 
@@ -22,6 +24,8 @@ class DrawingsController < ApplicationController
       .per(100)
     @categories = Category.all.order(:display_order)
     @search_params = search_params
+
+    save_params
   end
 
   # GET /drawings/1
@@ -183,6 +187,28 @@ class DrawingsController < ApplicationController
       first_thumbnail = @drawing.thumbnail_drawing_files.first
       @drawing.thumbnail_drawing_file = first_thumbnail
       @drawing.save
+    end
+
+    def save_params
+      cookies[:params] = {
+        value: {
+          display_mode: params[:display_mode],
+          sort: params[:sort],
+          order: params[:order],
+        }.to_json,
+        path: URI.parse(request.fullpath).path,
+        expires: 1.year.from_now
+      }
+    end
+
+    def restore_params
+      begin
+        last_options = JSON.parse(cookies[:params])
+        last_options.each do |key, value|
+          params[key.to_sym] = value if params[key.to_sym].nil?
+        end
+      rescue => e
+      end
     end
 
 end
