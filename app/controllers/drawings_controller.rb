@@ -3,7 +3,7 @@ class DrawingsController < ApplicationController
   before_action :set_categories, only: [:new, :edit]
   before_action :set_orders, only: [:index, :new, :edit]
   before_action :set_materials, only: [:new, :edit]
-  before_action :set_processing_types, only: [:index, :new, :edit]
+  before_action :set_processing_types, only: [:new, :edit]
   before_action :set_outsources, only: [:new, :edit]
   before_action :set_params_display_order, only: [:create, :update]
   after_action :set_thumbnail_drawing_file, only: [:create, :update]
