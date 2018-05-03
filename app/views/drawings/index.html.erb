@@ -1,6 +1,6 @@
 <% breadcrumb :drawings %>
 
-<% @drawings = @drawings.includes(:drawing_files) %>
+<% @drawings = @drawings.includes(:customer) %>
 
 <% content_for :sidebar do %>
   <div class='px-3'>
