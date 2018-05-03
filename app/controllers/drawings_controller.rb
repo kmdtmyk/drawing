@@ -11,9 +11,13 @@ class DrawingsController < ApplicationController
   # GET /drawings
   # GET /drawings.json
   def index
+
+    params[:sort] = 'estimate_date' unless ['estimate_date', 'sales_price'].include?(params[:sort])
+    params[:order] = 'desc' unless ['asc', 'desc'].include?(params[:order])
+
     @drawings = Drawing
       .search_by_params(params)
-      .order(estimate_date: :desc)
+      .order(params[:sort] + ' ' + params[:order])
       .page(params[:page])
       .per(100)
     @categories = Category.all.order(:display_order)
