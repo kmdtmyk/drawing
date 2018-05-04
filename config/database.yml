@@ -25,7 +25,7 @@ default: &default
   collation: C
   ctype: C
   username: app
-  password:
+  password: <%= ENV['DATABASE_PASSWORD'] %>
   host: db
   port: 5432
 
@@ -89,5 +89,3 @@ test:
 production:
   <<: *default
   database: app_production
-  username: app
-  password: <%= ENV['APP_DATABASE_PASSWORD'] %>

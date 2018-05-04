@@ -14,7 +14,7 @@ services:
       RAILS_FORCE_SSL: ${RAILS_FORCE_SSL}
       ADMIN_EMAIL: ${ADMIN_EMAIL}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
-      APP_DATABASE_PASSWORD: ${APP_DATABASE_PASSWORD}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
     working_dir: /usr/src/app
     volumes:
       - .:/usr/src/app
@@ -28,7 +28,7 @@ services:
     image: postgres:9.6.8
     environment:
       POSTGRES_USER: app
-      POSTGRES_PASSWORD:
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
       TZ: Asia/Tokyo
     ports:
       - '5432:5432'
