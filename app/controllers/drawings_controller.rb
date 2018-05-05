@@ -54,7 +54,7 @@ class DrawingsController < ApplicationController
 
     respond_to do |format|
       if @drawing.save
-        format.html { redirect_to @drawing, notice: 'Drawing was successfully created.' }
+        format.html { redirect_to @drawing, notice: '図面の作成に成功しました' }
         format.json { render :show, status: :created, location: @drawing }
       else
         format.html { render :new }
@@ -68,7 +68,7 @@ class DrawingsController < ApplicationController
   def update
     respond_to do |format|
       if @drawing.update(drawing_params)
-        format.html { redirect_to @drawing, notice: 'Drawing was successfully updated.' }
+        format.html { redirect_to @drawing, notice: '図面の更新に成功しました' }
         format.json { render :show, status: :ok, location: @drawing }
       else
         format.html { render :edit }
@@ -82,7 +82,7 @@ class DrawingsController < ApplicationController
   def destroy
     @drawing.destroy
     respond_to do |format|
-      format.html { redirect_to drawings_url, notice: 'Drawing was successfully destroyed.' }
+      format.html { redirect_to drawings_url, notice: '図面の削除に成功しました' }
       format.json { head :no_content }
     end
   end

@@ -15,7 +15,7 @@ class Admin::UsersController < Admin::Controller
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to ({action: :index}), notice: 'User was successfully created.'
+      redirect_to ({action: :index}), notice: 'ユーザーの作成に成功しました'
     else
       render :new
     end
@@ -23,8 +23,7 @@ class Admin::UsersController < Admin::Controller
 
   def update
     if @user.update(user_params)
-      # redirect_to admin_users_url, notice: 'User was successfully updated.'
-      redirect_to ({action: :index}), notice: 'User was successfully updated.'
+      redirect_to ({action: :index}), notice: 'ユーザーの更新に成功しました'
     else
       render :edit
     end
@@ -32,7 +31,7 @@ class Admin::UsersController < Admin::Controller
 
   def destroy
     @user.destroy
-    redirect_to ({action: :index}), notice: 'User was successfully destroyed.'
+    redirect_to ({action: :index}), notice: 'ユーザーの削除に成功しました'
   end
 
   private

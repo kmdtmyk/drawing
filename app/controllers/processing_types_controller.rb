@@ -17,7 +17,7 @@ class ProcessingTypesController < ApplicationController
   def create
     @processing_type = ProcessingType.new(processing_type_params)
     if @processing_type.save
-      redirect_to processing_types_url, notice: 'ProcessingType was successfully created.'
+      redirect_to processing_types_url, notice: '加工種類の作成に成功しました'
     else
       redirect_to action: :new, processing_type: processing_type_params
     end
@@ -25,7 +25,7 @@ class ProcessingTypesController < ApplicationController
 
   def update
     if @processing_type.update(processing_type_params)
-      redirect_to processing_types_url, notice: 'ProcessingType was successfully updated.'
+      redirect_to processing_types_url, notice: '加工種類の更新に成功しました'
     else
       redirect_to action: :edit, processing_type: processing_type_params
     end
@@ -33,7 +33,7 @@ class ProcessingTypesController < ApplicationController
 
   def destroy
     @processing_type.destroy
-    redirect_to processing_types_url, notice: 'ProcessingType was successfully destroyed.'
+    redirect_to processing_types_url, notice: '加工種類の削除に成功しました'
   end
 
   private

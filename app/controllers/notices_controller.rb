@@ -16,7 +16,7 @@ class NoticesController < ApplicationController
     @notice = Notice.new(notice_params)
     @notice.post_datetime = DateTime.now
     if @notice.save
-      redirect_to notices_url, notice: 'Notice was successfully created.'
+      redirect_to notices_url, notice: 'お知らせの作成に成功しました'
     else
       render :new
     end
@@ -24,7 +24,7 @@ class NoticesController < ApplicationController
 
   def update
     if @notice.update(notice_params)
-      redirect_to notices_url, notice: 'Notice was successfully updated.'
+      redirect_to notices_url, notice: 'お知らせの更新に成功しました'
     else
       render :edit
     end
@@ -32,7 +32,7 @@ class NoticesController < ApplicationController
 
   def destroy
     @notice.destroy
-    redirect_to notices_url, notice: 'Notice was successfully destroyed.'
+    redirect_to notices_url, notice: 'お知らせの削除に成功しました'
   end
 
   private

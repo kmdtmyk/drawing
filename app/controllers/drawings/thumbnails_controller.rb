@@ -6,7 +6,7 @@ class Drawings::ThumbnailsController < ApplicationController
 
   def update
     if @drawing.update(drawing_params)
-      redirect_to @drawing, notice: 'Thumbnail was successfully updated.'
+      redirect_to @drawing, notice: 'サムネイルの変更に成功しました'
     else
       redirect_to action: :edit, drawing: drawing_params
     end

@@ -18,7 +18,7 @@ class CustomersController < ApplicationController
   def create
     @customer = Customer.new(customer_params)
     if @customer.save
-      redirect_to customers_url, notice: 'Customer was successfully created.'
+      redirect_to customers_url, notice: '顧客の作成に成功しました'
     else
       render :new
     end
@@ -26,7 +26,7 @@ class CustomersController < ApplicationController
 
   def update
     if @customer.update(customer_params)
-      redirect_to customers_url, notice: 'Customer was successfully updated.'
+      redirect_to customers_url, notice: '顧客の更新に成功しました'
     else
       render :edit
     end
@@ -34,7 +34,7 @@ class CustomersController < ApplicationController
 
   def destroy
     @customer.destroy
-    redirect_to customers_url, notice: 'Customer was successfully destroyed.'
+    redirect_to customers_url, notice: '顧客の削除に成功しました'
   end
 
   private

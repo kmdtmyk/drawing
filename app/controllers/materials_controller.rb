@@ -23,7 +23,7 @@ class MaterialsController < ApplicationController
   def create
     @material = Material.new(material_params)
     if @material.save
-      redirect_to materials_url, notice: 'Material was successfully created.'
+      redirect_to materials_url, notice: '材質の作成に成功しました'
     else
       redirect_to action: :new, material: material_params
     end
@@ -33,7 +33,7 @@ class MaterialsController < ApplicationController
   # PATCH/PUT /materials/1.json
   def update
     if @material.update(material_params)
-      redirect_to materials_url, notice: 'Material was successfully updated.'
+      redirect_to materials_url, notice: '材質の更新に成功しました'
     else
       redirect_to action: :edit, material: material_params
     end
@@ -43,7 +43,7 @@ class MaterialsController < ApplicationController
   # DELETE /materials/1.json
   def destroy
     @material.destroy
-    redirect_to materials_url, notice: 'Material was successfully destroyed.'
+    redirect_to materials_url, notice: '材質の削除に成功しました'
   end
 
   private

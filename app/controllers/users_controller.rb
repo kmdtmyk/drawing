@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to root_path, notice: 'User was successfully updated.'
+      redirect_to root_path, notice: 'ユーザー情報の更新に成功しました'
     else
       redirect_to ({action: :edit, user: user_params}), alert: @user.errors.full_messages
     end
