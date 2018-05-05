@@ -5,6 +5,11 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     sessions: 'users/sessions'
   }
+
+  resource :user, only: [:edit, :update] do
+    resource :password, only: [:update], module: :user
+  end
+
   resources :drawings do
     resource :thumbnail, only: [:edit, :update], module: :drawings
   end

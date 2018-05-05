@@ -1,7 +1,7 @@
-<% if notice %>
-  <% Array.wrap(notice) .each do |notice| %>
-    <div class='alert alert-success alert-dismissible fade show' role='alert'>
-      <%= notice %>
+<% if alert %>
+  <% Array.wrap(alert) .each do |alert| %>
+    <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+      <%= alert %>
       <button type='button' class='close' data-dismiss='alert'>
         <span aria-hidden='true'>&times;</span>
       </button>

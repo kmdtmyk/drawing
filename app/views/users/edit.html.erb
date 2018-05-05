@@ -1,0 +1,56 @@
+<% provide :title, 'ユーザー情報変更' %>
+
+<h3>ユーザー情報変更</h3>
+
+<%= form_for(@user, url: user_path) do |f| %>
+
+  <div class='form-group row'>
+    <label class='col-sm-2 col-form-label'>名前</label>
+    <div>
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class='form-group row'>
+    <label class='col-sm-2 col-form-label'>ふりがな</label>
+    <div>
+      <%= f.text_field :furigana, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class='form-group row'>
+    <label class='col-sm-2 col-form-label'>メールアドレス</label>
+    <div>
+      <%= f.email_field :email, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class='form-group'>
+    <%= f.submit '登録', class: 'btn btn-primary' %>
+  </div>
+
+<% end %>
+
+<h3>パスワード変更</h3>
+
+<%= form_for(@user, url: user_password_path) do |f| %>
+
+  <div class='form-group row'>
+    <label class='col-sm-2 col-form-label'>パスワード</label>
+    <div>
+      <%= f.password_field :password, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class='form-group row'>
+    <label class='col-sm-2 col-form-label'>パスワード確認</label>
+    <div>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class='form-group'>
+    <%= f.submit '変更', class: 'btn btn-primary' %>
+  </div>
+
+<% end %>
