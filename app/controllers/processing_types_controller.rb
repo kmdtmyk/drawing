@@ -2,7 +2,7 @@ class ProcessingTypesController < ApplicationController
   before_action :set_processing_type, only: [:show, :edit, :update, :destroy]
 
   def index
-    @processing_types = ProcessingType.all
+    @processing_types = ProcessingType.all.order(:display_order)
   end
 
   def new
