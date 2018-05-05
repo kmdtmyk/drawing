@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   }
 
   resource :user, only: [:edit, :update] do
-    resource :password, only: [:update], module: :user
+    resource :password, only: [:edit, :update], module: :user
   end
 
   resources :drawings do
