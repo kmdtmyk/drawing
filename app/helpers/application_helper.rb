@@ -12,6 +12,11 @@ module ApplicationHelper
     datetime.strftime('%Y/%m/%d %H:%M:%S') if datetime.present?
   end
 
+  def page_title(title)
+    return '図面管理システム' if title.blank?
+    title
+  end
+
   def paginate_statistic(page)
     render 'kaminari/statistic', page: page
   end
