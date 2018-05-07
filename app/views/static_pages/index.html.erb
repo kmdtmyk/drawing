@@ -12,12 +12,14 @@
       <li><%= link_to '統計', statistic_drawings_path %></li>
     </ul>
 
-    <h3>管理者用メニュー</h3>
+    <% if current_user.admin? %>
+      <h3>管理者用メニュー</h3>
+      <ul>
+        <li><%= link_to 'ユーザー', admin_users_path %></li>
+        <li><%= link_to 'お知らせ', notices_path %></li>
+      </ul>
+    <% end %>
 
-    <ul>
-      <li><%= link_to 'ユーザー', admin_users_path %></li>
-      <li><%= link_to 'お知らせ', notices_path %></li>
-    </ul>
   </div>
 
   <div class='col-sm-6'>
