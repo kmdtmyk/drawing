@@ -1,5 +1,16 @@
 module ApplicationHelper
 
+  def new_tab_link_to(*params, &block)
+    if block_given?
+      html_option_index = 1
+    else
+      html_option_index = 2
+    end
+    params[html_option_index] ||= {}
+    params[html_option_index][:target] = '_blank'
+    link = link_to *params, &block
+  end
+
   def format_number(number)
     number_with_delimiter number
   end
