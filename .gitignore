@@ -21,5 +21,8 @@
 # dotenv
 .env
 
+# Ignore backup directory.
+/backup
+
 # paperclip
 public/system
