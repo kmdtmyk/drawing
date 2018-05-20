@@ -1,3 +1,5 @@
+<% name_map = Config::DrawingIndex.display_items.to_h.invert %>
+
 <% drawings = drawings.includes(:thumbnail_drawing_file) %>
 
 <div class='drawing-cards mb-4'>
@@ -10,22 +12,42 @@
           <% end %>
         <% end %>
         <table class='drawing-card-info'>
-          <tr>
-            <th>受注先</th>
-            <td><%= drawing.customer_name %></td>
-          </tr>
-          <tr>
-            <th>品名</th>
-            <td><%= drawing.product_name %></td>
-          </tr>
-          <tr>
-            <th>品番</th>
-            <td><%= drawing.part_number %></td>
-          </tr>
-          <tr>
-            <th>見積もり日</th>
-            <td><%= format_date drawing.estimate_date %></td>
-          </tr>
+          <% @config.display_items.each do |item| %>
+            <tr>
+              <th><%= name_map[item] %></th>
+              <td>
+                <% if item == 'estimate_date' %>
+                  <%= format_date drawing.estimate_date %>
+                <% elsif item == 'order_customer' %>
+                  <%= drawing.customer_name %>
+                <% elsif item == 'product_name' %>
+                  <%= drawing.product_name %>
+                <% elsif item == 'part_number' %>
+                  <%= drawing.part_number %>
+                <% elsif item == 'material' %>
+                  <%= drawing.material_name %>
+                <% elsif item == 'processing_type' %>
+                  <%= drawing.processing_type_name %>
+                <% elsif item == 'thickness' %>
+                  <%= format_number drawing.thickness %>
+                <% elsif item == 'width' %>
+                  <%= format_number drawing.width %>
+                <% elsif item == 'length' %>
+                  <%= format_number drawing.length %>
+                <% elsif item == 'status' %>
+                  <%= drawing.status %>
+                <% elsif item == 'material_cost' %>
+                  <%= format_number drawing.material_cost %>
+                <% elsif item == 'process_cost' %>
+                  <%= format_number drawing.process_cost %>
+                <% elsif item == 'sales_price' %>
+                  <%= format_number drawing.sales_price %>
+                <% elsif item == 'memo' %>
+                  <%= format_number drawing.memo %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
         </table>
         <div class='drawing-card-footer'>
           <%= link_to '詳細', drawing, class: 'btn btn-info btn-sm mr-2' %>

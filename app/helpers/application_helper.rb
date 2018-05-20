@@ -66,18 +66,6 @@ module ApplicationHelper
     end
   end
 
-  def hidden_params(options)
-    except = Array.wrap(options[:except])
-    except << :controller
-    except << :action
-    result = ''
-    params.each do |name, value|
-      next if except.include?(name.to_sym)
-      result += hidden_field_tag name, value
-    end
-    raw result
-  end
-
   def userstamp(record)
     render 'userstamp', record: record
   end

@@ -15,16 +15,18 @@
 
   <div class='mb-2 d-flex justify-content-between'>
     <form class='form-inline'>
-      <%= hidden_params except: [:display_mode, :sort, :order] %>
+      <% @search_params.each do |name, value| %>
+        <%= hidden_field_tag name, value %>
+      <% end %>
 
       <label class='mr-2'>表示形式</label>
-      <%= select_tag 'display_mode', options_for_select([['サムネイル', 'thumbnail'], ['一覧', 'list']], params[:display_mode]), class: 'form-control mr-2' %>
+      <%= select_tag 'config[display_mode]', options_for_select(Config::DrawingIndex.display_modes, @config.display_mode), class: 'form-control mr-2' %>
 
       <label class='mr-2'>並び替え</label>
-      <%= select_tag 'sort', options_for_select([['見積もり日', 'estimate_date'], ['売価', 'sales_price']], params[:sort]), class: 'form-control mr-2' %>
+      <%= select_tag 'config[sort]', options_for_select(Config::DrawingIndex.sort_items, @config.sort), class: 'form-control mr-2' %>
 
       <label class='mr-2'>順番</label>
-      <%= select_tag 'order', options_for_select([['昇順', 'asc'], ['降順', 'desc']], params[:order]), class: 'form-control mr-2' %>
+      <%= select_tag 'config[order]', options_for_select(Config::DrawingIndex.order_items, @config.order), class: 'form-control mr-2' %>
 
       <button type='submit' class='btn btn-info'>変更</button>
     </form>
@@ -32,14 +34,19 @@
 
   <div class='d-flex justify-content-between align-items-end'>
     <%= paginate_statistic @drawings %>
-    <%= link_to '新規作成', new_drawing_path, class: 'btn btn-primary' %>
+    <div class='d-flex'>
+      <div class='mr-2'>
+        <%= render 'display_config' %>
+      </div>
+      <%= link_to '新規作成', new_drawing_path, class: 'btn btn-primary' %>
+    </div>
   </div>
 
   <%= render 'search_conditions' %>
 
   <% if @drawings.empty? %>
     <p>検索条件に一致するデータが見つかりませんでした。</p>
-  <% elsif params[:display_mode] == 'list' %>
+  <% elsif @config.display_mode == 'list' %>
     <%= render 'list', drawings: @drawings %>
   <% else %>
     <%= render 'card', drawings: @drawings %>

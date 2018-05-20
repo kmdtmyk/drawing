@@ -11,21 +11,19 @@ class DrawingsController < ApplicationController
   # GET /drawings
   # GET /drawings.json
   def index
-    restore_params
-
-    params[:display_mode] = 'thumbnail' unless ['thumbnail', 'list'].include?(params[:display_mode])
-    params[:sort] = 'estimate_date' unless ['estimate_date', 'sales_price'].include?(params[:sort])
-    params[:order] = 'desc' unless ['asc', 'desc'].include?(params[:order])
-
+    json = get_config
+    if params[:config].present?
+      json = json.merge(config_params)
+    end
+    @config =  Config::DrawingIndex.new(json)
     @drawings = Drawing
       .search_by_params(params)
-      .order(params[:sort] + ' ' + params[:order])
+      .order(@config.sort + ' ' + @config.order)
       .page(params[:page])
       .per(100)
     @categories = Category.all.order(:display_order)
     @search_params = search_params
-
-    save_params
+    save_config(@config)
   end
 
   # GET /drawings/1
@@ -145,6 +143,10 @@ class DrawingsController < ApplicationController
       )
     end
 
+    def config_params
+      params.require(:config).permit(Config::DrawingIndex.permits)
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def drawing_params
       params.require(:drawing).permit(
@@ -196,25 +198,19 @@ class DrawingsController < ApplicationController
       @drawing.save
     end
 
-    def save_params
-      cookies[:params] = {
-        value: {
-          display_mode: params[:display_mode],
-          sort: params[:sort],
-          order: params[:order],
-        }.to_json,
+    def save_config(config)
+      cookies[:config] = {
+        value: config.to_json,
         path: URI.parse(request.fullpath).path,
-        expires: 1.year.from_now
+        expires: 1.year.from_now,
       }
     end
 
-    def restore_params
+    def get_config
       begin
-        last_options = JSON.parse(cookies[:params])
-        last_options.each do |key, value|
-          params[key.to_sym] = value if params[key.to_sym].nil?
-        end
+        JSON.parse(cookies[:config])
       rescue => e
+        {}
       end
     end
 
