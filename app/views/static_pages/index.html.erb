@@ -27,12 +27,10 @@
     <% @notices.each do |notice| %>
       <div>
         <h5><%= notice.title %></h5>
-        <div><%= simple_format notice.body %></div>
-        <small>
-          <%= format_datetime notice.post_datetime %>
-          <%= notice.update_user_name %>
-        </small>
+        <%= simple_format notice.body, {}, wrapper_tag: :div %>
+        <small><%= format_datetime notice.post_datetime %> <%= notice.update_user_name %></small>
       </div>
+      <hr>
     <% end %>
   </div>
 
