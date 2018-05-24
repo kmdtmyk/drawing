@@ -69,7 +69,7 @@
     まだファイルが登録されていません
   </div>
 <% else %>
-  <ul class='list-group'>
+  <ul class='list-group mb-2'>
     <% @drawing.drawing_files.each do |drawing_file| %>
       <li class='list-group-item'>
         <% if drawing_file.pdf? %>
