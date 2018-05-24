@@ -8,110 +8,83 @@
   <%= link_to '削除', @drawing, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
 </p>
 
-<div class='row'>
+<%= table_tag do %>
+  <tr>
+    <th>受注先</th>
+    <td><%= @drawing.customer_name %></td>
+    <th>品名</th>
+    <td><%= @drawing.product_name %></td>
+  </tr>
+  <tr>
+    <th>品番</th>
+    <td><%= @drawing.part_number %></td>
+    <th>材質</th>
+    <td><%= @drawing.material_name %></td>
+  </tr>
+  <tr>
+    <th>加工種類</th>
+    <td><%= @drawing.processing_type_name %></td>
+    <th>板厚</th>
+    <td><%= format_number @drawing.thickness %> [mm]</td>
+  </tr>
+  <tr>
+    <th>幅</th>
+    <td><%= format_number @drawing.width %> [mm]</td>
+    <th>長さ</th>
+    <td><%= format_number @drawing.length %> [mm]</td>
+  </tr>
+  <tr>
+    <th>見積もり日</th>
+    <td><%= format_date @drawing.estimate_date %></td>
+    <th>状態</th>
+    <td><%= @drawing.status %></td>
+  </tr>
+  <tr>
+    <th>材料費</th>
+    <td><%= format_number @drawing.material_cost %></td>
+    <th>加工費</th>
+    <td><%= format_number @drawing.process_cost %></td>
+  </tr>
+  <tr>
+    <th>売価</th>
+    <td><%= format_number @drawing.sales_price %></td>
+    <th>外注先</th>
+    <td>
+      <% @drawing.drawing_outsources.each do |drawing_outsource| %>
+        <div>
+          <%= drawing_outsource.customer_name %>
+          <%= format_number drawing_outsource.purchase_price %>
+        </div>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <th>メモ</th>
+    <td colspan='3'><%= @drawing.memo %></td>
+  </tr>
+<% end %>
 
-  <div class='col-sm-3'>
-    <%= table_tag do %>
-      <tr>
-        <th>受注先</th>
-        <td><%= @drawing.customer_name %></td>
-      </tr>
-      <tr>
-        <th>品名</th>
-        <td><%= @drawing.product_name %></td>
-      </tr>
-      <tr>
-        <th>品番</th>
-        <td><%= @drawing.part_number %></td>
-      </tr>
-      <tr>
-        <th>材質</th>
-        <td><%= @drawing.material_name %></td>
-      </tr>
-      <tr>
-        <th>加工種類</th>
-        <td><%= @drawing.processing_type_name %></td>
-      </tr>
-      <tr>
-        <th>板厚</th>
-        <td><%= format_number @drawing.thickness %> [mm]</td>
-      </tr>
-      <tr>
-        <th>幅</th>
-        <td><%= format_number @drawing.width %> [mm]</td>
-      </tr>
-      <tr>
-        <th>長さ</th>
-        <td><%= format_number @drawing.length %> [mm]</td>
-      </tr>
-      <tr>
-        <th>見積もり日</th>
-        <td><%= format_date @drawing.estimate_date %></td>
-      </tr>
-      <tr>
-        <th>状態</th>
-        <td><%= @drawing.status %></td>
-      </tr>
-      <tr>
-        <th>材料費</th>
-        <td><%= format_number @drawing.material_cost %></td>
-      </tr>
-      <tr>
-        <th>加工費</th>
-        <td><%= format_number @drawing.process_cost %></td>
-      </tr>
-      <tr>
-        <th>売価</th>
-        <td><%= format_number @drawing.sales_price %></td>
-      </tr>
-      <!-- <tr>
-        <th>カテゴリー</th>
-        <td><%= @drawing.categories.pluck(:name).join('、') %></td>
-      </tr> -->
-      <tr>
-        <th>外注先</th>
-        <td>
-          <% @drawing.drawing_outsources.each do |drawing_outsource| %>
-            <div>
-              <%= drawing_outsource.customer_name %>
-              <%= format_number drawing_outsource.purchase_price %>
-            </div>
+<% if @drawing.drawing_files.empty? %>
+  <div class='alert alert-info'>
+    まだファイルが登録されていません
+  </div>
+<% else %>
+  <ul class='list-group'>
+    <% @drawing.drawing_files.each do |drawing_file| %>
+      <li class='list-group-item'>
+        <% if drawing_file.pdf? %>
+          <iframe src='/pdf/web/viewer.html?file=<%= drawing_file.url %>' style='width: 100%; height: 70vh;'></iframe>
+          <%= new_tab_link_to '拡大表示', drawing_file.url %>
+        <% elsif drawing_file.image? %>
+          <%= new_tab_link_to drawing_file.url do %>
+            <%= drawing_file.large title: drawing_file.name, style: 'max-width: 100%;' %>
           <% end %>
-        </td>
-      </tr>
-      <tr>
-        <th>メモ</th>
-        <td><%= @drawing.memo %></td>
-      </tr>
-    <% end %>
-  </div>
-
-  <div class='col-sm-9'>
-    <% if @drawing.drawing_files.empty? %>
-      <div class='alert alert-info'>
-        まだファイルが登録されていません
-      </div>
-    <% else %>
-      <ul class='list-group'>
-        <% @drawing.drawing_files.each do |drawing_file| %>
-          <li class='list-group-item'>
-            <% if drawing_file.pdf? %>
-              <%= new_tab_link_to drawing_file.url do %>
-                <%= drawing_file.large title: drawing_file.name, style: 'max-width: 100%; box-shadow: 5px 5px 10px gray;' %>
-              <% end %>
-            <% elsif drawing_file.image? %>
-              <%= new_tab_link_to drawing_file.url do %>
-                <%= drawing_file.large title: drawing_file.name, style: 'max-width: 100%;' %>
-              <% end %>
-            <% else %>
-              <%= new_tab_link_to drawing_file.name_with_icon, drawing_file.url %>
-            <% end %>
-          </li>
+        <% else %>
+          <%= new_tab_link_to drawing_file.name_with_icon, drawing_file.url %>
         <% end %>
-      </ul>
+      </li>
     <% end %>
-  </div>
-
-</div>
+  </ul>
+<% end %>
 
 <%= userstamp @drawing %>
