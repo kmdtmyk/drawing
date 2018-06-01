@@ -49,29 +49,20 @@ class DrawingsController < ApplicationController
   # POST /drawings.json
   def create
     @drawing = Drawing.new(drawing_params)
-
-    respond_to do |format|
-      if @drawing.save
-        format.html { redirect_to @drawing, notice: '図面の作成に成功しました' }
-        format.json { render :show, status: :created, location: @drawing }
-      else
-        format.html { render :new }
-        format.json { render json: @drawing.errors, status: :unprocessable_entity }
-      end
+    if @drawing.save
+      redirect_to @drawing, notice: '図面の作成に成功しました'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /drawings/1
   # PATCH/PUT /drawings/1.json
   def update
-    respond_to do |format|
-      if @drawing.update(drawing_params)
-        format.html { redirect_to @drawing, notice: '図面の更新に成功しました' }
-        format.json { render :show, status: :ok, location: @drawing }
-      else
-        format.html { render :edit }
-        format.json { render json: @drawing.errors, status: :unprocessable_entity }
-      end
+    if @drawing.update(drawing_params)
+      redirect_to @drawing, notice: '図面の更新に成功しました'
+    else
+      render :edit
     end
   end
 
