@@ -78,10 +78,11 @@ class DrawingsController < ApplicationController
   # DELETE /drawings/1
   # DELETE /drawings/1.json
   def destroy
-    @drawing.destroy
-    respond_to do |format|
-      format.html { redirect_to drawings_url, notice: '図面の削除に成功しました' }
-      format.json { head :no_content }
+    if @drawing.destroy
+      redirect_to drawings_url, notice: '図面の削除に成功しました'
+    else
+      flash.now[:alert] =  @drawing.errors.full_messages
+      render :show
     end
   end
 
