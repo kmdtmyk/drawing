@@ -1,0 +1,33 @@
+<button type='button' id='bulk-delete' class='btn btn-danger' data-toggle='modal' data-target='#destroyAllModal'>
+  一括削除
+</button>
+
+<div class='modal fade' id='destroyAllModal' tabindex='-1'>
+  <div class='modal-dialog'>
+    <div class='modal-content'>
+      <div class='modal-header'>
+        <h5 class='modal-title'>
+          一括削除
+        </h5>
+        <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+          <span aria-hidden='true'>&times;</span>
+        </button>
+      </div>
+      <div class='modal-body'>
+        選択した項目を全て削除します
+      </div>
+      <div class='modal-footer'>
+        <button type='button' id='bulk-delete-submit' class='btn btn-danger'>OK</button>
+        <button type='button' class='btn btn-secondary' data-dismiss='modal'>キャンセル</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  document.getElementById('bulk-delete-submit').addEventListener('click', (e) => {
+    document.getElementById('list-form').submit()
+  })
+})()
+</script>

@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   resources :drawings do
     resource :thumbnail, only: [:edit, :update], module: :drawings
   end
+  delete :drawings, to: 'drawings#destroy'
+
   resources :categories, except: [:show]
   resources :customers, except: [:show]
   resources :materials, except: [:show]

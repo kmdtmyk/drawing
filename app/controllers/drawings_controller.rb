@@ -1,5 +1,5 @@
 class DrawingsController < ApplicationController
-  before_action :set_drawing, only: [:show, :edit, :update, :destroy]
+  before_action :set_drawing, only: [:show, :edit, :update]
   before_action :set_categories, only: [:new, :edit]
   before_action :set_orders, only: [:index, :new, :edit]
   before_action :set_materials, only: [:new, :edit]
@@ -69,15 +69,30 @@ class DrawingsController < ApplicationController
   # DELETE /drawings/1
   # DELETE /drawings/1.json
   def destroy
-    if @drawing.destroy
-      redirect_to drawings_url, notice: '図面の削除に成功しました'
+    return if params[:id].nil?
+    if params[:id].instance_of?(Array)
+      destroy_all
     else
-      flash.now[:alert] =  @drawing.errors.full_messages
-      render :show
+      @drawing = Drawing.find(params[:id])
+      if @drawing.destroy
+        redirect_to drawings_url, notice: '図面の削除に成功しました'
+      else
+        flash.now[:alert] =  @drawing.errors.full_messages
+        render :show
+      end
     end
   end
 
   private
+
+    def destroy_all
+      @drawings = Drawing.where(id: params[:id])
+      total = @drawings.size
+      @drawings.destroy_all
+      success = total - @drawings.size
+      redirect_to drawings_url, notice: "#{total}件中#{success}件の図面の削除に成功しました"
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_drawing
       @drawing = Drawing.find(params[:id])

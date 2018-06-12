@@ -1,58 +1,91 @@
 <% name_map = Config::DrawingIndex.display_items.to_h.invert %>
 
-<%= table_tag do %>
-  <thead>
-    <tr>
-      <% @config.list_display_items.each do |item| %>
-        <th><%= name_map[item] %></th>
-      <% end %>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% drawings.each do |drawing| %>
+<%= form_tag drawings_path, method: :delete, id: 'list-form' do %>
+  <%= table_tag do %>
+    <thead>
       <tr>
-        <% @config.display_items.each do |item| %>
-          <td>
-            <% if item == 'estimate_date' %>
-              <%= format_date drawing.estimate_date %>
-            <% elsif item == 'order_customer' %>
-              <%= drawing.customer_name %>
-            <% elsif item == 'product_name' %>
-              <%= drawing.product_name %>
-            <% elsif item == 'part_number' %>
-              <%= drawing.part_number %>
-            <% elsif item == 'material' %>
-              <%= drawing.material_name %>
-            <% elsif item == 'processing_type' %>
-              <%= drawing.processing_type_name %>
-            <% elsif item == 'thickness' %>
-              <%= format_number drawing.thickness %>
-            <% elsif item == 'width' %>
-              <%= format_number drawing.width %>
-            <% elsif item == 'length' %>
-              <%= format_number drawing.length %>
-            <% elsif item == 'status' %>
-              <%= drawing.status %>
-            <% elsif item == 'material_cost' %>
-              <%= format_number drawing.material_cost %>
-            <% elsif item == 'process_cost' %>
-              <%= format_number drawing.process_cost %>
-            <% elsif item == 'sales_price' %>
-              <%= format_number drawing.sales_price %>
-            <% elsif item == 'memo' %>
-              <%= format_number drawing.memo %>
-            <% end %>
-          </td>
+        <th></th>
+        <% @config.list_display_items.each do |item| %>
+          <th><%= name_map[item] %></th>
         <% end %>
-        <td>
-          <%= link_to '詳細', drawing, class: 'btn btn-info btn-sm' %>
-        </td>
-        <td>
-          <%= link_to '編集', edit_drawing_path(drawing), class: 'btn btn-primary btn-sm' %>
-        </td>
+        <th></th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
+    </thead>
+    <tbody>
+      <% drawings.each do |drawing| %>
+        <tr>
+          <td>
+            <%= check_box_tag 'id[]', drawing.id  %>
+          </td>
+          <% @config.display_items.each do |item| %>
+            <td>
+              <% if item == 'estimate_date' %>
+                <%= format_date drawing.estimate_date %>
+              <% elsif item == 'order_customer' %>
+                <%= drawing.customer_name %>
+              <% elsif item == 'product_name' %>
+                <%= drawing.product_name %>
+              <% elsif item == 'part_number' %>
+                <%= drawing.part_number %>
+              <% elsif item == 'material' %>
+                <%= drawing.material_name %>
+              <% elsif item == 'processing_type' %>
+                <%= drawing.processing_type_name %>
+              <% elsif item == 'thickness' %>
+                <%= format_number drawing.thickness %>
+              <% elsif item == 'width' %>
+                <%= format_number drawing.width %>
+              <% elsif item == 'length' %>
+                <%= format_number drawing.length %>
+              <% elsif item == 'status' %>
+                <%= drawing.status %>
+              <% elsif item == 'material_cost' %>
+                <%= format_number drawing.material_cost %>
+              <% elsif item == 'process_cost' %>
+                <%= format_number drawing.process_cost %>
+              <% elsif item == 'sales_price' %>
+                <%= format_number drawing.sales_price %>
+              <% elsif item == 'memo' %>
+                <%= format_number drawing.memo %>
+              <% end %>
+            </td>
+          <% end %>
+          <td>
+            <%= link_to '詳細', drawing, class: 'btn btn-info btn-sm' %>
+          </td>
+          <td>
+            <%= link_to '編集', edit_drawing_path(drawing), class: 'btn btn-primary btn-sm' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  <% end %>
 <% end %>
+
+<script>
+(function(){
+  let count = 0
+  document.querySelectorAll('[name="id[]"]').forEach((input) => {
+    input.addEventListener('change', (e) => {
+      if(e.target.checked){
+        count++
+      }else{
+        count--
+      }
+      updateBuklDeleteButton()
+    })
+  })
+
+  function updateBuklDeleteButton(){
+    let button = document.getElementById('bulk-delete')
+    if(count === 0){
+      button.disabled = true
+    }else{
+      button.disabled = false
+    }
+  }
+
+  updateBuklDeleteButton()
+})()
+</script>
