@@ -48,6 +48,9 @@ GEM
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
     builder (3.2.3)
+    bullet (5.7.5)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11.0)
     byebug (10.0.1)
     climate_control (0.2.0)
     coderay (1.1.2)
@@ -229,6 +232,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.1.8)
       execjs (>= 0.3.0, < 3)
+    uniform_notifier (1.11.0)
     warden (1.2.7)
       rack (>= 1.0)
     web-console (3.5.1)
@@ -246,6 +250,7 @@ PLATFORMS
 DEPENDENCIES
   better_errors (~> 2.4)
   binding_of_caller (~> 0.8.0)
+  bullet (~> 5.7, >= 5.7.5)
   byebug
   coffee-rails (~> 4.2)
   devise (~> 4.4, >= 4.4.3)
