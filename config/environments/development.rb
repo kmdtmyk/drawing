@@ -60,4 +60,7 @@ Rails.application.configure do
     Bullet.rails_logger = false
   end
 
+  config.rack_dev_mark.enable = true
+  config.rack_dev_mark.theme = [:github_fork_ribbon]
+
 end
