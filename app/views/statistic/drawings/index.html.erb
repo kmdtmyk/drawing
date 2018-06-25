@@ -1,82 +1,162 @@
 <%
 json = @drawings
-  .includes(:customer)
+  .includes(
+    :customer,
+    :material,
+    :processing_type,
+   )
   .to_json(
-    only: [:customer_id, :estimate_date, :estimated_price],
-    include: {customer: {only: [:name]}}
+    only: [
+      :customer_id,
+      :material_id,
+      :processing_type_id,
+      :estimate_date,
+      :material_cost,
+      :process_cost,
+      :sales_price,
+    ],
+    include: {
+      customer: {
+        only: [:name],
+      },
+      material: {
+        only: [:name],
+      },
+      processing_type: {
+        only: [:name],
+      },
+    },
   )
 %>
 
 <input id='records' type='hidden' value='<%= json %>'>
-<div id='graph'></div>
+<div id='graph' class='mb-2'></div>
+
+<form class='form-inline' id='graph-form'>
+  <div class='form-group'>
+    <label class='mr-2'>データ</label>
+    <select class='form-control mr-2' name='data'>
+      <option value='material_cost'>材料費</option>
+      <option value='process_cost'>加工費</option>
+      <option value='sales_price'>売価</option>
+    </select>
+  </div>
+  <div class='form-group'>
+    <label class='mr-2'>グループ分け</label>
+    <select class='form-control mr-2' name='group'>
+      <option value='customer'>受注先</option>
+      <option value='material'>材質</option>
+      <option value='processing_type'>加工種類</option>
+    </select>
+  </div>
+  <button type='submit' class='btn btn-info'>変更</button>
+</form>
 
 <script>
 (function(){
 
-  const records = JSON.parse(document.getElementById('records').value)
+  const form = document.getElementById('graph-form')
 
-  const groups = _.groupBy(records, (record) => {
-    return record.customer_id
-  })
+  function update(){
 
-  const yearMonths = Object.keys(_.groupBy(records, (record) => {
-    const date = new Date(record.estimate_date)
-    return moment(date.setDate(1)).format('YYYY-MM')
-  }))
+    const records = JSON.parse(document.getElementById('records').value)
 
-  const series = []
-  for(customer_id in groups){
-    const records = groups[customer_id]
+    const groups = _.groupBy(records, (record) => {
+      return groupValue(record)
+    })
 
-    const data = []
-    for(yearMonth of yearMonths){
-      const sum = records.filter((record) => {
-        return record.estimate_date.startsWith(yearMonth)
-      }).reduce((accumulator, record) => {
-        return accumulator + record.estimated_price
-      }, 0)
-      data.push(sum)
+    const yearMonths = Object.keys(_.groupBy(records, (record) => {
+      const date = new Date(record.estimate_date)
+      return moment(date.setDate(1)).format('YYYY-MM')
+    }))
+
+    const series = []
+    for(groupId in groups){
+      const records = groups[groupId]
+
+      const data = []
+      for(yearMonth of yearMonths){
+        const sum = records.filter((record) => {
+          return record.estimate_date.startsWith(yearMonth)
+        }).reduce((accumulator, record) => {
+          return accumulator + dataValue(record)
+        }, 0)
+        data.push(sum)
+      }
+
+      series.push({
+        name: groupName(records[0]),
+        data: data,
+        animation: false,
+      })
     }
 
-    series.push({
-      name: records[0].customer.name,
-      data: data,
-      animation: false,
+    Highcharts.setOptions({
+      lang: {
+        thousandsSep: ',',
+      },
     })
-  }
 
-  Highcharts.setOptions({
-    lang: {
-      thousandsSep: ',',
-    },
-  })
-
-  Highcharts.chart('graph', {
-    chart: {
-      type: 'column'
-    },
-    title: {
-      text: '見積金額統計（仮）',
-    },
-    subtitle: {
-      text: '',
-    },
-    credits: {
-      enabled: false,
-    },
-    xAxis: {
-      categories: yearMonths,
-    },
-    plotOptions: {
-      column: {
-        stacking: 'normal',
-        dataLabels: {
-          // enabled: true,
+    Highcharts.chart('graph', {
+      chart: {
+        type: 'column'
+      },
+      title: {
+        text: '月別図面統計',
+      },
+      subtitle: {
+        text: '',
+      },
+      credits: {
+        enabled: false,
+      },
+      xAxis: {
+        categories: yearMonths,
+      },
+      yAxis: {
+        title: {
+          text: dataName()
         },
       },
-    },
-    series: series,
+      plotOptions: {
+        column: {
+          stacking: 'normal',
+          dataLabels: {
+            // enabled: true,
+          },
+        },
+      },
+      series: series,
+    })
+
+    function dataValue(record){
+      return record[form['data'].value]
+    }
+
+    function dataName(){
+      return form['data'].selectedOptions[0].textContent
+    }
+
+    function groupValue(record){
+      return record[form['group'].value + '_id']
+    }
+
+    function groupName(record){
+      const group = record[form['group'].value]
+      if(group){
+        return group.name
+      }
+      return '未設定'
+    }
+
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault()
+    update()
   })
+
+  update()
 
 })()
 </script>
