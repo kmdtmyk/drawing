@@ -22,7 +22,8 @@
 .env
 
 # Ignore backup directory.
-/backup
+/backup/*
+!/backup/.keep
 
 # paperclip
 public/system
