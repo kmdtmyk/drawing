@@ -25,5 +25,10 @@
 /backup/*
 !/backup/.keep
 
+# Ignore assets and precompiled javascript packs
+/public/assets
+/public/packs
+/public/packs-test
+
 # paperclip
 public/system
