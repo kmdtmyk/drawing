@@ -2,9 +2,9 @@ form
   .form-group
     label 見積もり日
     .form-row.align-items-center
-      .col= text_field_tag :estimate_date_from, params[:estimate_date_from], class: 'form-control date-picker'
+      .col= text_field_tag :estimate_date_from, params[:estimate_date_from], class: 'form-control date-picker', autocomplete: :off
       span 〜
-      .col= text_field_tag :estimate_date_to, params[:estimate_date_to], class: 'form-control date-picker'
+      .col= text_field_tag :estimate_date_to, params[:estimate_date_to], class: 'form-control date-picker', autocomplete: :off
 
   .form-group
     label 受注先
