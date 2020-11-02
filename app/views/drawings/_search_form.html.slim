@@ -1,0 +1,64 @@
+form
+  .form-group
+    label 見積もり日
+    .form-row.align-items-center
+      .col= text_field_tag :estimate_date_from, params[:estimate_date_from], class: 'form-control date-picker'
+      span 〜
+      .col= text_field_tag :estimate_date_to, params[:estimate_date_to], class: 'form-control date-picker'
+
+  .form-group
+    label 受注先
+    select.form-control[name="customer_id"]
+      option
+      = @orders.each do |order|
+        option value=order.id selected=(order.id.to_s == params[:customer_id])
+          = order.name
+
+  .form-group
+    label 品名
+    = text_field_tag :product_name, params[:product_name], class: 'form-control'
+
+  .form-group
+    label 品番
+    = text_field_tag :part_number, params[:part_number], class: 'form-control'
+
+  .form-group
+    label 材質
+    = material_select 'material_id', params[:material_id], class: 'form-control'
+
+  .form-group
+    label 加工種類
+    = processing_type_select 'processing_type_id', params[:processing_type_id], class: 'form-control'
+
+  .form-group
+    label 板厚
+    .form-row.align-items-center
+      .col= number_field_tag :thickness_from, params[:thickness_from], step: '0.01', class: 'form-control'
+      span 〜
+      .col= number_field_tag :thickness_to, params[:thickness_to], step: '0.01', class: 'form-control'
+
+  .form-group
+    label 幅
+    .form-row.align-items-center
+      .col= number_field_tag :width_from, params[:width_from], step: '0.01', class: 'form-control'
+      span 〜
+      .col= number_field_tag :width_to, params[:width_to], step: '0.01', class: 'form-control'
+
+  .form-group
+    label 長さ
+    .form-row.align-items-center
+      .col= number_field_tag :length_from, params[:length_from], step: '0.01', class: 'form-control'
+      span 〜
+      .col= number_field_tag :length_to, params[:length_to], step: '0.01', class: 'form-control'
+
+  button.btn.btn-info type='submit' 検索
+
+javascript:
+  (function(){
+    for(const element of document.querySelectorAll('.date-picker')){
+      new Pikaday({
+        field: element,
+        format: 'YYYY/MM/DD',
+      })
+    }
+  })()

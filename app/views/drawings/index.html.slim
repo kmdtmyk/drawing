@@ -1,0 +1,43 @@
+- provide :title, '図面一覧'
+
+- breadcrumb :drawings
+
+- @drawings = @drawings.includes(:customer)
+
+- content_for :sidebar do
+  .px-3
+    h2 検索条件
+    = render 'search_form'
+
+div
+  .mb-2
+    form.form-inline
+      - @search_params.each do |name, value|
+        = hidden_field_tag name, value
+      label.mr-2 表示形式
+      = select_tag 'config[display_mode]', options_for_select(Config::DrawingIndex.display_modes, @config.display_mode), class: 'form-control mr-2'
+      label.mr-2 並び替え
+      = select_tag 'config[sort]', options_for_select(Config::DrawingIndex.sort_items, @config.sort), class: 'form-control mr-2'
+      label.mr-2 順番
+      = select_tag 'config[order]', options_for_select(Config::DrawingIndex.order_items, @config.order), class: 'form-control mr-2'
+      button.btn.btn-info type='submit'  変更
+
+  .d-flex.justify-content-between.align-items-end
+    = paginate_statistic @drawings
+    .d-flex
+      = render 'display_config'
+      = link_to '新規作成', new_drawing_path, class: 'btn btn-primary ml-2'
+      - if @config.display_mode == 'list'
+        .ml-2
+          = render 'bulk_delete'
+
+  = render 'search_conditions'
+
+  - if @drawings.empty?
+    p 検索条件に一致するデータが見つかりませんでした。
+  - elsif @config.display_mode == 'list'
+    = render 'list', drawings: @drawings
+  - else
+    = render 'card', drawings: @drawings
+
+  = paginate @drawings
