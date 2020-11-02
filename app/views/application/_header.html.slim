@@ -1,0 +1,28 @@
+header.sticky-top
+  nav.navbar.navbar-expand-sm.navbar-dark.bg-dark
+    a.navbar-brand href='/'
+      | Top Page
+    button.navbar-toggler.d-lg-none type='button' data-toggle='collapse' data-target='#navbar' aria-controls='navbar' aria-expanded='false' aria-label='Toggle navigation'
+      span.navbar-toggler-icon
+
+    #navbar.collapse.navbar-collapse
+      ul.navbar-nav.mr-auto
+        li.nav-item
+          = link_to drawings_path, class: 'nav-link' do
+            span.mr-1 図面一覧
+            span.badge.badge-light
+              = format_number Drawing.count
+        li.nav-item
+          = link_to '図面新規', new_drawing_path, class: 'nav-link'
+
+      .navbar-nav
+        - if user_signed_in?
+          .dropdown
+            button.btn.btn-md.btn-secondary.dropdown-toggle type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'
+              span.mr-1= fa_icon 'user'
+              = current_user.name
+            .dropdown-menu.dropdown-menu-right
+              = link_to 'ユーザー情報変更', edit_user_path, class: 'dropdown-item'
+              = link_to 'パスワード変更', edit_user_password_path, class: 'dropdown-item'
+          .nav-item
+            = link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'nav-link'
