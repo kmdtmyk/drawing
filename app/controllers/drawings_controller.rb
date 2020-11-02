@@ -19,7 +19,7 @@ class DrawingsController < ApplicationController
     end
     @config =  Config::DrawingIndex.new(json)
     @drawings = Drawing
-      .search_by_params(params)
+      .search(params)
       .order(@config.sort + ' ' + @config.order)
       .page(params[:page])
       .per(100)
@@ -151,6 +151,8 @@ class DrawingsController < ApplicationController
         :width_to,
         :length_from,
         :length_to,
+        :process_cost_from,
+        :process_cost_to,
       )
     end
 

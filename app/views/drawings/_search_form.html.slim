@@ -51,6 +51,13 @@ form
       span 〜
       .col= number_field_tag :length_to, params[:length_to], step: '0.01', class: 'form-control'
 
+  .form-group
+    label 加工費
+    .form-row.align-items-center
+      .col= number_field_tag :process_cost_from, params[:process_cost_from], class: 'form-control'
+      span 〜
+      .col= number_field_tag :process_cost_to, params[:process_cost_to], class: 'form-control'
+
   button.btn.btn-info type='submit' 検索
 
 javascript:

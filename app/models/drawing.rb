@@ -32,74 +32,81 @@ class Drawing < ApplicationRecord
   belongs_to :processing_type, optional: true
   delegate :name, to: :processing_type, prefix: true, allow_nil: true
 
-  scope :search_by_params, -> (params){
-    drawings = all
+  scope :search, ->(params){
+    result = self
 
     if params[:customer_id].present?
-      drawings.where!(customer_id: params[:customer_id])
+      result = result.where(customer_id: params[:customer_id])
     end
 
     if params[:product_name].present?
-      drawings.where!('LOWER(product_name) LIKE LOWER(?)', "%#{params[:product_name]}%")
+      result = result.where('LOWER(product_name) LIKE LOWER(?)', "%#{params[:product_name]}%")
     end
 
     if params[:part_number].present?
-      drawings.where!('LOWER(part_number) LIKE LOWER(?)', "%#{params[:part_number]}%")
+      result = result.where('LOWER(part_number) LIKE LOWER(?)', "%#{params[:part_number]}%")
     end
 
     if params[:material_id].present?
-      drawings.where!(material_id: params[:material_id])
+      result = result.where(material_id: params[:material_id])
     end
 
     if params[:processing_type_id].present?
-      drawings.where!(processing_type_id: params[:processing_type_id])
+      result = result.where(processing_type_id: params[:processing_type_id])
     end
 
     if params[:thickness_from].present?
-      drawings.where!('thickness >= ?', params[:thickness_from])
+      result = result.where('thickness >= ?', params[:thickness_from])
     end
     if params[:thickness_to].present?
-      drawings.where!('thickness <= ?', params[:thickness_to])
+      result = result.where('thickness <= ?', params[:thickness_to])
     end
 
     if params[:width_from].present?
-      drawings.where!('width >= ?', params[:width_from])
+      result = result.where('width >= ?', params[:width_from])
     end
     if params[:width_to].present?
-      drawings.where!('width <= ?', params[:width_to])
+      result = result.where('width <= ?', params[:width_to])
     end
 
     if params[:length_from].present?
-      drawings.where!('length >= ?', params[:length_from])
+      result = result.where('length >= ?', params[:length_from])
     end
     if params[:length_to].present?
-      drawings.where!('length <= ?', params[:length_to])
+      result = result.where('length <= ?', params[:length_to])
+    end
+
+    if params[:process_cost_from].present?
+      result = result.where('process_cost >= ?', params[:process_cost_from])
+    end
+    if params[:process_cost_to].present?
+      result = result.where('process_cost <= ?', params[:process_cost_to])
     end
 
     if params[:estimate_date_from].present?
-      drawings.where!('estimate_date >= ?', params[:estimate_date_from])
+      result = result.where('estimate_date >= ?', params[:estimate_date_from])
     end
     if params[:estimate_date_to].present?
-      drawings.where!('estimate_date <= ?', params[:estimate_date_to])
+      result = result.where('estimate_date <= ?', params[:estimate_date_to])
     end
 
     if params[:estimated_price_from].present?
-      drawings.where!('estimated_price >= ?', params[:estimated_price_from])
+      result = result.where('estimated_price >= ?', params[:estimated_price_from])
     end
     if params[:estimated_price_to].present?
-      drawings.where!('estimated_price <= ?', params[:estimated_price_to])
+      result = result.where('estimated_price <= ?', params[:estimated_price_to])
     end
 
-    if params[:categories].present?
-      params[:categories].each do |cateogy_id|
-        drawing_ids =  DrawingCategory
-          .where(category: cateogy_id)
-          .drawing_ids
-        drawings.where!(id: drawing_ids)
-      end
-    end
+    # if params[:categories].present?
+    #   params[:categories].each do |cateogy_id|
+    #     drawing_ids =  DrawingCategory
+    #       .where(category: cateogy_id)
+    #       .drawing_ids
+    #     result = result.where(id: drawing_ids)
+    #   end
+    # end
 
-    drawings
+    result
   }
 
   def status
