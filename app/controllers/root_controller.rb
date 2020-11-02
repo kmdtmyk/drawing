@@ -1,4 +1,6 @@
-class StaticPagesController < ApplicationController
+# frozen_string_literal: true
+
+class RootController < ApplicationController
 
   def index
     @notices = Notice
