@@ -50,7 +50,7 @@
     <td><%= format_number @drawing.sales_price %></td>
     <th>外注先</th>
     <td>
-      <% @drawing.drawing_outsources.each do |drawing_outsource| %>
+      <% @drawing.drawing_outsources.includes(:customer).each do |drawing_outsource| %>
         <div>
           <%= drawing_outsource.customer_name %>
           <%= format_number drawing_outsource.purchase_price %>
