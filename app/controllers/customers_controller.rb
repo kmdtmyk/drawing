@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CustomersController < ApplicationController
   before_action :set_customer, only: [:show, :edit, :update, :destroy]
 
@@ -17,6 +19,7 @@ class CustomersController < ApplicationController
 
   def create
     @customer = Customer.new(customer_params)
+    @customer.created_by(current_user)
     if @customer.save
       redirect_to customers_url, notice: '顧客の作成に成功しました'
     else
@@ -25,6 +28,7 @@ class CustomersController < ApplicationController
   end
 
   def update
+    @customer.updated_by(current_user)
     if @customer.update(customer_params)
       redirect_to customers_url, notice: '顧客の更新に成功しました'
     else

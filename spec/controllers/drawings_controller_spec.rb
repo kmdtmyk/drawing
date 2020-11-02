@@ -8,7 +8,6 @@ RSpec.describe DrawingsController, type: :controller do
 
   before(:each) do
     sign_in user
-    User.current_user = user
   end
 
   describe '#index' do

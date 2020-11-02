@@ -1,5 +1,10 @@
+# frozen_string_literal: true
+
 class Drawing < ApplicationRecord
-  include UserStamp
+  include BelongsToUser
+
+  belongs_to_user prefix: :create
+  belongs_to_user prefix: :update
 
   has_many :drawing_categories, -> { order(:display_order) }, dependent: :destroy
   has_many :categories, through: :drawing_categories

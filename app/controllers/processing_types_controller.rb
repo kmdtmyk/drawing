@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProcessingTypesController < ApplicationController
   before_action :set_processing_type, only: [:show, :edit, :update, :destroy]
 
@@ -16,6 +18,7 @@ class ProcessingTypesController < ApplicationController
 
   def create
     @processing_type = ProcessingType.new(processing_type_params)
+    @processing_type.created_by(current_user)
     if @processing_type.save
       redirect_to processing_types_url, notice: '加工種類の作成に成功しました'
     else
@@ -24,6 +27,7 @@ class ProcessingTypesController < ApplicationController
   end
 
   def update
+    @processing_type.updated_by(current_user)
     if @processing_type.update(processing_type_params)
       redirect_to processing_types_url, notice: '加工種類の更新に成功しました'
     else

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DrawingsController < ApplicationController
   before_action :set_drawing, only: [:show, :edit, :update]
   before_action :set_categories, only: [:new, :edit]
@@ -49,6 +51,7 @@ class DrawingsController < ApplicationController
   # POST /drawings.json
   def create
     @drawing = Drawing.new(drawing_params)
+    @drawing.created_by(current_user)
     if @drawing.save
       redirect_to @drawing, notice: '図面の作成に成功しました'
     else
@@ -59,6 +62,7 @@ class DrawingsController < ApplicationController
   # PATCH/PUT /drawings/1
   # PATCH/PUT /drawings/1.json
   def update
+    @drawing.updated_by(current_user)
     if @drawing.update(drawing_params)
       redirect_to @drawing, notice: '図面の更新に成功しました'
     else

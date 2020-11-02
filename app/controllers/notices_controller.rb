@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class NoticesController < ApplicationController
   before_action :set_notice, only: [:show, :edit, :update, :destroy]
 
@@ -15,6 +17,7 @@ class NoticesController < ApplicationController
   def create
     @notice = Notice.new(notice_params)
     @notice.post_datetime = DateTime.now
+    @notice.created_by(current_user)
     if @notice.save
       redirect_to notices_url, notice: 'お知らせの作成に成功しました'
     else
@@ -23,6 +26,7 @@ class NoticesController < ApplicationController
   end
 
   def update
+    @notice.updated_by(current_user)
     if @notice.update(notice_params)
       redirect_to notices_url, notice: 'お知らせの更新に成功しました'
     else

@@ -25,6 +25,6 @@
         h5= notice.title
         = simple_format notice.body, {}, wrapper_tag: :div
         small
-          = format_datetime notice.post_datetime
+          span.mr-1= format_datetime notice.post_datetime
           = notice.update_user_name
       hr

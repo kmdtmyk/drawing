@@ -22,6 +22,7 @@ class MaterialsController < ApplicationController
   # POST /materials.json
   def create
     @material = Material.new(material_params)
+    @material.created_by(current_user)
     if @material.save
       redirect_to materials_url, notice: '材質の作成に成功しました'
     else
@@ -32,6 +33,7 @@ class MaterialsController < ApplicationController
   # PATCH/PUT /materials/1
   # PATCH/PUT /materials/1.json
   def update
+    @material.updated_by(current_user)
     if @material.update(material_params)
       redirect_to materials_url, notice: '材質の更新に成功しました'
     else
