@@ -40,21 +40,19 @@
         <%= f.collection_select :processing_type_id, @processing_types, :id, :name, {include_blank: true}, class: 'form-control' %>
       </div>
 
-      <div class='form-group'>
-        <h3>材質</h3>
-        <div class='form-row'>
-          <div class='col'>
-            <label>板厚</label>
-            <%= f.number_field :thickness, step: '0.01', class: 'form-control' %>
-          </div>
-          <div class='col'>
-            <label>幅</label>
-            <%= f.number_field :width, step: '0.01', class: 'form-control' %>
-          </div>
-          <div class='col'>
-            <label>長さ</label>
-            <%= f.number_field :length, step: '0.01', class: 'form-control' %>
-          </div>
+      <h3>材質</h3>
+      <div class='form-row'>
+        <div class='col form-group'>
+          <label>板厚</label>
+          <%= f.number_field :thickness, step: '0.01', class: 'form-control' %>
+        </div>
+        <div class='col form-group'>
+          <label>幅</label>
+          <%= f.number_field :width, step: '0.01', class: 'form-control' %>
+        </div>
+        <div class='col form-group'>
+          <label>長さ</label>
+          <%= f.number_field :length, step: '0.01', class: 'form-control' %>
         </div>
       </div>
 
@@ -84,16 +82,16 @@
         </div>
       </div>
 
-      <div class='form-group form-row'>
-        <div class='col'>
+      <div class='form-row'>
+        <div class='col form-group'>
           <label>材料費</label>
           <%= f.number_field :material_cost, class: 'form-control' %>
         </div>
-        <div class='col'>
+        <div class='col form-group'>
           <label>加工費</label>
           <%= f.number_field :process_cost, class: 'form-control' %>
         </div>
-        <div class='col'>
+        <div class='col form-group'>
           <label>売価</label>
           <%= f.number_field :sales_price, class: 'form-control' %>
         </div>
