@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
 
   def new_tab_link_to(*params, &block)
@@ -64,10 +66,6 @@ module ApplicationHelper
       content_tag(:span, value, class: 'tag-label-value') +
       fa_icon('close')
     end
-  end
-
-  def userstamp(record)
-    render 'userstamp', record: record
   end
 
 end

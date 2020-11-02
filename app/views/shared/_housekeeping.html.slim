@@ -1,0 +1,13 @@
+- unless record.new_record?
+  small
+    table
+      tr
+        th 作成者
+        td= record.create_user_name
+        th 作成日時
+        td= format_datetime record.created_at
+      tr
+        th 更新者
+        td= record.update_user_name
+        th 更新日時
+        td= format_datetime record.updated_at
