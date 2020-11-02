@@ -24,5 +24,4 @@ header.sticky-top
             .dropdown-menu.dropdown-menu-right
               = link_to 'ユーザー情報変更', edit_user_path, class: 'dropdown-item'
               = link_to 'パスワード変更', edit_user_password_path, class: 'dropdown-item'
-          .nav-item
-            = link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'nav-link'
+              = link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'dropdown-item'
