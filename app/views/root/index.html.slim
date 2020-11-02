@@ -1,0 +1,30 @@
+.row
+  .col-sm-6
+    h3 メインメニュー
+    ul
+      li= link_to '図面', drawings_path
+      li= link_to '顧客', customers_path
+      li= link_to '材質', materials_path
+      li= link_to '加工種類', processing_types_path
+      li= link_to '図面統計', statistic_drawings_path
+
+    - if current_user.admin?
+      h3 管理者用メニュー
+      ul
+        li= link_to 'ユーザー', admin_users_path
+        li= link_to 'お知らせ', notices_path
+
+
+  .col-sm-6
+    h3 お知らせ
+    hr
+    - notices = @notices.includes(:update_user)
+
+    - notices.each do |notice|
+      div
+        h5= notice.title
+        = simple_format notice.body, {}, wrapper_tag: :div
+        small
+          = format_datetime notice.post_datetime
+          = notice.update_user_name
+      hr
