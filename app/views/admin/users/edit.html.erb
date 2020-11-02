@@ -13,7 +13,7 @@
   </div>
 <% end %>
 
-<%= form_for([:admin, @user]) do |f| %>
+<%= form_for([:admin, @user], html: { id: nil }) do |f| %>
 
   <div class='form-group row'>
     <label class='col-sm-2 col-form-label'>名前</label>
@@ -51,7 +51,7 @@
 
 <h3>パスワード変更</h3>
 
-<%= form_for([:admin, @user]) do |f| %>
+<%= form_for([:admin, @user], html: { id: nil }) do |f| %>
 
   <div class='form-group row'>
     <label class='col-sm-2 col-form-label'>パスワード</label>
