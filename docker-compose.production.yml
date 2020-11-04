@@ -22,6 +22,10 @@ services:
     command: bash -c 'rm -f tmp/pids/server.pid; rails s -b 0.0.0.0'
     depends_on:
       - db
+    logging:
+      options:
+        max-size: 10m
+        max-file: '10'
     restart: always
   db:
     image: postgres:9.6.8
@@ -32,6 +36,10 @@ services:
     volumes:
       - db:/var/lib/postgresql/data
       - ./backup:/backup
+    logging:
+      options:
+        max-size: 10m
+        max-file: '10'
     restart: always
   web:
     image: nginx:1.13.9
@@ -44,6 +52,10 @@ services:
       - ./log/nginx:/var/log/nginx
     depends_on:
       - app
+    logging:
+      options:
+        max-size: 10m
+        max-file: '10'
     restart: always
 volumes:
   db:
