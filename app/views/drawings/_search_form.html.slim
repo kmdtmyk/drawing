@@ -1,10 +1,14 @@
 form
   .form-group.mb-2
     label 見積もり日
-    .form-row.align-items-center
-      .col= text_field_tag :estimate_date_from, params[:estimate_date_from], class: 'form-control date-picker', autocomplete: :off
-      span 〜
-      .col= text_field_tag :estimate_date_to, params[:estimate_date_to], class: 'form-control date-picker', autocomplete: :off
+    .input-group.input-group-sm
+      .input-group-prepend
+        .input-group-text style='width: 4em' From
+      = date_field_tag :estimate_date_from, params[:estimate_date_from], class: 'form-control form-control-sm'
+    .input-group.input-group-sm
+      .input-group-prepend
+        .input-group-text style='width: 4em' To
+      = date_field_tag :estimate_date_to, params[:estimate_date_to], class: 'form-control form-control-sm'
 
   .form-group.mb-2
     label 受注先
@@ -59,13 +63,3 @@ form
       .col= number_field_tag :process_cost_to, params[:process_cost_to], class: 'form-control'
 
   button.btn.btn-info type='submit' 検索
-
-javascript:
-  (function(){
-    for(const element of document.querySelectorAll('.date-picker')){
-      new Pikaday({
-        field: element,
-        format: 'YYYY/MM/DD',
-      })
-    }
-  })()
