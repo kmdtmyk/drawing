@@ -1,0 +1,156 @@
+ruby:
+  json = @drawings
+    .includes(
+      :customer,
+      :material,
+      :processing_type,
+    )
+    .to_json(
+      only: [
+        :customer_id,
+        :material_id,
+        :processing_type_id,
+        :estimate_date,
+        :material_cost,
+        :process_cost,
+        :sales_price,
+      ],
+      include: {
+        customer: {
+          only: [:name],
+        },
+        material: {
+          only: [:name],
+        },
+        processing_type: {
+          only: [:name],
+        },
+      },
+    )
+
+input#records type='hidden' value=json
+
+#graph.mb-2
+
+form#graph-form.form-inline
+  .form-group
+    label.mr-2 データ
+    select.form-control.mr-2 name='data'
+      option value='material_cost' 材料費
+      option value='process_cost' 加工費
+      option value='sales_price' 売価
+  .form-group
+    label.mr-2 グループ分け
+    select.form-control.mr-2 name='group'
+      option value='customer' 受注先
+      option value='material' 材質
+      option value='processing_type' 加工種類
+  button.btn.btn-info type='submit' 変更
+
+javascript:
+  (function(){
+
+    const form = document.getElementById('graph-form')
+
+    function update(){
+
+      const records = JSON.parse(document.getElementById('records').value)
+
+      const groups = _.groupBy(records, (record) => {
+        return groupValue(record)
+      })
+
+      const yearMonths = Object.keys(_.groupBy(records, (record) => {
+        const date = new Date(record.estimate_date)
+        return moment(date.setDate(1)).format('YYYY-MM')
+      }))
+
+      const series = []
+      for(groupId in groups){
+        const records = groups[groupId]
+
+        const data = []
+        for(yearMonth of yearMonths){
+          const sum = records.filter((record) => {
+            return record.estimate_date.startsWith(yearMonth)
+          }).reduce((accumulator, record) => {
+            return accumulator + dataValue(record)
+          }, 0)
+          data.push(sum)
+        }
+
+        series.push({
+          name: groupName(records[0]),
+          data: data,
+          animation: false,
+        })
+      }
+
+      Highcharts.setOptions({
+        lang: {
+          thousandsSep: ',',
+        },
+      })
+
+      Highcharts.chart('graph', {
+        chart: {
+          type: 'column'
+        },
+        title: {
+          text: '月別図面統計',
+        },
+        subtitle: {
+          text: '',
+        },
+        credits: {
+          enabled: false,
+        },
+        xAxis: {
+          categories: yearMonths,
+        },
+        yAxis: {
+          title: {
+            text: dataName()
+          },
+        },
+        plotOptions: {
+          column: {
+            stacking: 'normal',
+            dataLabels: {
+              // enabled: true,
+            },
+          },
+        },
+        series: series,
+      })
+
+      function dataValue(record){
+        return record[form['data'].value]
+      }
+
+      function dataName(){
+        return form['data'].selectedOptions[0].textContent
+      }
+
+      function groupValue(record){
+        return record[form['group'].value + '_id']
+      }
+
+      function groupName(record){
+        const group = record[form['group'].value]
+        if(group){
+          return group.name
+        }
+        return '未設定'
+      }
+
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault()
+      update()
+    })
+
+    update()
+
+  })()
