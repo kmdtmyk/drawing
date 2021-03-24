@@ -12,4 +12,6 @@ class User < ApplicationRecord
     :validatable
   )
 
+  acts_as_rparam_user
+
 end

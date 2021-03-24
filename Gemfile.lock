@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/kmdtmyk/rparam
+  revision: a0fb6080ad960f938b81a326abc71af88f0d7f9c
+  ref: a0fb6080ad960f938b81a326abc71af88f0d7f9c
+  specs:
+    rparam (0.1.0)
+      rails (>= 5.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -276,6 +284,7 @@ DEPENDENCIES
   rack-dev-mark (~> 0.7.7)
   rails (~> 5.0.0, >= 5.0.0.1)
   rails-controller-testing (~> 1.0, >= 1.0.2)
+  rparam!
   rspec-rails (~> 3.7, >= 3.7.2)
   sass-rails (~> 5.0)
   slim (~> 4.1)

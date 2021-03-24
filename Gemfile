@@ -39,6 +39,8 @@ gem 'gretel', '~> 3.0', '>= 3.0.9'
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.4'
 gem 'slim', '~> 4.1'
 
+gem 'rparam', git: 'https://github.com/kmdtmyk/rparam', ref: 'a0fb6080ad960f938b81a326abc71af88f0d7f9c'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri

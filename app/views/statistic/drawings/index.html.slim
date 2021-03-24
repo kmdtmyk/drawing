@@ -36,15 +36,15 @@ form#graph-form.form-inline
   .form-group
     label.mr-2 データ
     select.form-control.mr-2 name='data'
-      option value='material_cost' 材料費
-      option value='process_cost' 加工費
-      option value='sales_price' 売価
+      option value='material_cost' selected=(params[:data] == 'material_cost') 材料費
+      option value='process_cost' selected=(params[:data] == 'process_cost') 加工費
+      option value='sales_price' selected=(params[:data] == 'sales_price') 売価
   .form-group
     label.mr-2 グループ分け
     select.form-control.mr-2 name='group'
-      option value='customer' 受注先
-      option value='material' 材質
-      option value='processing_type' 加工種類
+      option value='customer' selected=(params[:group] == 'customer') 受注先
+      option value='material' selected=(params[:group] == 'material') 材質
+      option value='processing_type' selected=(params[:group] == 'processing_type') 加工種類
   button.btn.btn-info type='submit' 変更
 
 javascript:
@@ -145,11 +145,6 @@ javascript:
       }
 
     }
-
-    form.addEventListener('submit', (e) => {
-      e.preventDefault()
-      update()
-    })
 
     update()
 

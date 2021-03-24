@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180502205113) do
+ActiveRecord::Schema.define(version: 20210324083539) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -134,6 +134,16 @@ ActiveRecord::Schema.define(version: 20180502205113) do
     t.datetime "updated_at",     null: false
     t.index ["create_user_id"], name: "index_processing_types_on_create_user_id", using: :btree
     t.index ["update_user_id"], name: "index_processing_types_on_update_user_id", using: :btree
+  end
+
+  create_table "rparam_memories", force: :cascade do |t|
+    t.string   "user_type"
+    t.integer  "user_id"
+    t.string   "action"
+    t.string   "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_type", "user_id"], name: "index_rparam_memories_on_user_type_and_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
