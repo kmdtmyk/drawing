@@ -1,36 +1,41 @@
-ruby:
-  json = @drawings
-    .includes(
-      :customer,
-      :material,
-      :processing_type,
-    )
-    .to_json(
-      only: [
-        :customer_id,
-        :material_id,
-        :processing_type_id,
-        :estimate_date,
-        :material_cost,
-        :process_cost,
-        :sales_price,
-      ],
-      include: {
-        customer: {
-          only: [:name],
-        },
-        material: {
-          only: [:name],
-        },
-        processing_type: {
-          only: [:name],
-        },
-      },
-    )
 
-input#records type='hidden' value=json
+- if params[:from_month].nil? && params[:to_month].nil?
+  .alert.alert-danger 年月を入力して下さい
+- else
 
-#graph.mb-2
+  ruby:
+    json = @drawings
+      .includes(
+        :customer,
+        :material,
+        :processing_type,
+      )
+      .to_json(
+        only: [
+          :customer_id,
+          :material_id,
+          :processing_type_id,
+          :estimate_date,
+          :material_cost,
+          :process_cost,
+          :sales_price,
+        ],
+        include: {
+          customer: {
+            only: [:name],
+          },
+          material: {
+            only: [:name],
+          },
+          processing_type: {
+            only: [:name],
+          },
+        },
+      )
+
+  input#records type='hidden' value=json
+
+  #graph.mb-2
 
 form#graph-form
   .form-inline
@@ -63,6 +68,9 @@ javascript:
     const form = document.getElementById('graph-form')
 
     function update(){
+      if(document.getElementById('records') == null){
+        return
+      }
 
       const records = JSON.parse(document.getElementById('records').value)
 
