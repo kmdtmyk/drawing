@@ -32,20 +32,30 @@ input#records type='hidden' value=json
 
 #graph.mb-2
 
-form#graph-form.form-inline
-  .form-group
-    label.mr-2 データ
-    select.form-control.mr-2 name='data'
-      option value='material_cost' selected=(params[:data] == 'material_cost') 材料費
-      option value='process_cost' selected=(params[:data] == 'process_cost') 加工費
-      option value='sales_price' selected=(params[:data] == 'sales_price') 売価
-  .form-group
-    label.mr-2 グループ分け
-    select.form-control.mr-2 name='group'
-      option value='customer' selected=(params[:group] == 'customer') 受注先
-      option value='material' selected=(params[:group] == 'material') 材質
-      option value='processing_type' selected=(params[:group] == 'processing_type') 加工種類
-  button.btn.btn-info type='submit' 変更
+form#graph-form
+  .form-inline
+    .form-group
+      label 年月
+      = month_field_tag 'from_month', params[:from_month]&.strftime('%Y-%m'), class: 'form-control'
+      .mx-1 〜
+      = month_field_tag 'to_month', params[:to_month]&.strftime('%Y-%m'), class: 'form-control'
+    .form-group
+      button.btn type='button' name='month_this_year' 今年
+      button.btn.ml-1 type='button' name='month_last_year' 去年
+  .form-inline.mt-3
+    .form-group
+      label.mr-2 データ
+      select.form-control.mr-2 name='data'
+        option value='material_cost' selected=(params[:data] == 'material_cost') 材料費
+        option value='process_cost' selected=(params[:data] == 'process_cost') 加工費
+        option value='sales_price' selected=(params[:data] == 'sales_price') 売価
+    .form-group
+      label.mr-2 グループ分け
+      select.form-control.mr-2 name='group'
+        option value='customer' selected=(params[:group] == 'customer') 受注先
+        option value='material' selected=(params[:group] == 'material') 材質
+        option value='processing_type' selected=(params[:group] == 'processing_type') 加工種類
+    button.btn.btn-info type='submit' 変更
 
 javascript:
   (function(){
@@ -147,5 +157,25 @@ javascript:
     }
 
     update()
+
+  })()
+
+javascript:
+  (function(){
+
+    const fromMonth = document.querySelector('[name=from_month]')
+    const toMonth = document.querySelector('[name=to_month]')
+
+    document.querySelector('[name=month_this_year]').addEventListener('click', e => {
+      const date = Midnight.today()
+      fromMonth.value = dateFormat(date.startOfYear(), 'yyyy-mm')
+      toMonth.value = dateFormat(date.endOfYear(), 'yyyy-mm')
+    })
+
+    document.querySelector('[name=month_last_year]').addEventListener('click', e => {
+      const date = Midnight.today().nextYear(-1)
+      fromMonth.value = dateFormat(date.startOfYear(), 'yyyy-mm')
+      toMonth.value = dateFormat(date.endOfYear(), 'yyyy-mm')
+    })
 
   })()
