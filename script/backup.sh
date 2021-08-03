@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#  0 3 * * * /bin/bash -l -c 'cd ~/drawing && script/backup.sh >> log/crontab.log 2>&1'
+
 cd $(dirname ${0})
 cd ..
 
