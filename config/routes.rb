@@ -21,6 +21,9 @@ Rails.application.routes.draw do
   resources :processing_types, except: [:show]
   resources :notices, except: [:show]
 
+  get '/backup', to: 'backup#index'
+  get '/backup/:filename', to: 'backup#download'
+
   namespace :admin do
     resources :users, except: [:show]
   end
