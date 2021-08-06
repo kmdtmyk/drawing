@@ -1,0 +1,8 @@
+- if @files.size == 0
+  .alert.alert-danger バックアップファイルがまだ作られていません
+else
+  ul
+    - @files.each do |file|
+      li
+        a href="/backup/#{file[:name]}"
+          |#{file[:name]} [#{number_to_human_size file[:size]}]

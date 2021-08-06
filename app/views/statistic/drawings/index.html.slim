@@ -79,8 +79,8 @@ javascript:
       })
 
       const yearMonths = Object.keys(_.groupBy(records, (record) => {
-        const date = new Date(record.estimate_date)
-        return moment(date.setDate(1)).format('YYYY-MM')
+        //文字列で日付が渡ってくるので年月だけ取り出す
+        return record.estimate_date.substring(0, 7)
       }))
 
       const series = []
