@@ -107,6 +107,11 @@ crumb :notice_edit do
 end
 
 
+crumb :backup do
+  link 'バックアップ', backup_path
+  parent :root
+end
+
 # crumb :projects do
 #   link "Projects", projects_path
 # end
