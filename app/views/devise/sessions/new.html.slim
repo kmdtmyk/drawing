@@ -5,10 +5,11 @@
   .login-form
 
     = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      - if notice
+        p= notice
 
       - if alert
-        p.alert
-          = alert
+        p= alert
 
       .form-group
         = f.label :email
