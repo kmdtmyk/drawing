@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   resources :notices, except: [:show]
 
   get '/backup', to: 'backup#index'
-  get '/backup/:filename', to: 'backup#download'
+  get '/backup/:filename(.tar)', to: 'backup#download'
 
   namespace :admin do
     resources :users, except: [:show]

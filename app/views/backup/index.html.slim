@@ -1,10 +1,21 @@
 - breadcrumb :backup
 
-- if @files.size == 0
+- if @dump_files.size == 0 && @pdf_files.size == 0
   .alert.alert-danger バックアップファイルがまだ作られていません
 else
-  ul
-    - @files.each do |file|
-      li
-        a href="/backup/#{file[:name]}"
-          |#{file[:name]} [#{number_to_human_size file[:size]}]
+
+  - if @dump_files.any?
+    h5 データベースバックアップ
+    ul
+      - @dump_files.each do |dump_file|
+        li
+          a href="/backup/#{dump_file[:name]}"
+            |#{dump_file[:name]} [#{number_to_human_size dump_file[:size]}]
+
+  - if @pdf_files.any?
+    h5 PDFファイル等
+    ul
+      - @pdf_files.each do |pdf_file|
+        li
+          a href="/backup/#{pdf_file[:name]}"
+            |#{pdf_file[:name]} [#{number_to_human_size pdf_file[:size]}]
