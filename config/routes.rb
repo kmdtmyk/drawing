@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
 
-  root 'root#index'
+  authenticated :user do
+    root 'root#index'
+  end
+
+  devise_scope :user do
+    get '/', to: 'users/sessions#new'
+  end
 
   devise_for :users, controllers: {
     sessions: 'users/sessions'
@@ -22,7 +28,7 @@ Rails.application.routes.draw do
   resources :notices, except: [:show]
 
   get '/backup', to: 'backup#index'
-  get '/backup/:filename', to: 'backup#download'
+  get '/backup/:filename(.tar)', to: 'backup#download'
 
   namespace :admin do
     resources :users, except: [:show]
